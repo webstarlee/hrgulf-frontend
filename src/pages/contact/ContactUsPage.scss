@@ -1,0 +1,57 @@
+@import "../../assets/consts.scss";
+
+.section {
+  margin-top: calc(#{$page-margin-top} * 1.5);
+  margin-bottom: $page-margin-top;
+}
+
+.heading1 {
+  font-size: 2.2rem;
+  //color: #185689;
+}
+
+@media (max-width: $screen-breakpoint-lg) {
+  .heading1 {
+    font-size: 1.5rem;
+  }
+}
+
+.heading2 {
+  font-size: 1.2rem;
+  //color: #185689;
+}
+
+@media (max-width: $screen-breakpoint-lg) {
+  .heading2 {
+    font-size: 1rem;
+  }
+}
+
+.section-card {
+  box-shadow: unset;
+}
+
+.card-image {
+  max-height: 6.3rem;
+}
+
+@media (max-width: $screen-breakpoint-lg) {
+  .card-image {
+    max-height: 5.9rem;
+  }
+}
+
+.card-title {
+
+}
+
+.contact-icon {
+  width: 3rem;
+  font-size: 2.5rem;
+  color: #3c9dcc;
+}
+
+.contact-item {
+  font-size: 1.2rem;
+  vertical-align: super;
+}

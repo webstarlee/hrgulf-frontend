@@ -1,0 +1,30 @@
+@import "../assets/consts";
+
+$logo-height: 65px;
+
+.navbar-logo-icon {
+  height: $logo-height;
+}
+
+.nav-inner * {
+  font-family: "Droid Arabic Kufi", "DIN Regular", sans-serif, "Font Awesome 5 Pro" !important;
+  font-weight: bold;
+  font-size: 1.2rem !important;
+}
+
+.navbar-light .nav-inner .nav-link, .navbar-light .nav-inner .dropdown, .navbar-light .nav-inner .dropdown-item, .navbar-dark .nav-inner .dropdown-item {
+  color: grey !important;
+}
+
+.navbar-dark .nav-inner * {
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .nav-inner {
+    padding-top: 2.4rem !important;
+  }
+}
+
+.my-navbar .nav-link {
+  //padding-bottom: 0;
+}

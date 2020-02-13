@@ -1,0 +1,55 @@
+{
+  "name": "hrgulf-knowledge",
+  "version": "1.0.0",
+  "private": true,
+  "// If You want to install mdbreact from our GitLab repository, please replace '4.21.1' with gitURL provided here ->": "git+https://oauth2:<YOUR-TOKEN-GOES-HERE>@git.mdbootstrap.com/mdb/react/re-pro.git",
+  "dependencies": {
+    "@fortawesome/fontawesome-pro": "^5.8.2",
+    "@rehooks/component-size": "^1.0.3",
+    "@rehooks/window-scroll-position": "^1.0.1",
+    "axios": "^0.19.2",
+    "formik": "^2.1.4",
+    "google-libphonenumber": "^3.2.6",
+    "i18next": "^19.1.0",
+    "i18next-browser-languagedetector": "^4.0.1",
+    "mdb-react-fileupload": "^4.16.0",
+    "mdbreact": "npm:mdbreact-pro@^4.25.1",
+    "moment": "^2.24.0",
+    "node-sass": "^4.13.1",
+    "query-string": "^6.10.1",
+    "react": "^16.12.0",
+    "react-device-detect": "^1.11.14",
+    "react-dom": "^16.12.0",
+    "react-google-login": "^5.1.0",
+    "react-helmet": "^5.2.1",
+    "react-i18next": "^11.3.1",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.0.1",
+    "react-scroll": "^1.7.16",
+    "react-toastify": "latest",
+    "react-transition-group": "^4.3.0",
+    "react-use-form-state": "^0.12.1",
+    "redux": "^4.0.5",
+    "redux-state-sync": "^3.0.0",
+    "sprintf-js": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.2.0",
+    "redux-devtools-extension": "^2.13.8",
+    "renamer": "^1.1.4",
+    "rimraf": "^3.0.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

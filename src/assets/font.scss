@@ -1,0 +1,61 @@
+@font-face {
+  font-family: "DIN-Bold";
+  src: url("./font/DIN-Bold.eot");
+  src: local("DIN-Bold"), url("./font/DIN-Bold.woff") format("woff"), url("./font/DIN-Bold.ttf") format("truetype");
+}
+
+.font-DIN-Bold {
+  font-family: "DIN-Bold" !important;
+}
+
+
+
+@font-face {
+  font-family: "DIN Medium";
+  src: url("./font/DIN Medium.eot");
+  src: local("DIN Medium"), url("./font/DIN Medium.woff") format("woff"), url("./font/DIN Medium.ttf") format("truetype");
+}
+
+.font-DIN-Medium {
+  font-family: "DIN Medium" !important;
+}
+
+
+
+@font-face {
+  font-family: "DIN Regular";
+  src: url("./font/DIN Regular.eot");
+  src: local("DIN Regular"), url("./font/DIN Regular.woff") format("woff"), url("./font/DIN Regular.ttf") format("truetype");
+}
+
+.font-DIN-Regular {
+  font-family: "DIN Regular" !important;
+}
+
+
+
+@font-face {
+  font-family: "Droid Arabic Kufi Bold";
+  src: url("./font/Droid Arabic Kufi Bold.eot");
+  src: local("Droid Arabic Kufi Bold"), url("./font/Droid Arabic Kufi Bold.woff") format("woff"), url("./font/Droid Arabic Kufi Bold.ttf") format("truetype");
+
+  //unicode-range: u+0600–06FF, u+0750–077F, u+08A0–08FF, u+FB50–FDFF, u+FE70–FEFF, u+10E60–10E7F, u+1EC70–1ECBF, u+1ED00–1ED4F, u+1EE00–1EEFF;
+}
+
+.font-Droid-Arabic-Kufi-Bold {
+  font-family: "Droid Arabic Kufi Bold" !important;
+}
+
+
+
+@font-face {
+  font-family: "Droid Arabic Kufi";
+  src: url("./font/Droid Arabic Kufi.eot");
+  src: local("Droid Arabic Kufi"), url("./font/Droid Arabic Kufi.woff") format("woff"), url("./font/Droid Arabic Kufi.ttf") format("truetype");
+  
+  //unicode-range: u+0600–06FF, u+0750–077F, u+08A0–08FF, u+FB50–FDFF, u+FE70–FEFF, u+10E60–10E7F, u+1EC70–1ECBF, u+1ED00–1ED4F, u+1EE00–1EEFF;
+}
+
+.font-Droid-Arabic-Kufi {
+  font-family: "Droid Arabic Kufi" !important;
+}

@@ -1,0 +1,19 @@
+@import "../../assets/consts.scss";
+
+.section {
+  margin-top: $page-margin-top;
+  margin-bottom: $page-margin-top;
+}
+
+.back-to-top-container {
+  right: 24px;
+  bottom: 45px;
+}
+
+.rtl-content {
+  .back-to-top-container {
+    left: 24px;
+    right: unset;
+    bottom: 45px;
+  }
+}
