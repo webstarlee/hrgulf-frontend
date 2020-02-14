@@ -38,6 +38,27 @@ input:-webkit-autofill {
   font-family: "Droid Arabic Kufi", Roboto, sans-serif;
 }
 
+body {
+  background-image: url("./img/bg/circle-chain-md.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  body {
+    background-image: url("./img/bg/circle-chain.png");
+  }
+}
+
+.my-section {
+  margin-top: $section-margin-top !important;
+}
+
+.grey-text {
+  color: $gray !important;
+}
+
 .margin-auto-x {
   margin-left: auto;
   margin-right: auto;

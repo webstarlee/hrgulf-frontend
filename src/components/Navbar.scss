@@ -1,6 +1,7 @@
 @import "../assets/consts";
 
 $logo-height: 65px;
+$avatar-height: 35px;
 
 .navbar-logo-icon {
   height: $logo-height;
@@ -13,7 +14,7 @@ $logo-height: 65px;
 }
 
 .navbar-light .nav-inner .nav-link, .navbar-light .nav-inner .dropdown, .navbar-light .nav-inner .dropdown-item, .navbar-dark .nav-inner .dropdown-item {
-  color: grey !important;
+  color: $gray !important;
 }
 
 .navbar-dark .nav-inner * {
@@ -27,4 +28,9 @@ $logo-height: 65px;
 
 .my-navbar .nav-link {
   //padding-bottom: 0;
+}
+
+.my-navbar-avatar {
+  width: $avatar-height;
+  height: $avatar-height;
 }

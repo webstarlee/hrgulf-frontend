@@ -48,7 +48,7 @@ export default (props) => {
     });
   }, [props]);
 
-  const validateForm = ({email, password, rememberMe}) => {
+  const validate = ({email, password, rememberMe}) => {
     const errors = {};
     if (!email.length) {
       errors["email"] = VALIDATION.REQUIRED;
@@ -121,7 +121,7 @@ export default (props) => {
 
   };
 
-  return (
+  const payload =() => (
     <Fragment>
       <Helmet>
         <title>{t("AUTH.SIGN_IN")} - {t("SITE_NAME")}</title>
@@ -170,7 +170,7 @@ export default (props) => {
           <hr className="white-border"/>
           <Formik
             initialValues={initialValues}
-            validate={validateForm}
+            validate={validate}
             onSubmit={handleSubmit}
           >
             {({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
@@ -229,4 +229,6 @@ export default (props) => {
 
     </Fragment>
   );
+
+  return payload();
 };

@@ -29,6 +29,7 @@ export default {
       SUBMIT: "خضع",
       DELIVERY: "تسليم",
       ADMIN_PAGE: "بوابة المشرف",
+      CHOOSE_FILE: "اختر ملف",
     },
     VALIDATION: {
       REQUIRED: "{{field}} مطلوب",
@@ -80,6 +81,10 @@ export default {
       SAUDI_ARABIA: "المملكة العربية السعودية",
       UAE: "الإمارات العربية المتحدة",
     },
+    ACCOUNT_TYPE: {
+      HIRE: "توظيف",
+      WORK: "عمل",
+    },
     CARDINALS: {
       6: "٦",
       20: "٢٠",
@@ -96,6 +101,9 @@ export default {
       ABOUT: "ماهو المجتمع",
       PORTAL: "رؤية ورسالة المجتمع",
       US: "نبذة عن بوابة المعرفة",
+    },
+    ACCOUNT: {
+      MY_ACCOUNT: "حسابي الشخصي",
     },
   },
   FOOTER: {
@@ -136,13 +144,40 @@ export default {
     SIGN_IN_GOOGLE: "تسجيل الدخول مع جوجل",
     SIGN_UP_FACEBOOK: "تسجيل جديد مع الفيسبوك",
     SIGN_UP_GOOGLE: "تسجيل جديد مع جوجل",
-    MY_ACCOUNT: "حسابي الشخصي",
     FORGOT_PASSWORD: "هل نسيت كلمة المرور؟",
     ALREADY_REGISTERED: "مسجل بالفعل؟",
     NOT_REGISTERED: "غير مسجل؟",
     RESET_PASSWORD: "إعادة تعيين كلمة المرور",
     ERROR: {
       ACCOUNT_IS_INVALID: "حسابك غير صالح. حاول مع واحد آخر.",
+    },
+  },
+  ACCOUNT: {
+    ACCOUNT: "الحساب",
+    SETTINGS: "الإعدادات",
+    AVATAR: {
+      AVATAR: "صورة الحساب",
+      NEW_FILE: "ملف جديد",
+      SCALE: "تكبير",
+      BORDER_RADIUS: "دائرة نصف قطرها الحدود",
+      X_POSITION: "الموقف الأفقي",
+      Y_POSITION: "الوضع الرأسي",
+      ROTATE: "استدارة",
+    },
+    PERSONAL_INFO: {
+      PERSONAL_INFO: "معلومات شخصية",
+    },
+    PASSWORD: {
+      PASSWORD: "تغيير كلمة المرور",
+      CURRENT_PASSWORD: "كلمة المرور الحالية",
+      NEW_PASSWORD: "كلمة مرور جديدة",
+      PASSWORD2: "تأكيد كلمة المرور",
+      CHANGE_PASSWORD: "تغيير كلمة المرور",
+      GOOGLE_SIGNED_IN: "لقد سجلت الدخول باستخدام Google. لذلك لا يمكنك تغيير كلمة المرور.",
+      FACEBOOK_SIGNED_IN: "لقد سجلت الدخول باستخدام Facebook. لذلك لا يمكنك تغيير كلمة المرور.",
+    },
+    ACCOUNT_TYPE: {
+      ACCOUNT_TYPE: "نوع الحساب الافتراضي",
     },
   },
   PROFILE: {

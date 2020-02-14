@@ -16,6 +16,10 @@ export const routes = {
     forgotPassword: "/auth/forgot-password",
     resetPassword: "/auth/reset-password",
   },
+  account: {
+    root: "/account",
+    settings: "/account/settings",
+  },
   profile: {
     root: "/profile",
     main: "/profile/main",

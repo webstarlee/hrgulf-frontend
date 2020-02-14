@@ -17,11 +17,11 @@ import {GoogleLogout} from "react-google-login";
 
 import routes from "core/routes";
 import {changeLanguage} from "core/i18n";
+import apis from "core/apis";
+import {AUTH, NAVBAR, RESULT, SOCIAL} from "core/globals";
 import authActions from "actions/auth";
-import {AUTH, RESULT, SOCIAL} from "core/globals";
 import AuthService from "services/AuthService";
 import AccountService from "services/AccountService";
-import apis from "../../core/apis";
 
 export default ({collapse, setCollapse}) => {
   const {t} = useTranslation();
@@ -30,6 +30,7 @@ export default ({collapse, setCollapse}) => {
   const dispatch = useDispatch();
 
   const [avatar, setAvatar] = useState("");
+  const [borderRadius, setBorderRadius] = useState(0);
 
   const pathname = history.location.pathname;
 
@@ -38,12 +39,13 @@ export default ({collapse, setCollapse}) => {
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           setAvatar(`${apis.assetsBaseUrl}${res.data.url}`);
+          setBorderRadius(res.data.borderRadius);
         }
       })
       .catch(err => {
 
       })
-  });
+  }, [auth]);
 
   const goTo = to => {
     setCollapse(false);
@@ -101,20 +103,20 @@ export default ({collapse, setCollapse}) => {
           <MDBNavItem>
             <MDBDropdown>
               <MDBDropdownToggle className="dopdown-toggle" nav>
-                <img src={avatar} className="z-depth-1 white"
-                     style={{ height: "35px", padding: 0 }} alt="" />
+                <img src={avatar} className="z-depth-1 white my-navbar-avatar" style={{borderRadius: NAVBAR.AVATAR.HEIGHT / 100 * borderRadius}} />
               </MDBDropdownToggle>
               <MDBDropdownMenu className="dropdown-default" right>
                 <MDBDropdownItem onClick={e => goTo(routes.account.settings)}>{t("NAVBAR.ACCOUNT.MY_ACCOUNT")}</MDBDropdownItem>
                 <MDBDropdownItem>
-                  {auth.user.social === SOCIAL.NAME.GOOGLE && <GoogleLogout
-                    clientId={AUTH.GOOGLE.CLIENT_ID}
-                    onLogoutSuccess={handleSignOut}
-                    onFailure={e => {}}
-                    render={({disabled, onClick}) => (<div onClick={onClick}>{t("AUTH.SIGN_OUT")}</div>)}
-                  >
-                  </GoogleLogout>}
-                  {!auth.user.social.length && <div onClick={handleSignOut}>{t("AUTH.SIGN_OUT")}</div>}
+                  {/*{auth.user.social === SOCIAL.NAME.GOOGLE && <GoogleLogout*/}
+                  {/*  clientId={AUTH.GOOGLE.CLIENT_ID}*/}
+                  {/*  onLogoutSuccess={handleSignOut}*/}
+                  {/*  onFailure={handleSignOut}*/}
+                  {/*  render={({disabled, onClick}) => (<div onClick={onClick}>{t("AUTH.SIGN_OUT")}</div>)}*/}
+                  {/*>*/}
+                  {/*</GoogleLogout>}*/}
+                  {/*{!auth.user.social.length && <div onClick={handleSignOut}>{t("AUTH.SIGN_OUT")}</div>}*/}
+                  <div onClick={handleSignOut}>{t("AUTH.SIGN_OUT")}</div>
                 </MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>

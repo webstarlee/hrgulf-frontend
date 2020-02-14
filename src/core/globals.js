@@ -6,6 +6,13 @@ export const PROJECT = {
   PERSIST_KEY: "recruitment",
 };
 
+export const ACCOUNT = {
+  TYPE: {
+    HIRE: "HIRE",
+    WORK: "WORK",
+  },
+};
+
 export const ALERT = {
   SUCCESS: "success",
   DANGER: "danger",
@@ -23,6 +30,13 @@ export const AUTH = {
       SIGN_IN: `${origin}/auth/sign-in/google`,
       SIGN_UP: `${origin}/auth/sign-up/google`,
     },
+  },
+};
+
+export const AVATAR = {
+  SIZE: {
+    WIDTH: 200,
+    HEIGHT: 200,
   },
 };
 
@@ -91,6 +105,9 @@ export const INPUT = {
 
 export const NAVBAR = {
   SCROLLING_OFFSET: 40,
+  AVATAR: {
+    HEIGHT: 35,
+  },
 };
 
 export const PAGINATION = {

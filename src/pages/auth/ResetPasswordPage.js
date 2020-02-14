@@ -58,7 +58,7 @@ export default (props) => {
       });
   }, [props]);
 
-  const validateForm = ({password}) => {
+  const validate = ({password}) => {
     const errors = {};
     if (!password.length) {
       errors["password"] = VALIDATION.REQUIRED;
@@ -93,7 +93,7 @@ export default (props) => {
     }
   };
 
-  return (
+  const payload = () => (
     <Fragment>
       <Helmet>
         <title>{t("AUTH.RESET_PASSWORD")} - {t("SITE_NAME")}</title>
@@ -110,7 +110,7 @@ export default (props) => {
           </MDBRow>
           <Formik
             initialValues={initialValues}
-            validate={validateForm}
+            validate={validate}
             onSubmit={handleSubmit}>
             {({values: {password}, errors, touched, handleChange, handleSubmit, handleBlur, isSubmitting}) => (
               <form onSubmit={handleSubmit}>
@@ -148,4 +148,6 @@ export default (props) => {
       </MDBCard>
     </Fragment>
   );
+
+  return payload();
 };

@@ -14,6 +14,13 @@ export default {
     validateToken: "auth/validate-token",
     resetPassword: "auth/reset-password",
   },
+  account: {
+    avatar: "account/avatar",
+    saveAvatar: "account/save-avatar",
+    savePersonalInfo: "account/save-personal-info",
+    changePassword: "account/change-password",
+    changeAccountType: "account/change-account-type",
+  },
   profile: {
     avatar: "profile/avatar",
     saveAvatar: "profile/save-avatar",

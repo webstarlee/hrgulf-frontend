@@ -29,6 +29,7 @@ export default {
       SUBMIT: "Submit",
       DELIVERY: "Delivery",
       ADMIN_PAGE: "Admin Portal",
+      CHOOSE_FILE: "Choose File",
     },
     VALIDATION: {
       REQUIRED: "{{field}} is required",
@@ -80,6 +81,10 @@ export default {
       SAUDI_ARABIA: "Saudi Arabia",
       UAE: "UAE",
     },
+    ACCOUNT_TYPE: {
+      HIRE: "Hire",
+      WORK: "Work",
+    },
     CARDINALS: {
       6: "6",
       20: "20",
@@ -96,6 +101,9 @@ export default {
       ABOUT: "What is the Society",
       PORTAL: "Vision & Mission of the Society",
       US: "About The Knowledge Portal",
+    },
+    ACCOUNT: {
+      MY_ACCOUNT: "My Account",
     },
   },
   FOOTER: {
@@ -136,13 +144,40 @@ export default {
     SIGN_IN_GOOGLE: "Login with Google",
     SIGN_UP_FACEBOOK: "Register with Facebook",
     SIGN_UP_GOOGLE: "Register with Google",
-    MY_ACCOUNT: "My Account",
     FORGOT_PASSWORD: "Forgot password?",
     ALREADY_REGISTERED: "Already registered?",
     NOT_REGISTERED: "Not registered?",
     RESET_PASSWORD: "Reset Password",
     ERROR: {
       ACCOUNT_IS_INVALID: "Your account is invalid. Try with another one.",
+    },
+  },
+  ACCOUNT: {
+    ACCOUNT: "Account",
+    SETTINGS: "Settings",
+    AVATAR: {
+      AVATAR: "Account Picture",
+      NEW_FILE: "New File",
+      SCALE: "Zoom",
+      BORDER_RADIUS: "Border Radius",
+      X_POSITION: "X Position",
+      Y_POSITION: "Y Position",
+      ROTATE: "Rotate",
+    },
+    PERSONAL_INFO: {
+      PERSONAL_INFO: "Personal Information",
+    },
+    PASSWORD: {
+      PASSWORD: "Password",
+      CURRENT_PASSWORD: "Current Password",
+      NEW_PASSWORD: "New Password",
+      PASSWORD2: "Confirm Password",
+      CHANGE_PASSWORD: "Change Password",
+      GOOGLE_SIGNED_IN: "You are signed in with Google. So you cannot change the password.",
+      FACEBOOK_SIGNED_IN: "You are signed in with Facebook. So you cannot change the password.",
+    },
+    ACCOUNT_TYPE: {
+      ACCOUNT_TYPE: "Default Account Type",
     },
   },
   PROFILE: {

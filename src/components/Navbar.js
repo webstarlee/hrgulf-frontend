@@ -4,13 +4,14 @@ import {MDBNavbar, MDBNavbarBrand, MDBNavbarToggler} from "mdbreact";
 import {useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
 import useWindowScrollPosition from "@rehooks/window-scroll-position";
+
 import routes from "core/routes";
 import images from "core/images";
-import authActions from "actions/auth";
 import {NAVBAR, PROJECT} from "core/globals";
+import authActions from "actions/auth";
 import AuthService from "services/AuthService";
 import VisitNavbar from "./partial/VisitNavbar";
-import WorkNavbar from "./partial/WorkNavbar";
+import AuthedNavbar from "./partial/AuthedNavbar";
 
 import "./Navbar.scss";
 
@@ -73,7 +74,7 @@ export default ({thresholdY}) => {
       <MDBNavbarToggler onClick={toggleCollapse}/>
 
       {!auth.signedIn && <VisitNavbar collapse={collapse} setCollapse={setCollapse}/>}
-      {!!auth.signedIn && <WorkNavbar collapse={collapse} setCollapse={setCollapse}/>}
+      {!!auth.signedIn && <AuthedNavbar collapse={collapse} setCollapse={setCollapse}/>}
 
       {/*<MDBCollapse isOpen={collapse} navbar className="text-left nav-inner">*/}
       {/*  <MDBNavbarNav left>*/}

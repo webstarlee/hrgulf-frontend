@@ -1,11 +1,12 @@
-import fetch from "apis/fetch";
+import fetch, {setHeader} from "apis/fetch";
 import {POST} from "apis/constants";
 import apis from "core/apis";
+import {SUCCESS} from "core/globals";
 
 export default {
-  packages: (params) => {
+  avatar: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.packages, params)
+      fetch(POST, apis.account.avatar, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -14,9 +15,9 @@ export default {
     });
   },
 
-  getPackage: (params) => {
+  saveAvatar: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.getPackage, params)
+      fetch(POST, apis.account.saveAvatar, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -25,9 +26,9 @@ export default {
     });
   },
 
-  questions: (params) => {
+  savePersonalInfo: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.questions, params)
+      fetch(POST, apis.account.savePersonalInfo, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -36,9 +37,9 @@ export default {
     });
   },
 
-  update: (params) => {
+  changePassword: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.update, params)
+      fetch(POST, apis.account.changePassword, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -47,9 +48,9 @@ export default {
     });
   },
 
-  result: (params) => {
+  changeAccountType: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.result, params)
+      fetch(POST, apis.account.changeAccountType, params)
         .then(res => {
           resolve(res);
         }, err => {

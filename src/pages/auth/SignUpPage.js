@@ -38,8 +38,6 @@ export default (props) => {
   const {t} = useTranslation();
   const history = useHistory();
 
-  const [loading, setLoading] = useState(false);
-
   const initialValues = {
     email: PROJECT.IS_DEV ? DEFAULT.EMAIL : "",
     username: PROJECT.IS_DEV ? DEFAULT.USERNAME : "",
@@ -58,7 +56,7 @@ export default (props) => {
     });
   }, [props]);
 
-  const validateForm = ({email, username, firstName, fatherName, lastName, countryCode, phone, password, password2}) => {
+  const validate = ({email, username, firstName, fatherName, lastName, countryCode, phone, password, password2}) => {
     const errors = {};
 
     if (!email.length) {
@@ -140,7 +138,7 @@ export default (props) => {
 
   };
 
-  return (
+  const payload = () => (
     <Fragment>
       <Helmet>
         <title>{t("AUTH.SIGN_UP")} - {t("SITE_NAME")}</title>
@@ -189,7 +187,7 @@ export default (props) => {
           <hr className="white-border"/>
           <Formik
             initialValues={initialValues}
-            validate={validateForm}
+            validate={validate}
             onSubmit={handleSubmit}
           >
             {({values, touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
@@ -317,7 +315,7 @@ export default (props) => {
                 </div>
                 <div className="text-center mt-4 mb-3 mx-5">
                   <MDBBtn type="submit" color="white" rounded className="full-width z-depth-1a blue-grey-text"
-                          disabled={!!loading || !!isSubmitting || (!!errors && !!Object.keys(errors).length)}>
+                          disabled={!!isSubmitting || (!!errors && !!Object.keys(errors).length)}>
                     {!isSubmitting && <MDBIcon size="lg" icon={"user-plus"}/>}
                     {!!isSubmitting && <div className="spinner-grow spinner-grow-sm" role="status"/>}
                     {!isSubmitting && t("AUTH.SIGN_UP")}
@@ -340,4 +338,6 @@ export default (props) => {
         transition={Fade}/>
     </Fragment>
   );
+
+  return payload();
 };

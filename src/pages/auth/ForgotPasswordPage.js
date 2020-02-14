@@ -31,7 +31,7 @@ export default (props) => {
     });
   }, [props]);
 
-  const validateForm = ({email}) => {
+  const validate = ({email}) => {
     const errors = {};
     if (!email.length) {
       errors["email"] = VALIDATION.REQUIRED;
@@ -67,7 +67,7 @@ export default (props) => {
     }
   };
 
-  return (
+  const payload = () => (
     <Fragment>
       <Helmet>
         <title>{t("AUTH.FORGOT_PASSWORD")} - {t("SITE_NAME")}</title>
@@ -84,7 +84,7 @@ export default (props) => {
           </MDBRow>
           <Formik
             initialValues={initialValues}
-            validate={validateForm}
+            validate={validate}
             onSubmit={handleSubmit}>
             {({values: {email}, errors, touched, handleChange, handleSubmit, handleBlur, isSubmitting}) => (
               <form onSubmit={handleSubmit}>
@@ -123,4 +123,6 @@ export default (props) => {
       </MDBCard>
     </Fragment>
   );
+
+  return payload();
 };

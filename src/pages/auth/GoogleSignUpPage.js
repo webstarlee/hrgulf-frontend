@@ -87,7 +87,7 @@ export default (props) => {
       });
   }, [props]);
 
-  const validateForm = ({email, username, firstName, fatherName, lastName, countryCode, phone, password, password2}) => {
+  const validate = ({email, username, firstName, fatherName, lastName, countryCode, phone, password, password2}) => {
     const errors = {};
 
     if (!email.length) {
@@ -160,7 +160,7 @@ export default (props) => {
     }
   };
 
-  return (
+  const payload = () => (
     <Fragment>
       <Helmet>
         <title>{t("AUTH.SIGN_UP_GOOGLE")} - {t("SITE_NAME")}</title>
@@ -177,7 +177,7 @@ export default (props) => {
           </MDBRow>
           <Formik
             initialValues={initialValues}
-            validate={validateForm}
+            validate={validate}
             onSubmit={handleSubmit}
           >
             {({values, errors, touched, handleChange, handleSubmit, handleBlur, isSubmitting}) => (
@@ -333,4 +333,6 @@ export default (props) => {
         transition={Fade}/>
     </Fragment>
   );
+
+  return payload();
 };

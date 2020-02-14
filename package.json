@@ -18,6 +18,7 @@
     "node-sass": "^4.13.1",
     "query-string": "^6.10.1",
     "react": "^16.12.0",
+    "react-avatar-editor": "^12.0.0-beta.0",
     "react-device-detect": "^1.11.14",
     "react-dom": "^16.12.0",
     "react-google-login": "^5.1.0",
