@@ -131,8 +131,9 @@ export default (props) => {
   };
 
   const callbackGoogleSuccess = e => {
-    const {profileObj: {email, givenName, familyName}, tokenObj: {id_token}} = e;
-    history.push(`${routes.auth.googleSignUp}/${email}/${givenName}/${familyName}/${id_token}`);
+    console.log(e);
+    // const {profileObj: {email, givenName, familyName}, tokenObj: {id_token}} = e;
+    // history.push(`${routes.auth.googleSignUp}/${email}/${givenName}/${familyName}/${id_token}`);
   };
 
   const callbackGoogleFailure = e => {
@@ -140,7 +141,7 @@ export default (props) => {
   };
 
   const callbackFacebook = e => {
-
+    console.log(e);
   };
 
   const payload = () => (
@@ -168,7 +169,8 @@ export default (props) => {
             <div className="text-center">
               <FacebookLogin
                 appId={AUTH.FACEBOOK.APP_ID}
-                autoLoad
+                // autoLoad
+                cookie={true}
                 callback={callbackFacebook}
                 render={({isDisabled, isProcessing, isSdkLoaded, onClick}) => (
                   <MDBBtn social="fb" rounded className="full-width z-depth-1a mx-0" onClick={onClick} disabled={isDisabled || isProcessing || !isSdkLoaded}>
