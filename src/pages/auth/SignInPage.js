@@ -16,6 +16,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {Formik} from "formik";
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import auth from "actions/auth";
 import {AUTH, DEFAULT, EFFECT, ERROR, PROJECT, RESULT, VALIDATION,} from "core/globals";
@@ -26,7 +28,6 @@ import images from "core/images";
 import Service from "services/AuthService";
 
 import "./SignInPage.scss";
-import GoogleLogin from "react-google-login";
 
 export default (props) => {
   const {auth: {redirectUrl}} = useSelector(state => state);
@@ -121,6 +122,32 @@ export default (props) => {
 
   };
 
+  const callbackFacebook = e => {
+    const {id, first_name, last_name, email, accessToken} = e;
+
+    const params = {socialId: id, accessToken};
+    dispatch(auth.requestSignIn({user: params}));
+    setLoading(true);
+    Service.signInWithFacebook(params)
+      .then(res => {
+        setLoading(false);
+        if (res.result === RESULT.SUCCESS) {
+          dispatch(auth.successSignIn(res.data));
+          const params = new URLSearchParams(props.location.search);
+          const redirect = params.get("redirect");
+          history.push(redirect || routes.root);
+        } else {
+          dispatch(auth.failureSignIn(res.message));
+          toast.error(res.message);
+        }
+      })
+      .catch(err => {
+        setLoading(false);
+        dispatch(auth.failureSignIn(ERROR.UNKNOWN_SERVER_ERROR));
+        toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
+      })
+  };
+
   const payload =() => (
     <Fragment>
       <Helmet>
@@ -144,10 +171,20 @@ export default (props) => {
           </MDBRow>
           <div className="mt-3 mt-lg-5 mb-2 mb-lg-3 mx-lg-5">
             <div className="text-center">
-              <MDBBtn social="fb" rounded className="full-width z-depth-1a mx-0">
-                <MDBIcon fab icon="facebook" size="lg"
-                         className="pr-1"/> {t("AUTH.SIGN_IN_FACEBOOK")}
-              </MDBBtn>
+              <FacebookLogin
+                appId={AUTH.FACEBOOK.APP_ID}
+                // autoLoad
+                fields="first_name,last_name,email"
+                cookie={true}
+                callback={callbackFacebook}
+                render={({isDisabled, isProcessing, isSdkLoaded, onClick}) => (
+                  <MDBBtn social="fb" rounded className="full-width z-depth-1a mx-0" onClick={onClick} disabled={!!isDisabled || !!isProcessing || !isSdkLoaded || !!loading}>
+                    <MDBIcon fab icon="facebook" size="lg"
+                    className="pr-1"/>
+                    {t("AUTH.SIGN_UP_FACEBOOK")}
+                  </MDBBtn>
+                )}
+              />
             </div>
             <div className="text-center">
               <GoogleLogin
@@ -159,7 +196,7 @@ export default (props) => {
                 cookiePolicy={"single_host_origin"}
                 render={({disabled, onClick}) => (
                   <MDBBtn social="gplus" rounded className="full-width z-depth-1a mx-0" onClick={onClick}
-                          disabled={disabled}>
+                          disabled={!!disabled || !!loading}>
                     <MDBIcon fab icon="google-plus-g" size="lg"
                              className="pr-1"/> {t("AUTH.SIGN_IN_GOOGLE")}
                   </MDBBtn>

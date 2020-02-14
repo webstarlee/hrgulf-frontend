@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
 import {
+  MDBAlert,
   MDBBtn,
   MDBCard,
   MDBCardBody,
@@ -12,61 +12,112 @@ import {
   MDBSelect,
   MDBSelectInput,
   MDBSelectOption,
-  MDBSelectOptions,
-  ToastContainer,
+  MDBSelectOptions, ToastContainer
 } from "mdbreact";
-import {useHistory} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useParams} from "react-router-dom";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {Formik} from "formik";
+import queryString from "query-string";
+import {useDispatch} from "react-redux";
 import {Base64} from "js-base64";
 import hash from "object-hash";
-import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import {CSSTransition} from "react-transition-group";
 
-import toast, {Fade} from "components/MyToast";
-import {AUTH, COUNTRY_CODE, DEFAULT, EFFECT, ERROR, PROJECT, RESULT, VALIDATION,} from "core/globals";
-import routes from "core/routes";
-import validators from "core/validators";
-import images from "core/images";
-import Service from "services/AuthService";
 import auth from "actions/auth";
+import toast, {Fade} from "components/MyToast";
 import helpers from "core/helpers";
+import {AUTH, COUNTRY_CODE, DEFAULT, EFFECT, ERROR, PROJECT, RESULT, SOCIAL, VALIDATION} from "core/globals";
+import validators from "core/validators";
+import Service from "services/AuthService";
+import images from "core/images";
 
-import "./SignUpPage.scss";
+import "./FacebookSignUpPage.scss";
 
 export default (props) => {
   const dispatch = useDispatch();
+  const {cipher, checksum} = useParams();
   const {t} = useTranslation();
-  const history = useHistory();
+
+  const [loading, setLoading] = useState(false);
+  const [IsInvalid, setIsInvalid] = useState(true);
+  const [alert, setAlert] = useState({});
+
+  const hash2 = hash(cipher);
+  let socialId = "", email = "", firstName = "", lastName = "", accessToken = "";
+  if (hash2 === checksum) {
+    const raw = Base64.decode(cipher.replace(/@/, "/"));
+    const jsonParams = JSON.parse(raw);
+    socialId = jsonParams.socialId;
+    email = jsonParams.email;
+    firstName = jsonParams.first_name;
+    lastName = jsonParams.last_name;
+    accessToken = jsonParams.accessToken;
+  }
 
   const initialValues = {
-    email: PROJECT.IS_DEV ? DEFAULT.EMAIL : "",
+    email: email,
     username: PROJECT.IS_DEV ? DEFAULT.USERNAME : "",
-    firstName: PROJECT.IS_DEV ? DEFAULT.FIRST_NAME : "",
+    firstName: firstName,
     fatherName: PROJECT.IS_DEV ? DEFAULT.FATHER_NAME : "",
-    lastName: PROJECT.IS_DEV ? DEFAULT.LAST_NAME : "",
+    lastName: lastName,
     countryCode: PROJECT.IS_DEV ? COUNTRY_CODE.SAUDI_ARABIA : "",
     phone: PROJECT.IS_DEV ? DEFAULT.PHONE : "",
-    password: PROJECT.IS_DEV ? DEFAULT.PASSWORD : "",
-    password2: PROJECT.IS_DEV ? DEFAULT.PASSWORD : "",
+    password: "",
+    password2: "",
   };
 
   useEffect(() => {
     scroll.scrollToTop({
       duration: EFFECT.TRANSITION_TIME,
     });
+
+    const hash2 = hash(cipher);
+    if (hash2 !== checksum) {
+      setIsInvalid(true);
+      setAlert({
+        show: true,
+        color: "danger",
+        message: t("AUTH.ERROR.ACCOUNT_IS_INVALID"),
+      });
+      return;
+    }
+
+    setLoading(true);
+    const params = {socialId, email, firstName, lastName, accessToken};
+    Service.validateFacebookAccount(params)
+      .then(res => {
+        setLoading(false);
+        if (res.result === RESULT.SUCCESS) {
+          setIsInvalid(false);
+        } else {
+          setIsInvalid(true);
+          setAlert({
+            show: true,
+            color: res.result,
+            message: res.message,
+          });
+        }
+      })
+      .catch(err => {
+        setLoading(false);
+        setIsInvalid(true);
+        setAlert({
+          show: true,
+          color: "danger",
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
+        });
+      });
   }, [props]);
 
   const validate = ({email, username, firstName, fatherName, lastName, countryCode, phone, password, password2}) => {
     const errors = {};
 
-    if (!email.length) {
-      errors["email"] = VALIDATION.REQUIRED;
-    } else if (!validators.isEmail(email)) {
-      errors["email"] = VALIDATION.INVALID;
-    }
+    // if (!email.length) {
+    //   errors["email"] = VALIDATION.REQUIRED;
+    // } else if (!validators.isEmail(email)) {
+    //   errors["email"] = VALIDATION.INVALID;
+    // }
 
     if (!username.length) {
       errors["username"] = VALIDATION.REQUIRED;
@@ -98,23 +149,23 @@ export default (props) => {
       errors["phone"] = VALIDATION.INVALID;
     }
 
-    if (!password.length) {
-      errors["password"] = VALIDATION.REQUIRED;
-    } else if (password.length < AUTH.PASSWORD_MIN_LENGTH) {
-      errors["password"] = VALIDATION.MIN_LENGTH;
-    }
-
-    if (!password2.length) {
-      errors["password2"] = VALIDATION.REQUIRED;
-    } else if (password2 !== password) {
-      errors["password2"] = VALIDATION.MISMATCH;
-    }
+    // if (!password.length) {
+    //   errors["password"] = VALIDATION.REQUIRED;
+    // } else if (password.length < AUTH.PASSWORD_MIN_LENGTH) {
+    //   errors["password"] = VALIDATION.MIN_LENGTH;
+    // }
+    //
+    // if (!password2.length) {
+    //   errors["password2"] = VALIDATION.REQUIRED;
+    // } else if (password2 !== password) {
+    //   errors["password2"] = VALIDATION.MISMATCH;
+    // }
 
     return errors;
   };
 
   const handleSubmit = async (params) => {
-    params = {...params};
+    params = {...params, social: SOCIAL.NAME.FACEBOOK, socialId};
     try {
       dispatch(auth.requestSignUp(params));
       let res = await Service.signUp(params);
@@ -132,107 +183,40 @@ export default (props) => {
     }
   };
 
-  const callbackGoogleSuccess = e => {
-    const {profileObj: {googleId, email, givenName, familyName}, tokenObj: {id_token}} = e;
-    const params = {
-      googleId, email, firstName: givenName, lastName: familyName, id_token,
-    };
-    const cipher = Base64.encode(JSON.stringify(params)).replace(/\//, "@");
-    const checksum = hash(cipher);
-    history.push(`${routes.auth.googleSignUp}/${cipher}/${checksum}`);
-  };
-
-  const callbackGoogleFailure = e => {
-
-  };
-
-  const callbackFacebook = e => {
-    const {id, email, first_name, last_name, accessToken} = e;
-    const params = {
-      socialId: id, email, first_name, last_name, accessToken
-    };
-    const cipher = Base64.encode(JSON.stringify(params)).replace(/\//, "@");
-    const checksum = hash(cipher);
-    history.push(`${routes.auth.facebookSignUp}/${cipher}/${checksum}`);
-  };
-
   const payload = () => (
     <Fragment>
       <Helmet>
-        <title>{t("AUTH.SIGN_UP")} - {t("SITE_NAME")}</title>
+        <title>{t("AUTH.SIGN_UP_GOOGLE")} - {t("SITE_NAME")}</title>
       </Helmet>
-      <div className="admin-nav text-right">
-        {/*<MDBBtn href={routes.admin2} size="sm" rounded color="indigo">{t("COMMON.BUTTON.ADMIN_PAGE")}</MDBBtn>*/}
-      </div>
-      <div className="text-center">
+      <div className="admin-nav text-center">
         <img className="logo-img mt-3 mb-5" src={images.logo.logo100}/>
       </div>
       <MDBCard className="auth-bg">
-        <MDBCardBody className="mx-md-4 mx-sm-1 mb-lg-5">
+        <MDBCardBody className="mx-md-4 mx-sm-1">
           <MDBRow className="text-center">
-            <MDBCol className="col-6 col-lg-4">
-              <Link to={routes.auth.signIn}><p className="text-white h5">{t("AUTH.SIGN_IN")}</p></Link>
-            </MDBCol>
-            <MDBCol className="col-6 col-lg-4 underlined white-border">
-              <p className="text-white h5">{t("AUTH.SIGN_UP")}</p>
+            <MDBCol className="col-12 underlined white-border">
+              <p className="text-white h5">{t("AUTH.SIGN_UP_GOOGLE")}</p>
             </MDBCol>
           </MDBRow>
-          <div className="mt-3 mt-lg-5 mb-2 mb-lg-3 mx-lg-5">
-            <div className="text-center">
-              <FacebookLogin
-                appId={AUTH.FACEBOOK.APP_ID}
-                // autoLoad
-                fields="first_name,last_name,email"
-                cookie={true}
-                callback={callbackFacebook}
-                render={({isDisabled, isProcessing, isSdkLoaded, onClick}) => (
-                  <MDBBtn social="fb" rounded className="full-width z-depth-1a mx-0" onClick={onClick} disabled={isDisabled || isProcessing || !isSdkLoaded}>
-                    <MDBIcon fab icon="facebook" size="lg"
-                    className="pr-1"/>
-                    {t("AUTH.SIGN_UP_FACEBOOK")}
-                  </MDBBtn>
-                )}
-              />
-
-            </div>
-            <div className="text-center">
-              <GoogleLogin
-                clientId={AUTH.GOOGLE.CLIENT_ID}
-                onSuccess={callbackGoogleSuccess}
-                onFailure={callbackGoogleFailure}
-                // uxMode="redirect"
-                // redirectUri={AUTH.GOOGLE.REDIRECT_URI.SIGN_UP}
-                cookiePolicy={"single_host_origin"}
-                render={({disabled, onClick}) => (
-                  <MDBBtn social="gplus" rounded className="full-width z-depth-1a mx-0" onClick={onClick}
-                          disabled={disabled}>
-                    <MDBIcon fab icon="google-plus-g" size="lg"
-                             className="pr-1"/> {t("AUTH.SIGN_UP_GOOGLE")}
-                  </MDBBtn>
-                )}
-              />
-            </div>
-          </div>
-          <hr className="white-border"/>
           <Formik
             initialValues={initialValues}
             validate={validate}
             onSubmit={handleSubmit}
           >
-            {({values, touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
+            {({values, errors, touched, handleChange, handleSubmit, handleBlur, isSubmitting}) => (
               <form onSubmit={handleSubmit}>
                 <input hidden id="countryCode" name="countryCode" onChange={handleChange} onBlur={handleBlur}/>
                 <div className="white-text">
                   <MDBRow>
-                    <MDBCol md="6">
-                      <MDBInput id="email" name="email" type="email" label={t("AUTH.EMAIL")} background
+                    {/* <MDBCol md="6">
+                      <MDBInput id="email" name="email" type="email" label={t("AUTH.EMAIL")} background readOnly
                                 containerClass="mb-0" value={values.email} onChange={handleChange} onBlur={handleBlur}>
                         {!!touched.email && errors.email === VALIDATION.REQUIRED && <div
                           className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")})}</div>}
                         {!!touched.email && errors.email === VALIDATION.INVALID && <div
                           className="text-left invalid-field2">{t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})}</div>}
                       </MDBInput>
-                    </MDBCol>
+                    </MDBCol> */}
                     <MDBCol md="6">
                       <MDBInput id="username" name="username" type="text" label={t("AUTH.USERNAME")} background
                                 containerClass="mb-0" value={values.username} onChange={handleChange}
@@ -248,16 +232,16 @@ export default (props) => {
                         })}</div>}
                       </MDBInput>
                     </MDBCol>
-                  </MDBRow>
-                  <MDBRow>
                     <MDBCol md="6">
                       <MDBInput id="firstName" name="firstName" type="text" label={t("AUTH.FIRST_NAME")} background
-                                containerClass="mt-3 mb-0" value={values.firstName} onChange={handleChange}
+                                containerClass="mb-0" value={values.firstName} onChange={handleChange}
                                 onBlur={handleBlur}>
                         {!!touched.firstName && errors.firstName === VALIDATION.REQUIRED && <div
                           className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FIRST_NAME")})}</div>}
                       </MDBInput>
                     </MDBCol>
+                  </MDBRow>
+                  <MDBRow>
                     <MDBCol md="6">
                       <MDBInput id="fatherName" name="fatherName" type="text" label={t("AUTH.FATHER_NAME")} background
                                 containerClass="mt-3 mb-0" value={values.fatherName} onChange={handleChange}
@@ -311,40 +295,45 @@ export default (props) => {
                       </MDBInput>
                     </MDBCol>
                   </MDBRow>
-                  <MDBRow>
-                    <MDBCol md="6">
-                      <MDBInput id="password" name="password" label={t("AUTH.PASSWORD")} type="password" background
-                                containerClass="mt-3" value={values.password} onChange={handleChange}
-                                onBlur={handleBlur}>
-                        {!!touched.password && errors.password === VALIDATION.REQUIRED && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")})}</div>}
-                        {!!touched.password && errors.password === VALIDATION.MIN_LENGTH && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.MIN_LENGTH", {
-                          field: t("AUTH.PASSWORD"),
-                          length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
-                        })}</div>}
-                      </MDBInput>
-                    </MDBCol>
-                    <MDBCol md="6">
-                      <MDBInput id="password2" name="password2" label={t("AUTH.PASSWORD2")} type="password" background
-                                containerClass="mt-3" value={values.password2} onChange={handleChange}
-                                onBlur={handleBlur}>
-                        {!!touched.password2 && errors.password2 === VALIDATION.REQUIRED && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD2")})}</div>}
-                        {!!touched.password2 && errors.password2 === VALIDATION.MIN_LENGTH && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.MIN_LENGTH", {
-                          field: t("AUTH.PASSWORD2"),
-                          length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
-                        })}</div>}
-                        {(!!touched.password || !!touched.password2) && errors.password2 === VALIDATION.MISMATCH && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.MISMATCH", {field: t("AUTH.PASSWORD")})}</div>}
-                      </MDBInput>
-                    </MDBCol>
-                  </MDBRow>
+                  {/*<MDBRow>*/}
+                  {/*  <MDBCol md="6">*/}
+                  {/*    <MDBInput id="password" name="password" label={t("AUTH.PASSWORD")} type="password" background*/}
+                  {/*              containerClass="mt-3" value={values.password} onChange={handleChange}*/}
+                  {/*              onBlur={handleBlur}>*/}
+                  {/*      {!!touched.password && errors.password === VALIDATION.REQUIRED && <div*/}
+                  {/*        className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")})}</div>}*/}
+                  {/*      {!!touched.password && errors.password === VALIDATION.MIN_LENGTH && <div*/}
+                  {/*        className="text-left invalid-field2">{t("COMMON.VALIDATION.MIN_LENGTH", {*/}
+                  {/*        field: t("AUTH.PASSWORD"),*/}
+                  {/*        length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)*/}
+                  {/*      })}</div>}*/}
+                  {/*    </MDBInput>*/}
+                  {/*  </MDBCol>*/}
+                  {/*  <MDBCol md="6">*/}
+                  {/*    <MDBInput id="password2" name="password2" label={t("AUTH.PASSWORD2")} type="password" background*/}
+                  {/*              containerClass="mt-3" value={values.password2} onChange={handleChange}*/}
+                  {/*              onBlur={handleBlur}>*/}
+                  {/*      {!!touched.password2 && errors.password2 === VALIDATION.REQUIRED && <div*/}
+                  {/*        className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD2")})}</div>}*/}
+                  {/*      {!!touched.password2 && errors.password2 === VALIDATION.MIN_LENGTH && <div*/}
+                  {/*        className="text-left invalid-field2">{t("COMMON.VALIDATION.MIN_LENGTH", {*/}
+                  {/*        field: t("AUTH.PASSWORD2"),*/}
+                  {/*        length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)*/}
+                  {/*      })}</div>}*/}
+                  {/*      {(!!touched.password || !!touched.password2) && errors.password2 === VALIDATION.MISMATCH && <div*/}
+                  {/*        className="text-left invalid-field2">{t("COMMON.VALIDATION.MISMATCH", {field: t("AUTH.PASSWORD")})}</div>}*/}
+                  {/*    </MDBInput>*/}
+                  {/*  </MDBCol>*/}
+                  {/*</MDBRow>*/}
                 </div>
+                <CSSTransition in={alert.show} classNames="mt-3 fade-transition" timeout={EFFECT.TRANSITION_TIME}
+                               unmountOnExit
+                               appear>
+                  <MDBAlert color={alert.color} onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
+                </CSSTransition>
                 <div className="text-center mt-4 mb-3 mx-5">
                   <MDBBtn type="submit" color="white" rounded className="full-width z-depth-1a blue-grey-text"
-                          disabled={!!isSubmitting || (!!errors && !!Object.keys(errors).length)}>
+                          disabled={!!loading || !!IsInvalid || !!isSubmitting || (!!errors && !!Object.keys(errors).length)}>
                     {!isSubmitting && <MDBIcon size="lg" icon={"user-plus"}/>}
                     {!!isSubmitting && <div className="spinner-grow spinner-grow-sm" role="status"/>}
                     {!isSubmitting && t("AUTH.SIGN_UP")}

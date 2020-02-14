@@ -15,6 +15,7 @@ import "./RootPage.scss";
 const SignInPage = lazy(() => import("./SignInPage"));
 const SignUpPage = lazy(() => import("./SignUpPage"));
 const GoogleSignUpPage = lazy(() => import("./GoogleSignUpPage"));
+const FacebookSignUpPage = lazy(() => import("./FacebookSignUpPage"));
 const ForgotPasswordPage = lazy(() => import("./ForgotPasswordPage"));
 const ResetPasswordPage = lazy(() => import("./ResetPasswordPage"));
 
@@ -32,6 +33,7 @@ export default () => {
               <Route path={routes.auth.signIn} exact component={SignInPage}/>
               <Route path={routes.auth.signUp} exact component={SignUpPage}/>
               <Route path={`${routes.auth.googleSignUp}/:cipher/:checksum`} exact component={GoogleSignUpPage}/>
+              <Route path={`${routes.auth.facebookSignUp}/:cipher/:checksum`} exact component={FacebookSignUpPage}/>
               <Route path={routes.auth.forgotPassword} component={ForgotPasswordPage}/>
               <Route path={`${routes.auth.resetPassword}/:email?/:token?`} component={ResetPasswordPage}/>
               <Route component={Error404}/>
