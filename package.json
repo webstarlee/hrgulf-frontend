@@ -21,6 +21,7 @@
     "react-avatar-editor": "^12.0.0-beta.0",
     "react-device-detect": "^1.11.14",
     "react-dom": "^16.12.0",
+    "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.1.0",
     "react-helmet": "^5.2.1",
     "react-i18next": "^11.3.1",

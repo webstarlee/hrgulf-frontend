@@ -31,6 +31,9 @@ export const AUTH = {
       SIGN_UP: `${origin}/auth/sign-up/google`,
     },
   },
+  FACEBOOK: {
+    APP_ID: "896615737461345",
+  },
 };
 
 export const AVATAR = {

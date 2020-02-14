@@ -21,6 +21,7 @@ import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {Formik} from "formik";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import toast, {Fade} from "components/MyToast";
 import {AUTH, COUNTRY_CODE, DEFAULT, EFFECT, ERROR, PROJECT, RESULT, VALIDATION,} from "core/globals";
@@ -138,6 +139,10 @@ export default (props) => {
 
   };
 
+  const callbackFacebook = e => {
+
+  };
+
   const payload = () => (
     <Fragment>
       <Helmet>
@@ -161,10 +166,19 @@ export default (props) => {
           </MDBRow>
           <div className="mt-3 mt-lg-5 mb-2 mb-lg-3 mx-lg-5">
             <div className="text-center">
-              <MDBBtn social="fb" rounded className="full-width z-depth-1a mx-0">
-                <MDBIcon fab icon="facebook" size="lg"
-                         className="pr-1"/> {t("AUTH.SIGN_UP_FACEBOOK")}
-              </MDBBtn>
+              <FacebookLogin
+                appId={AUTH.FACEBOOK.APP_ID}
+                autoLoad
+                callback={callbackFacebook}
+                render={({isDisabled, isProcessing, isSdkLoaded, onClick}) => (
+                  <MDBBtn social="fb" rounded className="full-width z-depth-1a mx-0" onClick={onClick} disabled={isDisabled || isProcessing || !isSdkLoaded}>
+                    <MDBIcon fab icon="facebook" size="lg"
+                    className="pr-1"/>
+                    {t("AUTH.SIGN_UP_FACEBOOK")}
+                  </MDBBtn>
+                )}
+              />
+
             </div>
             <div className="text-center">
               <GoogleLogin
