@@ -20,6 +20,8 @@ import {Helmet} from "react-helmet";
 import {Formik} from "formik";
 import queryString from "query-string";
 import {useDispatch} from "react-redux";
+import {Base64} from "js-base64";
+import hash from "object-hash";
 import {CSSTransition} from "react-transition-group";
 
 import auth from "actions/auth";
@@ -34,12 +36,24 @@ import "./GoogleSignUpPage.scss";
 
 export default (props) => {
   const dispatch = useDispatch();
-  const {email, firstName, lastName, id_token} = useParams();
+  const {cipher, checksum} = useParams();
   const {t} = useTranslation();
 
   const [loading, setLoading] = useState(false);
   const [IsInvalid, setIsInvalid] = useState(true);
   const [alert, setAlert] = useState({});
+
+  const hash2 = hash(cipher);
+  let googleId = "", email = "", firstName = "", lastName = "", id_token = "";
+  if (hash2 === checksum) {
+    const raw = Base64.decode(cipher.replace(/@/, "/"));
+    const jsonParams = JSON.parse(raw);
+    googleId = jsonParams.googleId;
+    email = jsonParams.email;
+    firstName = jsonParams.firstName;
+    lastName = jsonParams.lastName;
+    id_token = jsonParams.id_token;
+  }
 
   const initialValues = {
     email: email,
@@ -58,10 +72,20 @@ export default (props) => {
       duration: EFFECT.TRANSITION_TIME,
     });
 
+    const hash2 = hash(cipher);
+    if (hash2 !== checksum) {
+      setIsInvalid(true);
+      setAlert({
+        show: true,
+        color: "danger",
+        message: t("AUTH.ERROR.ACCOUNT_IS_INVALID"),
+      });
+      return;
+    }
+
     setLoading(true);
 
-    // const params = queryString.parse(props.location.hash);
-    const params = {email, firstName, lastName, id_token};
+    const params = {googleId, email, firstName, lastName, id_token};
     Service.validateGoogleAccount(params)
       .then(res => {
         setLoading(false);
@@ -142,7 +166,7 @@ export default (props) => {
   };
 
   const handleSubmit = async (params) => {
-    params = {...params, social: SOCIAL.NAME.GOOGLE};
+    params = {...params, social: SOCIAL.NAME.GOOGLE, socialId: googleId};
     try {
       dispatch(auth.requestSignUp(params));
       let res = await Service.signUp(params);

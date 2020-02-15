@@ -20,6 +20,8 @@ import {useDispatch} from "react-redux";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {Formik} from "formik";
+import {Base64} from "js-base64";
+import hash from "object-hash";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
@@ -131,9 +133,13 @@ export default (props) => {
   };
 
   const callbackGoogleSuccess = e => {
-    console.log(e);
-    // const {profileObj: {email, givenName, familyName}, tokenObj: {id_token}} = e;
-    // history.push(`${routes.auth.googleSignUp}/${email}/${givenName}/${familyName}/${id_token}`);
+    const {profileObj: {googleId, email, givenName, familyName}, tokenObj: {id_token}} = e;
+    const params = {
+      googleId, email, firstName: givenName, lastName: familyName, id_token,
+    };
+    const cipher = Base64.encode(JSON.stringify(params)).replace(/\//, "@");
+    const checksum = hash(cipher);
+    history.push(`${routes.auth.googleSignUp}/${cipher}/${checksum}`);
   };
 
   const callbackGoogleFailure = e => {

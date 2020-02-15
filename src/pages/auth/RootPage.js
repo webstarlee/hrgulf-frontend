@@ -31,7 +31,7 @@ export default () => {
             <Switch>
               <Route path={routes.auth.signIn} exact component={SignInPage}/>
               <Route path={routes.auth.signUp} exact component={SignUpPage}/>
-              <Route path={`${routes.auth.googleSignUp}/:email/:firstName?/:lastName?/:id_token?`} exact component={GoogleSignUpPage}/>
+              <Route path={`${routes.auth.googleSignUp}/:cipher/:checksum`} exact component={GoogleSignUpPage}/>
               <Route path={routes.auth.forgotPassword} component={ForgotPasswordPage}/>
               <Route path={`${routes.auth.resetPassword}/:email?/:token?`} component={ResetPasswordPage}/>
               <Route component={Error404}/>

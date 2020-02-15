@@ -92,9 +92,9 @@ export default (props) => {
   };
 
   const callbackGoogleSuccess = e => {
-    const {profileObj: {email, givenName, familyName}, tokenObj: {id_token}} = e;
+    const {profileObj: {googleId, email, givenName, familyName}, tokenObj: {id_token}} = e;
 
-    const params = {email, id_token};
+    const params = {googleId, email, id_token};
     dispatch(auth.requestSignIn({user: params}));
     setLoading(true);
     Service.signInWithGoogle(params)
