@@ -4,12 +4,12 @@ import {useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
 import {Formik} from "formik";
 
+import authActions from "actions/auth";
 import {ACCOUNT, AUTH, DEFAULT, PROJECT, RESULT, SOCIAL, VALIDATION} from "core/globals";
 import Service from "services/AccountService";
 import toast from "components/MyToast";
 
 import "./AccountType.scss";
-import authActions from "../../../actions/auth";
 
 export default (props) => {
   const {t} = useTranslation();

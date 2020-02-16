@@ -13,7 +13,7 @@ import {ALERT, AUTH, EFFECT, RESULT, VALIDATION} from "core/globals";
 import Service from "services/AuthService";
 
 import "./ResetPasswordPage.scss";
-import validators from "../../core/validators";
+import * as Yup from "yup";
 
 export default (props) => {
   const {email, token} = useParams();
@@ -26,6 +26,15 @@ export default (props) => {
   const initialValues = {
     password: "",
   };
+
+  const validationSchema = Yup.object().shape({
+    password: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")}))
+      .min(AUTH.PASSWORD_MIN_LENGTH, t("COMMON.VALIDATION.MIN_LENGTH", {
+        field: t("AUTH.PASSWORD"),
+        length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
+      })),
+  });
 
   useEffect(() => {
     scroll.scrollToTop({
@@ -110,7 +119,8 @@ export default (props) => {
           </MDBRow>
           <Formik
             initialValues={initialValues}
-            validate={validate}
+            // validate={validate}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}>
             {({values: {password}, errors, touched, handleChange, handleSubmit, handleBlur, isSubmitting}) => (
               <form onSubmit={handleSubmit}>
@@ -118,12 +128,13 @@ export default (props) => {
                   <MDBInput id="password" name="password" type="password" icon="lock" label={t("AUTH.PASSWORD")} background
                             value={password}
                             onChange={handleChange} onBlur={handleBlur}>
-                    {touched.password && errors.password === VALIDATION.REQUIRED && <div className="text-left invalid-field2">
-                      {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")})}
-                    </div>}
-                    {touched.password && errors.password === VALIDATION.MIN_LENGTH && <div className="text-left invalid-field2">
-                      {t("COMMON.VALIDATION.MIN_LENGTH", {field: t("AUTH.PASSWORD"), length: AUTH.PASSWORD_MIN_LENGTH})}
-                    </div>}
+                    {/*{touched.password && errors.password === VALIDATION.REQUIRED && <div className="text-left invalid-field2">*/}
+                    {/*  {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")})}*/}
+                    {/*</div>}*/}
+                    {/*{touched.password && errors.password === VALIDATION.MIN_LENGTH && <div className="text-left invalid-field2">*/}
+                    {/*  {t("COMMON.VALIDATION.MIN_LENGTH", {field: t("AUTH.PASSWORD"), length: AUTH.PASSWORD_MIN_LENGTH})}*/}
+                    {/*</div>}*/}
+                    {!!touched.password && !!errors.password && <div className="text-left invalid-field2">{errors.password}</div>}
                   </MDBInput>
                 </div>
                 <CSSTransition in={alert.show} classNames="fade-transition" timeout={EFFECT.TRANSITION_TIME} unmountOnExit

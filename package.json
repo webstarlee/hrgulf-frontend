@@ -36,7 +36,8 @@
     "react-use-form-state": "^0.12.1",
     "redux": "^4.0.5",
     "redux-state-sync": "^3.0.0",
-    "sprintf-js": "^1.1.2"
+    "sprintf-js": "^1.1.2",
+    "yup": "^0.28.1"
   },
   "scripts": {
     "start": "react-scripts start",

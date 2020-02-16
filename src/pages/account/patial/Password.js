@@ -9,6 +9,8 @@ import Service from "services/AccountService";
 import toast from "components/MyToast";
 
 import "./Password.scss";
+import * as Yup from "yup";
+import validators from "../../../core/validators";
 
 export default (props) => {
   const {t} = useTranslation();
@@ -20,6 +22,24 @@ export default (props) => {
     password: PROJECT.IS_DEV ? DEFAULT.PASSWORD : "",
     password2: PROJECT.IS_DEV ? DEFAULT.PASSWORD : "",
   };
+
+  const validationSchema = Yup.object().shape({
+    password0: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")}))
+      .min(AUTH.PASSWORD_MIN_LENGTH, t("COMMON.VALIDATION.MIN_LENGTH", {
+        field: t("AUTH.PASSWORD"),
+        length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
+      })),
+    password: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")}))
+      .min(AUTH.PASSWORD_MIN_LENGTH, t("COMMON.VALIDATION.MIN_LENGTH", {
+        field: t("AUTH.PASSWORD"),
+        length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
+      })),
+    password2: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD2")}))
+      .oneOf([Yup.ref("password"), null], t("COMMON.VALIDATION.MISMATCH", {field: t("AUTH.PASSWORD")})),
+  });
 
   const validate = (values) => {
     const {password0, password, password2} = values;
@@ -72,7 +92,8 @@ export default (props) => {
       </div>}
       {!user.social.length && <Formik
         initialValues={initialValues}
-        validate={validate}
+        // validate={validate}
+        validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         {({values, touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
@@ -82,13 +103,14 @@ export default (props) => {
                 <MDBInput id="password0" name="password0" label={t("ACCOUNT.PASSWORD.CURRENT_PASSWORD")} type="password" background
                           containerClass="mt-1 mb-0" value={values.password0} onChange={handleChange}
                           onBlur={handleBlur}>
-                  {!!touched.password0 && errors.password0 === VALIDATION.REQUIRED && <div
-                    className="text-left invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("ACCOUNT.PASSWORD.CURRENT_PASSWORD")})}</div>}
-                  {!!touched.password0 && errors.password0 === VALIDATION.MIN_LENGTH && <div
-                    className="text-left invalid-field">{t("COMMON.VALIDATION.MIN_LENGTH", {
-                    field: t("ACCOUNT.PASSWORD.CURRENT_PASSWORD"),
-                    length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
-                  })}</div>}
+                  {/*{!!touched.password0 && errors.password0 === VALIDATION.REQUIRED && <div*/}
+                  {/*  className="text-left invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("ACCOUNT.PASSWORD.CURRENT_PASSWORD")})}</div>}*/}
+                  {/*{!!touched.password0 && errors.password0 === VALIDATION.MIN_LENGTH && <div*/}
+                  {/*  className="text-left invalid-field">{t("COMMON.VALIDATION.MIN_LENGTH", {*/}
+                  {/*  field: t("ACCOUNT.PASSWORD.CURRENT_PASSWORD"),*/}
+                  {/*  length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)*/}
+                  {/*})}</div>}*/}
+                  {!!touched.password0 && !!errors.password0 && <div className="text-left invalid-field">{errors.password0}</div>}
                 </MDBInput>
               </MDBCol>
             </MDBRow>
@@ -97,28 +119,30 @@ export default (props) => {
                 <MDBInput id="password" name="password" label={t("ACCOUNT.PASSWORD.NEW_PASSWORD")} type="password" background
                           containerClass="mt-3" value={values.password} onChange={handleChange}
                           onBlur={handleBlur}>
-                  {!!touched.password && errors.password === VALIDATION.REQUIRED && <div
-                    className="text-left invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("ACCOUNT.PASSWORD.NEW_PASSWORD")})}</div>}
-                  {!!touched.password && errors.password === VALIDATION.MIN_LENGTH && <div
-                    className="text-left invalid-field">{t("COMMON.VALIDATION.MIN_LENGTH", {
-                    field: t("ACCOUNT.PASSWORD.NEW_PASSWORD"),
-                    length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
-                  })}</div>}
+                  {/*{!!touched.password && errors.password === VALIDATION.REQUIRED && <div*/}
+                  {/*  className="text-left invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("ACCOUNT.PASSWORD.NEW_PASSWORD")})}</div>}*/}
+                  {/*{!!touched.password && errors.password === VALIDATION.MIN_LENGTH && <div*/}
+                  {/*  className="text-left invalid-field">{t("COMMON.VALIDATION.MIN_LENGTH", {*/}
+                  {/*  field: t("ACCOUNT.PASSWORD.NEW_PASSWORD"),*/}
+                  {/*  length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)*/}
+                  {/*})}</div>}*/}
+                  {!!touched.password && !!errors.password && <div className="text-left invalid-field">{errors.password}</div>}
                 </MDBInput>
               </MDBCol>
               <MDBCol md="6">
                 <MDBInput id="password2" name="password2" label={t("ACCOUNT.PASSWORD.PASSWORD2")} type="password" background
                           containerClass="mt-3" value={values.password2} onChange={handleChange}
                           onBlur={handleBlur}>
-                  {!!touched.password2 && errors.password2 === VALIDATION.REQUIRED && <div
-                    className="text-left invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("ACCOUNT.PASSWORD.PASSWORD2")})}</div>}
-                  {!!touched.password2 && errors.password2 === VALIDATION.MIN_LENGTH && <div
-                    className="text-left invalid-field">{t("COMMON.VALIDATION.MIN_LENGTH", {
-                    field: t("ACCOUNT.PASSWORD.PASSWORD2"),
-                    length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
-                  })}</div>}
-                  {(!!touched.password || !!touched.password2) && errors.password2 === VALIDATION.MISMATCH && <div
-                    className="text-left invalid-field">{t("COMMON.VALIDATION.MISMATCH", {field: t("ACCOUNT.PASSWORD.NEW_PASSWORD")})}</div>}
+                  {/*{!!touched.password2 && errors.password2 === VALIDATION.REQUIRED && <div*/}
+                  {/*  className="text-left invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("ACCOUNT.PASSWORD.PASSWORD2")})}</div>}*/}
+                  {/*{!!touched.password2 && errors.password2 === VALIDATION.MIN_LENGTH && <div*/}
+                  {/*  className="text-left invalid-field">{t("COMMON.VALIDATION.MIN_LENGTH", {*/}
+                  {/*  field: t("ACCOUNT.PASSWORD.PASSWORD2"),*/}
+                  {/*  length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)*/}
+                  {/*})}</div>}*/}
+                  {/*{(!!touched.password || !!touched.password2) && errors.password2 === VALIDATION.MISMATCH && <div*/}
+                  {/*  className="text-left invalid-field">{t("COMMON.VALIDATION.MISMATCH", {field: t("ACCOUNT.PASSWORD.NEW_PASSWORD")})}</div>}*/}
+                  {(!!touched.password || !!touched.password2) && !!errors.password2 && <div className="text-left invalid-field">{errors.password2}</div>}
                 </MDBInput>
               </MDBCol>
             </MDBRow>

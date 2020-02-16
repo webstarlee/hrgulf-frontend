@@ -1,8 +1,8 @@
 import {PROJECT} from "core/globals";
 
 export default {
-  baseUrl: PROJECT.IS_DEV ? "http://localhost:8080/api/" : "/api/",
-  assetsBaseUrl: PROJECT.IS_DEV ? "http://localhost:8080/assets/" : "/assets/",
+  baseUrl: PROJECT.IS_DEV ? "http://localhost:7080/api/" : "/api/",
+  assetsBaseUrl: PROJECT.IS_DEV ? "http://localhost:7080/assets/" : "/assets/",
   auth: {
     signIn: "auth/sign-in",
     signUp: "auth/sign-up",

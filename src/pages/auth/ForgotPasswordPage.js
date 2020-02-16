@@ -14,6 +14,7 @@ import routes from "core/routes";
 import Service from "services/AuthService";
 
 import "./ForgotPasswordPage.scss";
+import * as Yup from "yup";
 
 export default (props) => {
   const {t} = useTranslation();
@@ -24,6 +25,12 @@ export default (props) => {
   const initialValues = {
     email: "",
   };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")}))
+      .email(t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})),
+  });
 
   useEffect(() => {
     scroll.scrollToTop({
@@ -84,7 +91,8 @@ export default (props) => {
           </MDBRow>
           <Formik
             initialValues={initialValues}
-            validate={validate}
+            // validate={validate}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}>
             {({values: {email}, errors, touched, handleChange, handleSubmit, handleBlur, isSubmitting}) => (
               <form onSubmit={handleSubmit}>
@@ -92,12 +100,13 @@ export default (props) => {
                   <MDBInput id="email" name="email" type="email" icon="envelope" label={t("AUTH.EMAIL")} background
                             value={email}
                             onChange={handleChange} onBlur={handleBlur}>
-                    {touched.email && errors.email === VALIDATION.REQUIRED && <div className="text-left invalid-field2">
-                      {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")})}
-                    </div>}
-                    {touched.email && errors.email === VALIDATION.INVALID && <div className="text-left invalid-field2">
-                      {t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})}
-                    </div>}
+                    {/*{touched.email && errors.email === VALIDATION.REQUIRED && <div className="text-left invalid-field2">*/}
+                    {/*  {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")})}*/}
+                    {/*</div>}*/}
+                    {/*{touched.email && errors.email === VALIDATION.INVALID && <div className="text-left invalid-field2">*/}
+                    {/*  {t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})}*/}
+                    {/*</div>}*/}
+                    {!!touched.email && !!errors.email && <div className="text-left invalid-field2">{errors.email}</div>}
                   </MDBInput>
                 </div>
                 <CSSTransition in={alert.show} classNames="fade-transition" timeout={EFFECT.TRANSITION_TIME}

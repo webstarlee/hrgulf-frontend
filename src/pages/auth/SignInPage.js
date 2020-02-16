@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Link, useHistory} from "react-router-dom";
 import {
@@ -16,6 +16,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {Formik} from "formik";
+import * as Yup from "yup";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
@@ -28,6 +29,7 @@ import images from "core/images";
 import Service from "services/AuthService";
 
 import "./SignInPage.scss";
+import WithTranslateFormErrors from "../../components/WithTranslationFormErrors";
 
 export default (props) => {
   const {auth: {redirectUrl}} = useSelector(state => state);
@@ -43,19 +45,35 @@ export default (props) => {
     rememberMe: PROJECT.IS_DEV,
   };
 
+  let validationSchema;
+
   useEffect(() => {
     scroll.scrollToTop({
       duration: EFFECT.TRANSITION_TIME,
     });
   }, [props]);
 
+  useMemo(() => {
+    validationSchema = Yup.object().shape({
+      email: Yup.string()
+        .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")}))
+        .email(t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})),
+      password: Yup.string()
+        .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")}))
+        .min(6, t("COMMON.VALIDATION.MIN_LENGTH", {
+          field: t("AUTH.PASSWORD"),
+          length: t(`${AUTH.PASSWORD_MIN_LENGTH}`)
+        })),
+    });
+  }, [t]);
+
   const validate = ({email, password, rememberMe}) => {
     const errors = {};
-    if (!email.length) {
-      errors["email"] = VALIDATION.REQUIRED;
-    } else if (!validators.isEmail(email)) {
-      errors["email"] = VALIDATION.INVALID;
-    }
+    // if (!email.length) {
+    //   errors["email"] = VALIDATION.REQUIRED;
+    // } else if (!validators.isEmail(email)) {
+    //   errors["email"] = VALIDATION.INVALID;
+    // }
 
     if (!password.length) {
       errors["password"] = VALIDATION.REQUIRED;
@@ -207,48 +225,53 @@ export default (props) => {
           <hr className="white-border"/>
           <Formik
             initialValues={initialValues}
-            validate={validate}
+            // validate={validate}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting}) => (
-              <form onSubmit={handleSubmit}>
-                <div className="white-text mt-2 mt-lg-3">
-                  <MDBInput id="email" name="email" type="email" icon="envelope" label={t("AUTH.EMAIL")} background
-                            value={values.email} onChange={handleChange} onBlur={handleBlur}>
-                    {!!touched.email && errors.email === VALIDATION.REQUIRED && <div
-                      className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")})}</div>}
-                    {!!touched.email && errors.email === VALIDATION.INVALID && <div
-                      className="text-left invalid-field2">{t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})}</div>}
-                  </MDBInput>
-                  <MDBInput id="password" name="password" icon="lock" label={t("AUTH.PASSWORD")} type="password"
-                            background
-                            containerClass="mb-0" value={values.password} onChange={handleChange} onBlur={handleBlur}>
-                    {!!touched.password && errors.password === VALIDATION.REQUIRED && <div
-                      className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")})}</div>}
-                    {!!touched.password && errors.password === VALIDATION.MIN_LENGTH && <div
-                      className="text-left invalid-field2">{t("COMMON.VALIDATION.MIN_LENGTH", {
-                      field: t("AUTH.PASSWORD"),
-                      length: t(`${AUTH.PASSWORD_MIN_LENGTH}`)
-                    })}</div>}
-                  </MDBInput>
-                  <div className="text-left">
-                    <MDBInput onChange={handleChange} checked={values.rememberMe || false}
-                              label={t("AUTH.REMEMBER_ME")} type="checkbox" filled id="rememberMe"
-                              containerClass="mt-4"/>
+            {({values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldTouched}) => (
+              <WithTranslateFormErrors errors={errors} touched={touched} setFieldTouched={setFieldTouched}>
+                <form onSubmit={handleSubmit}>
+                  <div className="white-text mt-2 mt-lg-3">
+                    <MDBInput id="email" name="email" type="email" icon="envelope" label={t("AUTH.EMAIL")} background
+                              value={values.email} onChange={handleChange} onBlur={handleBlur}>
+                      {/*{!!touched.email && errors.email === VALIDATION.REQUIRED && <div*/}
+                      {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")})}</div>}*/}
+                      {/*{!!touched.email && errors.email === VALIDATION.INVALID && <div*/}
+                      {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})}</div>}*/}
+                      {!!touched.email && !!errors.email && <div className="text-left invalid-field2">{errors.email}</div>}
+                    </MDBInput>
+                    <MDBInput id="password" name="password" icon="lock" label={t("AUTH.PASSWORD")} type="password"
+                              background
+                              containerClass="mb-0" value={values.password} onChange={handleChange} onBlur={handleBlur}>
+                      {/*{!!touched.password && errors.password === VALIDATION.REQUIRED && <div*/}
+                      {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")})}</div>}*/}
+                      {/*{!!touched.password && errors.password === VALIDATION.MIN_LENGTH && <div*/}
+                      {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.MIN_LENGTH", {*/}
+                      {/*  field: t("AUTH.PASSWORD"),*/}
+                      {/*  length: t(`${AUTH.PASSWORD_MIN_LENGTH}`)*/}
+                      {/*})}</div>}*/}
+                      {!!touched.password && !!errors.password && <div className="text-left invalid-field2">{errors.password}</div>}
+                    </MDBInput>
+                    <div className="text-left">
+                      <MDBInput onChange={handleChange} checked={values.rememberMe || false}
+                                label={t("AUTH.REMEMBER_ME")} type="checkbox" filled id="rememberMe"
+                                containerClass="mt-4"/>
+                    </div>
                   </div>
-                </div>
-                <div className="text-center mt-4 mb-3 mx-5">
-                  <MDBBtn type="submit" color="white" rounded className="full-width z-depth-1a blue-grey-text mx-0"
-                          disabled={!!loading || isSubmitting || (!!errors && !!Object.keys(errors).length)}>
-                    {!isSubmitting && <MDBIcon size="lg" icon={"sign-in-alt"}/>}
-                    {!!isSubmitting && <div className="spinner-grow spinner-grow-sm" role="status"/>}
-                    {!isSubmitting && t("AUTH.SIGN_IN")}
-                  </MDBBtn>
-                </div>
-                <p className="font-small white-text d-flex justify-content-end pb-3">
-                  <Link className="ml-1 white-text" to={routes.auth.forgotPassword}>{t("AUTH.FORGOT_PASSWORD")}</Link>
-                </p>
-              </form>
+                  <div className="text-center mt-4 mb-3 mx-5">
+                    <MDBBtn type="submit" color="white" rounded className="full-width z-depth-1a blue-grey-text mx-0"
+                            disabled={!!loading || isSubmitting || (!!errors && !!Object.keys(errors).length)}>
+                      {!isSubmitting && <MDBIcon size="lg" icon={"sign-in-alt"}/>}
+                      {!!isSubmitting && <div className="spinner-grow spinner-grow-sm" role="status"/>}
+                      {!isSubmitting && t("AUTH.SIGN_IN")}
+                    </MDBBtn>
+                  </div>
+                  <p className="font-small white-text d-flex justify-content-end pb-3">
+                    <Link className="ml-1 white-text" to={routes.auth.forgotPassword}>{t("AUTH.FORGOT_PASSWORD")}</Link>
+                  </p>
+                </form>
+              </WithTranslateFormErrors>
             )}
           </Formik>
         </MDBCardBody>

@@ -18,7 +18,7 @@ import {useParams} from "react-router-dom";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {Formik} from "formik";
-import queryString from "query-string";
+import * as Yup from "yup";
 import {useDispatch} from "react-redux";
 import {Base64} from "js-base64";
 import hash from "object-hash";
@@ -66,6 +66,41 @@ export default (props) => {
     password: "",
     password2: "",
   };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")}))
+      .email(t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})),
+    username: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.USERNAME")}))
+      .max(AUTH.USERNAME_MAX_LENGTH, t("COMMON.VALIDATION.MAX_LENGTH", {
+        field: t("AUTH.USERNAME"),
+        length: t(`COMMON.CARDINALS.${AUTH.USERNAME_MAX_LENGTH}`)
+      }))
+      .test("isUsername", t("COMMON.VALIDATION.INVALID", {field: t("AUTH.USERNAME")}), validators.isUsername),
+    firstName: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FIRST_NAME")})),
+    fatherName: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FATHER_NAME")})),
+    lastName: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.LAST_NAME")})),
+    countryCode: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.COUNTRY_CODE")})),
+    phone: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PHONE")}))
+      .test("isPhoneNumber", t("COMMON.VALIDATION.INVALID", {field: t("AUTH.PHONE")}), function (value) {
+        return validators.isPhoneNumber(`${this.parent.countryCode}${value}`);
+      }),
+    password: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")}))
+      .min(AUTH.PASSWORD_MIN_LENGTH, t("COMMON.VALIDATION.MIN_LENGTH", {
+        field: t("AUTH.PASSWORD"),
+        length: t(`COMMON.CARDINALS.${AUTH.PASSWORD_MIN_LENGTH}`)
+      })),
+    password2: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD2")}))
+      .oneOf([Yup.ref("password"), null], t("COMMON.VALIDATION.MISMATCH", {field: t("AUTH.PASSWORD")})),
+  });
 
   useEffect(() => {
     scroll.scrollToTop({
@@ -200,7 +235,8 @@ export default (props) => {
           </MDBRow>
           <Formik
             initialValues={initialValues}
-            validate={validate}
+            // validate={validate}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
             {({values, errors, touched, handleChange, handleSubmit, handleBlur, isSubmitting}) => (
@@ -221,23 +257,25 @@ export default (props) => {
                       <MDBInput id="username" name="username" type="text" label={t("AUTH.USERNAME")} background
                                 containerClass="mb-0" value={values.username} onChange={handleChange}
                                 onBlur={handleBlur}>
-                        {!!touched.username && errors.username === VALIDATION.REQUIRED && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.USERNAME")})}</div>}
-                        {!!touched.username && errors.username === VALIDATION.INVALID && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.INVALID", {field: t("AUTH.USERNAME")})}</div>}
-                        {!!touched.username && errors.username === VALIDATION.MAX_LENGTH && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.MAX_LENGTH", {
-                          field: t("AUTH.USERNAME"),
-                          length: t(`COMMON.CARDINALS.${AUTH.USERNAME_MAX_LENGTH}`)
-                        })}</div>}
+                        {/*{!!touched.username && errors.username === VALIDATION.REQUIRED && <div*/}
+                        {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.USERNAME")})}</div>}*/}
+                        {/*{!!touched.username && errors.username === VALIDATION.INVALID && <div*/}
+                        {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.INVALID", {field: t("AUTH.USERNAME")})}</div>}*/}
+                        {/*{!!touched.username && errors.username === VALIDATION.MAX_LENGTH && <div*/}
+                        {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.MAX_LENGTH", {*/}
+                        {/*  field: t("AUTH.USERNAME"),*/}
+                        {/*  length: t(`COMMON.CARDINALS.${AUTH.USERNAME_MAX_LENGTH}`)*/}
+                        {/*})}</div>}*/}
+                        {!!touched.username && !!errors.username && <div className="text-left invalid-field2">{errors.username}</div>}
                       </MDBInput>
                     </MDBCol>
                     <MDBCol md="6">
                       <MDBInput id="firstName" name="firstName" type="text" label={t("AUTH.FIRST_NAME")} background
                                 containerClass="mb-0" value={values.firstName} onChange={handleChange}
                                 onBlur={handleBlur}>
-                        {!!touched.firstName && errors.firstName === VALIDATION.REQUIRED && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FIRST_NAME")})}</div>}
+                        {/*{!!touched.firstName && errors.firstName === VALIDATION.REQUIRED && <div*/}
+                        {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FIRST_NAME")})}</div>}*/}
+                        {!!touched.firstName && !!errors.firstName && <div className="text-left invalid-field2">{errors.firstName}</div>}
                       </MDBInput>
                     </MDBCol>
                   </MDBRow>
@@ -246,16 +284,18 @@ export default (props) => {
                       <MDBInput id="fatherName" name="fatherName" type="text" label={t("AUTH.FATHER_NAME")} background
                                 containerClass="mt-3 mb-0" value={values.fatherName} onChange={handleChange}
                                 onBlur={handleBlur}>
-                        {!!touched.fatherName && errors.fatherName === VALIDATION.REQUIRED && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FATHER_NAME")})}</div>}
+                        {/*{!!touched.fatherName && errors.fatherName === VALIDATION.REQUIRED && <div*/}
+                        {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FATHER_NAME")})}</div>}*/}
+                        {!!touched.fatherName && !!errors.fatherName && <div className="text-left invalid-field2">{errors.fatherName}</div>}
                       </MDBInput>
                     </MDBCol>
                     <MDBCol md="6">
                       <MDBInput id="lastName" name="lastName" type="text" label={t("AUTH.LAST_NAME")} background
                                 containerClass="mt-3 mb-0" value={values.lastName} onChange={handleChange}
                                 onBlur={handleBlur}>
-                        {!!touched.lastName && errors.lastName === VALIDATION.REQUIRED && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.LAST_NAME")})}</div>}
+                        {/*{!!touched.lastName && errors.lastName === VALIDATION.REQUIRED && <div*/}
+                        {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.LAST_NAME")})}</div>}*/}
+                        {!!touched.lastName && !!errors.lastName && <div className="text-left invalid-field2">{errors.lastName}</div>}
                       </MDBInput>
                     </MDBCol>
                   </MDBRow>
@@ -281,17 +321,19 @@ export default (props) => {
                                            checked={values.countryCode === COUNTRY_CODE.UAE}>{COUNTRY_CODE.UAE} - {t("COMMON.GCC_COUNTRIES.UAE")}</MDBSelectOption>
                         </MDBSelectOptions>
                       </MDBSelect>
-                      {errors.countryCode === VALIDATION.REQUIRED && <div
-                        className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.COUNTRY_CODE")})}</div>}
+                      {/*{errors.countryCode === VALIDATION.REQUIRED && <div*/}
+                      {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.COUNTRY_CODE")})}</div>}*/}
+                      {!!touched.countryCode && !!errors.countryCode && <div className="text-left invalid-field2">{errors.countryCode}</div>}
                     </MDBCol>
                     <MDBCol md="6">
                       <MDBInput id="phone" name="phone" type="text" label={t("AUTH.PHONE")} background
                                 containerClass="mt-3 mb-0" value={values.phone} onChange={handleChange}
                                 onBlur={handleBlur}>
-                        {!!touched.phone && errors.phone === VALIDATION.REQUIRED && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PHONE")})}</div>}
-                        {errors.phone === VALIDATION.INVALID && <div
-                          className="text-left invalid-field2">{t("COMMON.VALIDATION.INVALID", {field: t("AUTH.PHONE")})}</div>}
+                        {/*{!!touched.phone && errors.phone === VALIDATION.REQUIRED && <div*/}
+                        {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PHONE")})}</div>}*/}
+                        {/*{errors.phone === VALIDATION.INVALID && <div*/}
+                        {/*  className="text-left invalid-field2">{t("COMMON.VALIDATION.INVALID", {field: t("AUTH.PHONE")})}</div>}*/}
+                        {!!errors.phone && <div className="text-left invalid-field2">{errors.phone}</div>}
                       </MDBInput>
                     </MDBCol>
                   </MDBRow>
