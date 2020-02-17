@@ -27,7 +27,7 @@ import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import toast, {Fade} from "components/MyToast";
-import {AUTH, COUNTRY_CODE, DEFAULT, EFFECT, ERROR, PROJECT, RESULT, VALIDATION,} from "core/globals";
+import {AUTH, COUNTRY_CODE, DEFAULT, EFFECT, ERROR, PROJECT, RESULT, VALIDATION, STATUS,} from "core/globals";
 import routes from "core/routes";
 import validators from "core/validators";
 import images from "core/images";
@@ -179,11 +179,15 @@ export default (props) => {
   };
 
   const callbackGoogleFailure = e => {
-
+    toast.error(t("AUTH.ERROR.GOOGLE_AUTHENTICATION_IS_FAILED"));
   };
 
   const callbackFacebook = e => {
-    const {id, email, first_name, last_name, accessToken} = e;
+    const {status, id, email, first_name, last_name, accessToken} = e;
+    if (!id || status === STATUS.UNKNOWN) {
+      toast.error(t("AUTH.ERROR.FACEBOOK_AUTHENTICATION_IS_FAILED"));
+      return;
+    }
     const params = {
       socialId: id, email, first_name, last_name, accessToken
     };

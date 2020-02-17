@@ -141,6 +141,10 @@ export const SCOPE = {
   CURRENT: "current",
 };
 
+export const STATUS = {
+  UNKNOWN: "unknown",
+};
+
 export const VALIDATION = {
   REQUIRED: "REQUIRED",
   INVALID: "INVALID",

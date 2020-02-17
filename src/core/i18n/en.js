@@ -150,6 +150,8 @@ export default {
     RESET_PASSWORD: "Reset Password",
     ERROR: {
       ACCOUNT_IS_INVALID: "Your account is invalid. Try with another one.",
+      FACEBOOK_AUTHENTICATION_IS_FAILED: "Facebook Authentication is failed.",
+      GOOGLE_AUTHENTICATION_IS_FAILED: "Google Authentication is failed.",
     },
   },
   ACCOUNT: {

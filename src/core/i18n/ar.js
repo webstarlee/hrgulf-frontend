@@ -150,6 +150,8 @@ export default {
     RESET_PASSWORD: "إعادة تعيين كلمة المرور",
     ERROR: {
       ACCOUNT_IS_INVALID: "حسابك غير صالح. حاول مع واحد آخر.",
+      FACEBOOK_AUTHENTICATION_IS_FAILED: "فشل مصادقة Facebook.",
+      GOOGLE_AUTHENTICATION_IS_FAILED: "فشل مصادقة Google.",
     },
   },
   ACCOUNT: {
