@@ -13,6 +13,7 @@ authSession = !!authSession ? JSON.parse(authSession) : undefined;
 
 const initialState = {
   signedIn: !!authSession ? authSession.signedIn : false,
+  account: !!authSession ? authSession.account : false,
   user: !!authSession ? authSession.user : undefined,
   token: !!authSession ? authSession.token : undefined,
   redirectUrl: null,
@@ -26,6 +27,7 @@ export default (state = initialState, action) => {
         ...state,
         signedIn: false,
         user: null,
+        account: null,
         token: null,
       };
     case AUTH_SIGN_IN_SUCCESS_SIGNAL:
@@ -33,6 +35,7 @@ export default (state = initialState, action) => {
         ...state,
         signedIn: true,
         user: payload.user,
+        account: payload.account,
         token: payload.token,
       };
     case AUTH_SIGN_IN_FAILURE_SIGNAL:
@@ -40,6 +43,7 @@ export default (state = initialState, action) => {
         ...state,
         signedIn: false,
         user: null,
+        account: null,
         token: null,
       };
     case AUTH_SIGN_OUT_SIGNAL:
@@ -47,6 +51,7 @@ export default (state = initialState, action) => {
         ...state,
         signedIn: false,
         user: null,
+        account: null,
         token: null,
         redirectUrl: "",
       };

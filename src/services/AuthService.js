@@ -3,19 +3,25 @@ import {POST} from "apis/constants";
 import apis from "core/apis";
 import {PROJECT, RESULT,} from "core/globals";
 
+const _onSuccessSignIn = (params, res) => {
+  if (res.result === RESULT.SUCCESS) {
+    setHeader({Authorization: `Bearer ${res.data.token}`});
+    const authData = JSON.stringify({
+      signedIn: true,
+      user: res.data.user,
+      token: res.data.token,
+    });
+    params["rememberMe"] && localStorage.setItem(PROJECT.PERSIST_KEY, authData);
+  }
+};
+
 export default {
   signIn: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.auth.signIn, params)
         .then(res => {
           if (res.result === RESULT.SUCCESS) {
-            setHeader({Authorization: `Bearer ${res.data.token}`});
-            const authData = JSON.stringify({
-              signedIn: true,
-              user: res.data.user,
-              token: res.data.token,
-            });
-            params["rememberMe"] && localStorage.setItem(PROJECT.PERSIST_KEY, authData);
+            _onSuccessSignIn(params, res);
           }
           resolve(res);
         }, err => {
@@ -51,13 +57,7 @@ export default {
       fetch(POST, apis.auth.signInWithGoogle, params)
         .then(res => {
           if (res.result === RESULT.SUCCESS) {
-            setHeader({Authorization: `Bearer ${res.data.token}`});
-            const authData = JSON.stringify({
-              signedIn: true,
-              user: res.data.user,
-              token: res.data.token,
-            });
-            params["rememberMe"] && localStorage.setItem(PROJECT.PERSIST_KEY, authData);
+            _onSuccessSignIn(params, res);
           }
           resolve(res);
         }, err => {
@@ -81,26 +81,7 @@ export default {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.auth.signInWithFacebook, params)
         .then(res => {
-          if (res.result === RESULT.SUCCESS) {
-            setHeader({Authorization: `Bearer ${res.data.token}`});
-            const authData = JSON.stringify({
-              signedIn: true,
-              user: res.data.user,
-              token: res.data.token,
-            });
-            params["rememberMe"] && localStorage.setItem(PROJECT.PERSIST_KEY, authData);
-          }
-          resolve(res);
-        }, err => {
-          reject(err);
-        });
-    });
-  },
-
-  signInWithFacebook: (params) => {
-    return new Promise((resolve, reject) => {
-      fetch(POST, apis.auth.signInWithFacebook, params)
-        .then(res => {
+          _onSuccessSignIn(params, res);
           resolve(res);
         }, err => {
           reject(err);

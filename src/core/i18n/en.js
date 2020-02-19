@@ -92,18 +92,94 @@ export default {
   },
   NAVBAR: {
     HOME: "Home",
-    CONTACT: {
-      CONTACT: "Contact Us",
-      US: "Contact Us",
-      CONSULTANTS: "Board of Consultancy",
-    },
+    MESSAGES: "Messages",
+    NOTIFICATIONS: "Notifications",
     ABOUT: {
-      ABOUT: "What is the Society",
+      ROOT: "What is the Society",
       PORTAL: "Vision & Mission of the Society",
       US: "About The Knowledge Portal",
     },
     ACCOUNT: {
       MY_ACCOUNT: "My Account",
+      ACTIVITY_LOG: "Activity Log",
+      SWITCH_TO_WORK: "Switch to Employee",
+      SWITCH_TO_HIRE: "Switch to Employer",
+    },
+    //HIRE===========================================
+    HIRE: {
+      WORKPLACE: {
+        ROOT: "Workplace",
+        QUESTIONNAIRE: "Questionnaire",
+        LETTERS: "Letters",
+        MY_COMPANY_PROFILES: "My Company Profiles",
+        EMPLOYER_TEST: "Employer test",
+      },
+      MY_JOBS: {
+        ROOT: "My Jobs",
+        POST_JOB: "Post a Job",
+        MY_JOBS: "My Jobs",
+        DRAFT_JOBS: "Draft Jobs",
+      },
+      CV_SERVICES: {
+        ROOT: "CV Services",
+        CV_SEARCH: "CV Search",
+        MY_SAVED_SEARCHES: "My Saved Searches",
+        CV_FOLDERS: "CV Folders",
+      },
+      HR_COMMUNITY: {
+        ROOT: "HR Community",
+        NEWS_FEED: "News Feed",
+        MY_QUESTIONS: "My Questions",
+        MY_ANSWERS: "My Answers",
+        MY_NETWORK: "My Network",
+        FIND_PEOPLE: "Find People",
+        MY_RANK: "My Rank",
+      },
+      CONTACT_US: {
+        ROOT: "Contact Us",
+        MAIN: "Contact Us",
+      },
+    },
+    //WORK===========================================
+    WORK: {
+      FIND_JOBS: {
+        ROOT: "Find Jobs",
+        FIND_JOBS: "Find Jobs",
+        RECOMMENDED_JOBS: "Recommended Jobs",
+        SAVED_JOBS: "Saved Jobs",
+        MY_JOB_ALERTS: "My Job Alerts",
+        ADVANCED_SEARCH: "Advanced Search",
+        BROWSE_JOBS: "Browse Jobs",
+        JOBS_BY_ROLE: "Jobs by Role",
+        JOBS_BY_LOCATION: "Jobs by Location",
+        JOBS_BY_SECTOR: "Jobs by Sector",
+        JOBS_BY_COMPANIES: "Jobs by Companies",
+        EXECUTIVE_JOBS: "Executive Jobs",
+        SALARIES: "Salaries",
+      },
+      MY_CV: {
+        ROOT: "My CV",
+        MY_CV: "My CV",
+        MY_OTHER_PROFILES: "My Other Profiles",
+        COVER_LETTERS: "Cover Letters",
+        BLOG: "Blog",
+      },
+      MY_APPLICATIONS: {
+        ROOT: "My Applications",
+        MAIN: "My Applications",
+      },
+      MY_VISIBILITY: {
+        ROOT: "My Visibility",
+        MY_VISIBILITY: "My Visibility",
+        WHO_VIEWED_MY: "Who Viewed My",
+      },
+      CV_SERVICES: {
+        ROOT: "CV Services",
+        PROFESSIONAL_CV: "Professional CV",
+        VISUAL_CV_TEMPLATES: "Visual CV Templates",
+        COVER_LETTER_WRITING: "Cover Letter Writing",
+        CV_EVALUATION: "CV Evaluation",
+      },
     },
   },
   FOOTER: {

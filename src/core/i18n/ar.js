@@ -92,11 +92,8 @@ export default {
   },
   NAVBAR: {
     HOME: "الصفحة الرئيسية",
-    CONTACT: {
-      CONTACT: "تواصل معنا",
-      US: "تواصل معنا",
-      CONSULTANTS: "المجلس الاستشاري",
-    },
+    MESSAGES: "رسائل",
+    NOTIFICATIONS: "إشعارات",
     ABOUT: {
       ABOUT: "ماهو المجتمع",
       PORTAL: "رؤية ورسالة المجتمع",
@@ -104,6 +101,85 @@ export default {
     },
     ACCOUNT: {
       MY_ACCOUNT: "حسابي الشخصي",
+      ACTIVITY_LOG: "سجل النشاطات",
+      SWITCH_TO_WORK: "التبديل إلى الموظف",
+      SWITCH_TO_HIRE: "التبديل إلى صاحب العمل",
+    },
+    //HIRE===========================================
+    HIRE: {
+      WORKPLACE: {
+        ROOT: "مكان العمل",
+        QUESTIONNAIRE: "استطلاع",
+        LETTERS: "حروف",
+        MY_COMPANY_PROFILES: "ملفات الشركة الخاصة بي",
+        EMPLOYER_TEST: "اختبار صاحب العمل",
+      },
+      MY_JOBS: {
+        ROOT: "وظائفي",
+        POST_JOB: "انشر وظيفة",
+        MY_JOBS: "وظائفي",
+        DRAFT_JOBS: "مشروع وظائف",
+      },
+      CV_SERVICES: {
+        ROOT: "خدمات السيرة الذاتية",
+        CV_SEARCH: "البحث عن السير الذاتية",
+        MY_SAVED_SEARCHES: "عمليات البحث المحفوظة الخاصة بي",
+        CV_FOLDERS: "مجلدات السيرة الذاتية",
+      },
+      HR_COMMUNITY: {
+        ROOT: "مجتمع الموارد البشرية",
+        NEWS_FEED: "أخبار الأعلاف",
+        MY_QUESTIONS: "أسئلتي",
+        MY_ANSWERS: "اجاباتي",
+        MY_NETWORK: "شبكتي",
+        FIND_PEOPLE: "ايجاد الناس",
+        MY_RANK: "رتبتي",
+      },
+      CONTACT_US: {
+        ROOT: "اتصل بنا",
+        MAIN: "اتصل بنا",
+      },
+    },
+    //WORK===========================================
+    WORK: {
+      FIND_JOBS: {
+        ROOT: "العثور على وظائف",
+        FIND_JOBS: "العثور على وظائف",
+        RECOMMENDED_JOBS: "وظائف الموصى بها",
+        SAVED_JOBS: "الوظائف المحفوظة",
+        MY_JOB_ALERTS: "تنبيهات وظيفتي",
+        ADVANCED_SEARCH: "البحث المتقدم",
+        BROWSE_JOBS: "تصفح الوظائف",
+        JOBS_BY_ROLE: "وظائف حسب الدور",
+        JOBS_BY_LOCATION: "وظائف حسب الموقع",
+        JOBS_BY_SECTOR: "وظائف حسب القطاع",
+        JOBS_BY_COMPANIES: "وظائف حسب الشركات",
+        EXECUTIVE_JOBS: "وظائف تنفيذية",
+        SALARIES: "الرواتب",
+      },
+      MY_CV: {
+        ROOT: "سيرتي الذاتية",
+        MY_CV: "سيرتي الذاتية",
+        MY_OTHER_PROFILES: "ملفاتي الشخصية الأخرى",
+        COVER_LETTERS: "تغطي الرسائل",
+        BLOG: "مدونة",
+      },
+      MY_APPLICATIONS: {
+        ROOT: "تطبيقاتي",
+        MAIN: "تطبيقاتي",
+      },
+      MY_VISIBILITY: {
+        ROOT: "رؤيتي",
+        MY_VISIBILITY: "رؤيتي",
+        WHO_VIEWED_MY: "الذين شاهدوا بلدي",
+      },
+      CV_SERVICES: {
+        ROOT: "خدمات السيرة الذاتية",
+        PROFESSIONAL_CV: "السيرة الذاتية المهنية",
+        VISUAL_CV_TEMPLATES: "قوالب السيرة الذاتية المرئية",
+        COVER_LETTER_WRITING: "غلاف رسالة الكتابة",
+        CV_EVALUATION: "تقييم السيرة الذاتية",
+      },
     },
   },
   FOOTER: {

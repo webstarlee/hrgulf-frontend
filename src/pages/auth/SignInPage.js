@@ -24,12 +24,12 @@ import auth from "actions/auth";
 import {AUTH, DEFAULT, EFFECT, ERROR, PROJECT, RESULT, VALIDATION,} from "core/globals";
 import routes from "core/routes";
 import validators from "core/validators";
-import toast, {Zoom, Fade} from "components/MyToast";
 import images from "core/images";
+import toast, {Zoom, Fade} from "components/MyToast";
+import WithTranslateFormErrors from "components/WithTranslationFormErrors";
 import Service from "services/AuthService";
 
 import "./SignInPage.scss";
-import WithTranslateFormErrors from "../../components/WithTranslationFormErrors";
 
 export default (props) => {
   const {auth: {redirectUrl}} = useSelector(state => state);

@@ -34,3 +34,11 @@ $avatar-height: 35px;
   width: $avatar-height;
   height: $avatar-height;
 }
+
+.rtl-content {
+  @media (min-width: $screen-breakpoint-md) {
+    .language-dropdown {
+      padding-left: 1.1rem;
+    }
+  }
+}

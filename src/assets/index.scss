@@ -485,12 +485,18 @@ textarea.form-control {
     right: 0;
   }
 
-  @media (min-width: 768px) {
-    .dropdown .dropdown-menu {
-      left: 0 !important;
-      right: unset;
-    }
+  .dropdown .dropdown-menu.dropdown-menu-right {
+    left: 0 !important;
+    right: auto !important;
+    text-align: right;
   }
+
+  //@media (max-width: $screen-breakpoint-md) {
+  //  .dropdown .dropdown-menu {
+  //    left: 0 !important;
+  //    right: unset;
+  //  }
+  //}
 
   .dropdown-toggle::after {
     margin-left: unset;
