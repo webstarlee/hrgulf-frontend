@@ -7,14 +7,14 @@ import images from "core/images";
 
 import "./Footer.scss";
 
-export default (props) => {
+export default ({className}) => {
   const {t} = useTranslation();
 
-  const dir = t('DIRECTION');
-  const classTextAlignRight = dir === 'rtl' ? 'text-right-lg' : '';
+  const dir = t("DIRECTION");
+  const classTextAlignRight = dir === "rtl" ? "text-right-lg" : '';
 
   return (
-    <MDBFooter color="unique-color-dark" className="font-small pt-4">
+    <MDBFooter color="unique-color-dark" className={`font-small pt-4 ${className}`}>
       <MDBContainer className="text-center text-md-left">
         <MDBRow className="text-center text-md-left mt-3 pb-3">
           <MDBCol md="3" lg="3" xl="3" className={`mx-auto mt-3 ${classTextAlignRight}`}>

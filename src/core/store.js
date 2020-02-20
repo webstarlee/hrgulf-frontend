@@ -1,6 +1,6 @@
 import {applyMiddleware, createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
-import {createStateSyncMiddleware} from 'redux-state-sync'
+import {createStateSyncMiddleware} from "redux-state-sync"
 import rootReducer from "reducers";
 import {PROJECT} from "./globals";
 

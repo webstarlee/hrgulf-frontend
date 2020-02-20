@@ -75,10 +75,10 @@ export default ({collapse, setCollapse, onChangeAccountTypeChange}) => {
                 <span className="mr-2">{t("NAVBAR.HIRE.WORKPLACE.ROOT")}</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
-                <MDBDropdownItem onClick={() => goTo(routes.hire.workplace.questionnaire)}>{t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => goTo(routes.hire.workplace.letters)}>{t("NAVBAR.HIRE.WORKPLACE.LETTERS")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => goTo(routes.hire.workplace.questionnaire.all)}>{t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => goTo(routes.hire.workplace.letters.all)}>{t("NAVBAR.HIRE.WORKPLACE.LETTERS")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => goTo(routes.hire.workplace.myCompanyProfiles)}>{t("NAVBAR.HIRE.WORKPLACE.MY_COMPANY_PROFILES")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => goTo(routes.hire.workplace.employerTest)}>{t("NAVBAR.HIRE.WORKPLACE.EMPLOYER_TEST")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => goTo(routes.hire.workplace.employerTest.root)}>{t("NAVBAR.HIRE.WORKPLACE.EMPLOYER_TEST")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>

@@ -21,6 +21,17 @@ export default {
     changePassword: "account/change-password",
     changeAccountType: "account/change-account-type",
   },
+  hire: {
+    letters: {
+      list: "hire/letters/list",
+      save: "hire/letters/save",
+      get: "hire/letters/get",
+      delete: "hire/letters/delete",
+    },
+  },
+  work: {
+
+  },
   profile: {
     avatar: "profile/avatar",
     saveAvatar: "profile/save-avatar",

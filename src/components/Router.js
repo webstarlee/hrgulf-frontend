@@ -6,10 +6,11 @@ import SignedInRoute from "components/SignedInRoute";
 import SignedOutRoute from "components/SignedOutRoute";
 import Error404Page from "pages/common/Error404Page";
 
+const FrontPage = lazy(() => import("pages/front/RootPage"));
 const AuthPage = lazy(() => import("pages/auth/RootPage"));
 const AccountPage = lazy(() => import("pages/account/RootPage"));
+const HirePage = lazy(() => import("pages/hire/RootPage"));
 const ProfilePage = lazy(() => import("pages/profile/RootPage"));
-const FrontPage = lazy(() => import("pages/front/RootPage"));
 const ContactPage = lazy(() => import("pages/contact/RootPage"));
 const AboutPage = lazy(() => import("pages/about/RootPage"));
 
@@ -18,6 +19,8 @@ export default () => (
     <Route path={"/"} exact component={FrontPage}/>
     <SignedOutRoute path={routes.auth.root} component={AuthPage}/>
     <SignedInRoute path={routes.account.root} component={AccountPage}/>
+    <SignedInRoute path={routes.hire.root} component={HirePage}/>
+
     <SignedInRoute path={routes.profile.root} component={ProfilePage}/>
     <Route path={routes.contact.root} component={ContactPage}/>
     <Route path={routes.about.root} component={AboutPage}/>

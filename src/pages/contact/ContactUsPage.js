@@ -65,7 +65,7 @@ export default () => {
       </Helmet>
       <MDBContainer className="section">
         <MDBRow>
-          <MDBCol md={12}>
+          <MDBCol md="12">
             <h2 className="heading1 text-center font-weight-bold mb-5">{t("CONTACT.US.TITLE")}</h2>
             <h5 className="heading2 text-center description-message">{t("CONTACT.US.DESCRIPTION1")}</h5>
             <h5 className="heading2 text-center description-message">{t("CONTACT.US.DESCRIPTION2")}</h5>
@@ -92,7 +92,7 @@ export default () => {
                       </div>}
                     </MDBInput>
                   </MDBCol>
-                  <MDBCol md={12}>
+                  <MDBCol md="12">
                     <MDBInput id="subject" name="subject" type="text" label={t("CONTACT.US.SUBJECT")} outline value={subject}
                               getValue={setSubject} onBlur={() => setTouched(Object.assign({}, touched, {subject: true}))}>
                       {touched.subject && !subject.length && <div className="invalid-field">
@@ -100,7 +100,7 @@ export default () => {
                       </div>}
                     </MDBInput>
                   </MDBCol>
-                  <MDBCol md={12}>
+                  <MDBCol md="12">
                     <MDBInput id="message" name="message" type="textarea" rows={INPUT.TEXTAREA_ROWS1} label={t("CONTACT.US.MESSAGE")} outline value={message}
                               getValue={setMessage} onBlur={() => setTouched(Object.assign({}, touched, {message: true}))}>
                       {touched.message && !message.length && <div className="invalid-field">

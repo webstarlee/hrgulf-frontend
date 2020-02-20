@@ -1,4 +1,4 @@
-import libphonenumber from 'google-libphonenumber';
+import libphonenumber from "google-libphonenumber";
 
 export default {
   isEmail: (value) => {

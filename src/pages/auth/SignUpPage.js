@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 import {
@@ -87,13 +87,7 @@ export default (props) => {
     password2: Yup.string()
       .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD2")}))
       .oneOf([Yup.ref("password"), null], t("COMMON.VALIDATION.MISMATCH", {field: t("AUTH.PASSWORD")})),
-  });
-
-  useEffect(() => {
-    scroll.scrollToTop({
-      duration: EFFECT.TRANSITION_TIME,
-    });
-  }, [props]);
+  });;
 
   const validate = ({email, username, firstName, fatherName, lastName, countryCode, phone, password, password2}) => {
     const errors = {};
@@ -149,23 +143,25 @@ export default (props) => {
     return errors;
   };
 
-  const handleSubmit = async (params) => {
-    params = {...params};
-    try {
-      dispatch(auth.requestSignUp(params));
-      let res = await Service.signUp(params);
-      if (res.result === RESULT.SUCCESS) {
-        dispatch(auth.successSignUp(res.data));
-        toast.success(res.message);
-      } else {
-        dispatch(auth.failureSignUp(res.message));
-        toast.error(res.message);
-      }
-
-    } catch (err) {
-      dispatch(auth.failureSignUp(ERROR.UNKNOWN_SERVER_ERROR));
-      toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
-    }
+  const handleSubmit = (params, {setSubmitting}) => {
+    setSubmitting(true);
+    dispatch(auth.requestSignUp(params));
+    Service.signUp(params)
+      .then(res => {
+        if (res.result === RESULT.SUCCESS) {
+          dispatch(auth.successSignUp(res.data));
+          toast.success(res.message);
+        } else {
+          dispatch(auth.failureSignUp(res.message));
+          toast.error(res.message);
+        }
+        setSubmitting(false);
+      })
+      .catch(err => {
+        dispatch(auth.failureSignUp(ERROR.UNKNOWN_SERVER_ERROR));
+        toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
+        setSubmitting(false);
+      });
   };
 
   const callbackGoogleSuccess = e => {
@@ -195,6 +191,16 @@ export default (props) => {
     const checksum = hash(cipher);
     history.push(`${routes.auth.facebookSignUp}/${cipher}/${checksum}`);
   };
+
+  useEffect(() => {
+    scroll.scrollToTop({
+      duration: EFFECT.TRANSITION_TIME,
+    });
+  }, [props]);
+
+  useMemo(e => {
+
+  });
 
   const payload = () => (
     <Fragment>

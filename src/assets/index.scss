@@ -78,6 +78,10 @@ body {
   width: 100%;
 }
 
+.full-height {
+  height: 100%;
+}
+
 .loading-page {
   height: $loading-page-height;
 }
@@ -307,6 +311,23 @@ textarea.form-control {
 
 .main-color {
   background-color: $main-color !important;
+}
+
+.back-to-top-container {
+  right: 24px;
+  bottom: 45px;
+}
+
+.footer-mb-sticky {
+  margin-bottom: $footer-margin-bottom;
+}
+
+.select-wrapper > label.mdb-main-label.active {
+  transform: translateY(-17px) !important;
+}
+
+.text-decoration-none {
+  text-decoration: none;
 }
 
 .rtl-content {
@@ -593,5 +614,11 @@ textarea.form-control {
 
   .Toastify__close-button {
 
+  }
+
+  .back-to-top-container {
+    left: 24px;
+    right: unset;
+    bottom: 45px;
   }
 }

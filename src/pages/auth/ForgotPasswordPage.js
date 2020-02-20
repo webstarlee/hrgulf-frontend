@@ -1,20 +1,21 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {MDBAlert, MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBIcon, MDBInput, MDBRow} from "mdbreact";
+import {Link} from "react-router-dom";
+import {MDBAlert, MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBIcon, MDBInput, MDBRow, ToastContainer} from "mdbreact";
 import {CSSTransition} from "react-transition-group";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {Formik} from "formik";
+import * as Yup from "yup";
 
 import {ALERT, EFFECT, RESULT, VALIDATION} from "core/globals";
 import validators from "core/validators";
 import images from "core/images";
-import {Link} from "react-router-dom";
 import routes from "core/routes";
+import toast, {Fade} from "components/MyToast";
 import Service from "services/AuthService";
 
 import "./ForgotPasswordPage.scss";
-import * as Yup from "yup";
 
 export default (props) => {
   const {t} = useTranslation();
@@ -32,12 +33,6 @@ export default (props) => {
       .email(t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})),
   });
 
-  useEffect(() => {
-    scroll.scrollToTop({
-      duration: EFFECT.TRANSITION_TIME,
-    });
-  }, [props]);
-
   const validate = ({email}) => {
     const errors = {};
     if (!email.length) {
@@ -49,30 +44,36 @@ export default (props) => {
     return errors;
   };
 
-  const handleSubmit = async ({email}, {setSubmitting}) => {
-    // event.preventDefault();
-    try {
-      const params = {email};
-      setLoading(true);
-      setSubmitting(true);
-      let res = await Service.sendForgotPasswordMail(params);
-      setLoading(false);
-      setSubmitting(false);
-      setAlert({
-        show: true,
-        color: res.result === RESULT.SUCCESS ? ALERT.SUCCESS : ALERT.DANGER,
-        message: res.message,
+  const handleSubmit = ({email}, {setSubmitting}) => {
+    const params = {email};
+    setLoading(true);
+    setSubmitting(true);
+    Service.sendForgotPasswordMail(params)
+      .then(res => {
+        if (res.result === RESULT.SUCCESS) {
+          toast.success(res.message);
+        } else {
+          toast.error(res.message);
+        }
+        setLoading(false);
+        setSubmitting(false);
+      })
+      .catch(err => {
+        toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
+        setLoading(false);
+        setSubmitting(false);
       });
-    } catch (err) {
-      setLoading(false);
-      setSubmitting(false);
-      setAlert({
-        show: true,
-        color: ALERT.DANGER,
-        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
-      });
-    }
   };
+
+  useEffect(() => {
+    scroll.scrollToTop({
+      duration: EFFECT.TRANSITION_TIME,
+    });
+  }, [props]);
+
+  useMemo(e => {
+
+  }, [t]);
 
   const payload = () => (
     <Fragment>
@@ -130,6 +131,16 @@ export default (props) => {
           </Formik>
         </MDBCardBody>
       </MDBCard>
+      <ToastContainer
+        className="text-left"
+        position={t("DIRECTION") === "ltr" ? "top-right" : "top-left"}
+        dir={t("DIRECTION")}
+        hideProgressBar={true}
+        // newestOnTop={true}
+        // autoClose={0}
+        autoClose={EFFECT.TRANSITION_TIME5}
+        closeButton={false}
+        transition={Fade}/>
     </Fragment>
   );
 

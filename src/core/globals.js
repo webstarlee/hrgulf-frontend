@@ -65,6 +65,12 @@ export const DATE_FORMAT = {
   ISO2: "YYYY-MM-DD",
 };
 
+export const DELAY = {
+  DELAY1: 500,
+  DELAY2: 1000,
+  DELAY3: 1500,
+};
+
 export const DEFAULT = {
   EMAIL: "honey96dev@gmail.com",
   USERNAME: "honey96dev",
@@ -106,6 +112,17 @@ export const INPUT = {
   TEXTAREA_MAX_LENGTH: 4096,
 };
 
+export const LETTERS = {
+  TYPE: {
+    GENERIC: "GENERIC",
+    INTERVIEW: "INTERVIEW",
+    FOLLOWUP: "FOLLOWUP",
+    ACCEPTANCE: "ACCEPTANCE",
+    REJECTION: "REJECTION",
+    ON_BOARDING: "ON_BOARDING",
+  },
+};
+
 export const NAVBAR = {
   SCROLLING_OFFSET: 40,
   AVATAR: {
@@ -138,7 +155,8 @@ export const SOCIAL = {
 };
 
 export const SCOPE = {
-  CURRENT: "current",
+  ALL: "ALL",
+  CURRENT: "CURRENT",
 };
 
 export const STATUS = {
@@ -166,6 +184,7 @@ export default {
   FILE_UPLOAD,
   GENDER,
   INPUT,
+  LETTERS,
   NAVBAR,
   PAGINATION,
   RESULT,

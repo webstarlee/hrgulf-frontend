@@ -45,27 +45,17 @@ export default (props) => {
     rememberMe: PROJECT.IS_DEV,
   };
 
-  let validationSchema;
-
-  useEffect(() => {
-    scroll.scrollToTop({
-      duration: EFFECT.TRANSITION_TIME,
-    });
-  }, [props]);
-
-  useMemo(() => {
-    validationSchema = Yup.object().shape({
-      email: Yup.string()
-        .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")}))
-        .email(t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})),
-      password: Yup.string()
-        .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")}))
-        .min(6, t("COMMON.VALIDATION.MIN_LENGTH", {
-          field: t("AUTH.PASSWORD"),
-          length: t(`${AUTH.PASSWORD_MIN_LENGTH}`)
-        })),
-    });
-  }, [t]);
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")}))
+      .email(t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")})),
+    password: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PASSWORD")}))
+      .min(6, t("COMMON.VALIDATION.MIN_LENGTH", {
+        field: t("AUTH.PASSWORD"),
+        length: t(`${AUTH.PASSWORD_MIN_LENGTH}`)
+      })),
+  });
 
   const validate = ({email, password, rememberMe}) => {
     const errors = {};
@@ -84,30 +74,31 @@ export default (props) => {
     return errors;
   };
 
-  const handleSubmit = async ({email, password, rememberMe}, {setSubmitting}) => {
-    try {
-      const params = {email, password, rememberMe};
-      dispatch(auth.requestSignIn({user: params}));
-      setLoading(true);
-      setSubmitting(true);
-      let res = await Service.signIn(params);
-      setLoading(false);
-      setSubmitting(false);
-      if (res.result === RESULT.SUCCESS) {
-        dispatch(auth.successSignIn(res.data));
-        const params = new URLSearchParams(props.location.search);
-        const redirect = params.get("redirect");
-        history.push(redirect || routes.root);
-      } else {
-        dispatch(auth.failureSignIn(res.message));
-        toast.error(res.message);
-      }
-    } catch (err) {
-      setLoading(false);
-      setSubmitting(false);
-      dispatch(auth.failureSignIn(ERROR.UNKNOWN_SERVER_ERROR));
-      toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
-    }
+  const handleSubmit = ({email, password, rememberMe}, {setSubmitting}) => {
+    const params = {email, password, rememberMe};
+    dispatch(auth.requestSignIn({user: params}));
+    setLoading(true);
+    setSubmitting(true);
+    Service.signIn(params)
+      .then(res => {
+        if (res.result === RESULT.SUCCESS) {
+          dispatch(auth.successSignIn(res.data));
+          const params = new URLSearchParams(props.location.search);
+          const redirect = params.get("redirect");
+          history.push(redirect || routes.root);
+        } else {
+          dispatch(auth.failureSignIn(res.message));
+          toast.error(res.message);
+        }
+        setLoading(false);
+        setSubmitting(false);
+      })
+      .catch(err => {
+        dispatch(auth.failureSignIn(ERROR.UNKNOWN_SERVER_ERROR));
+        toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
+        setLoading(false);
+        setSubmitting(false);
+      });
   };
 
   const callbackGoogleSuccess = e => {
@@ -165,6 +156,16 @@ export default (props) => {
         toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
       })
   };
+
+  useEffect(() => {
+    scroll.scrollToTop({
+      duration: EFFECT.TRANSITION_TIME,
+    });
+  }, [props]);
+
+  useMemo(() => {
+
+  }, [t]);
 
   const payload =() => (
     <Fragment>

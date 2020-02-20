@@ -93,11 +93,11 @@ export default () => {
       </Helmet>
       <MDBContainer className="section">
         <MDBRow>
-          <MDBCol md={12}>
+          <MDBCol md="12">
             <h2 className="heading1 text-center font-weight-bold mb-5">{t("CONTACT.CONSULTANTS.CONSULTANTS")}</h2>
           </MDBCol>
           {!!loading && <Loading/>}
-          {!loading && <MDBCol md={12}>
+          {!loading && <MDBCol md="12">
             <MDBCarousel activeItem={1} length={chunks.length} slide={true} showControls={true} multiItem testimonial className="my-carousel">
               <MDBCarouselInner>
                 <MDBRow>

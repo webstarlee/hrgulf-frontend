@@ -21,6 +21,8 @@ export default {
       DETAILS: "Details",
       CHANGE: "Change",
       ADD: "Add",
+      EDIT: "Edit",
+      NEW: "New",
       CANCEL: "Cancel",
       FIRST: "First",
       LAST: "Last",
@@ -39,7 +41,7 @@ export default {
       MISMATCH: "Make sure same to {{field}}",
     },
     QUESTION: {
-      DELETE: "Do you want to delete '{{item}}'?",
+      DELETE: "Do you want to delete \"{{item}}\"?",
     },
     ERROR: {
       SORRY: "Sorry",
@@ -48,13 +50,13 @@ export default {
       ERROR_404: "Ops, Page not found",
     },
     GENDER: {
-      MALE: 'Male',
-      FEMALE: 'Female',
+      MALE: "Male",
+      FEMALE: "Female",
     },
     LANGUAGE: {
-      LANGUAGE: 'Language',
-      ENGLISH: 'English',
-      ARABIC: 'العربية',
+      LANGUAGE: "Language",
+      ENGLISH: "English",
+      ARABIC: "العربية",
     },
     FILE_UPLOAD: {
       DEFAULT: "Drag and drop a file here or click",
@@ -88,6 +90,12 @@ export default {
     CARDINALS: {
       6: "6",
       20: "20",
+    },
+    SCOPE: {
+      ALL: "All",
+    },
+    SEARCH: {
+      KEYWORD: "Keyword",
     },
   },
   NAVBAR: {
@@ -258,6 +266,31 @@ export default {
       ACCOUNT_TYPE: "Default Account Type",
     },
   },
+  HIRE: {
+    WORKPLACE: {
+      LETTERS: {
+        FIELDS: {
+          TYPE: "Letter Type",
+          NAME: "Letter Name",
+          SUBJECT: "Letter Subject",
+          MESSAGE: "Message",
+          ATTACHMENT: "Attachment",
+        },
+        TYPE: {
+          GENERIC: "Generic",
+          INTERVIEW: "Interview",
+          FOLLOWUP: "Followup",
+          ACCEPTANCE: "Acceptance",
+          REJECTION: "Rejection",
+          ON_BOARDING: "On Boarding",
+        },
+        ADD: {
+          ADD_LETTER: "Add Letter",
+          EDIT_LETTER: "Edit Letter",
+        },
+      },
+    },
+  },
   PROFILE: {
     PROFILE: "Profile",
     MY_POSTS: {
@@ -276,7 +309,7 @@ export default {
     },
   },
   FRONT: {
-    WELCOME_MESSAGE: "Welcome to the Gulf Human Capital Society – Knowledge Portal",
+    WELCOME_MESSAGE: "Welcome to the Gulf Human Capital Society",
   },
   CONTACT: {
     US: {

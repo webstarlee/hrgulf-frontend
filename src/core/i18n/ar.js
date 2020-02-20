@@ -2,7 +2,7 @@ export default {
   NAME: "عربى",
   CODE: "ar",
   DIRECTION: "rtl",
-  SITE_NAME: 'بوابة المعرفة',
+  SITE_NAME: "بوابة المعرفة",
   COMMON: {
     BUTTON: {
       HOME: "الصفحة الرئيسية",
@@ -21,6 +21,8 @@ export default {
       DETAILS: "تفاصيل",
       CHANGE: "يتغيرون",
       ADD: "إضافة",
+      EDIT: "تعديل",
+      NEW: "جديد",
       CANCEL: "إلغاء",
       FIRST: "أول",
       LAST: "الاخير",
@@ -39,7 +41,7 @@ export default {
       MISMATCH: "تأكد من تطابق {{field}}",
     },
     QUESTION: {
-      DELETE: "هل تريد حذف '{{item}}'؟",
+      DELETE: "هل تريد حذف \"{{item}}\"؟",
     },
     ERROR: {
       SORRY: "نعتذر",
@@ -48,13 +50,13 @@ export default {
       ERROR_404: "لم يتم العثور على الصفحة",
     },
     GENDER: {
-      MALE: 'ذكر',
-      FEMALE: 'أنثى',
+      MALE: "ذكر",
+      FEMALE: "أنثى",
     },
     LANGUAGE: {
-      LANGUAGE: 'اللغة',
-      ENGLISH: 'English',
-      ARABIC: 'العربية',
+      LANGUAGE: "اللغة",
+      ENGLISH: "English",
+      ARABIC: "العربية",
     },
     FILE_UPLOAD: {
       DEFAULT: "انقر هنا أو اسحب وأسقط الملف هنا",
@@ -88,6 +90,12 @@ export default {
     CARDINALS: {
       6: "٦",
       20: "٢٠",
+    },
+    SCOPE: {
+      ALL: "الكل",
+    },
+    SEARCH: {
+      KEYWORD: "الكلمة",
     },
   },
   NAVBAR: {
@@ -258,6 +266,31 @@ export default {
       ACCOUNT_TYPE: "نوع الحساب الافتراضي",
     },
   },
+  HIRE: {
+    WORKPLACE: {
+      LETTERS: {
+        FIELDS: {
+          TYPE: "نوع الرسالة",
+          NAME: "اسم الرسالة",
+          SUBJECT: "موضوع الرسالة",
+          MESSAGE: "رسالة",
+          ATTACHMENT: "المرفق",
+        },
+        TYPE: {
+          GENERIC: "عام",
+          INTERVIEW: "مقابلة",
+          FOLLOWUP: "متابعة",
+          ACCEPTANCE: "قبول",
+          REJECTION: "الرفض",
+          ON_BOARDING: "على الصعود",
+        },
+        ADD: {
+          ADD_LETTER: "أضف رسالة",
+          EDIT_LETTER: "تحرير الرسالة",
+        },
+      },
+    },
+  },
   PROFILE: {
     PROFILE: "الملف الشخصي",
     MY_POSTS: {
@@ -276,7 +309,7 @@ export default {
     },
   },
   FRONT: {
-    WELCOME_MESSAGE: "المجتمع الخليجي لرأس المال البشري – بوابة المعرفة",
+    WELCOME_MESSAGE: "المجتمع الخليجي لرأس المال البشري",
   },
   CONTACT: {
     US: {

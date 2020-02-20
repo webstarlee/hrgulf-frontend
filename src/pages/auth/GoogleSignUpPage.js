@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {
   MDBAlert,
@@ -12,13 +12,14 @@ import {
   MDBSelect,
   MDBSelectInput,
   MDBSelectOption,
-  MDBSelectOptions, ToastContainer
+  MDBSelectOptions,
+  ToastContainer
 } from "mdbreact";
 import {useParams} from "react-router-dom";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {Formik} from "formik";
-import queryString from "query-string";
+import * as Yup from "yup";
 import {useDispatch} from "react-redux";
 import {Base64} from "js-base64";
 import hash from "object-hash";
@@ -33,7 +34,6 @@ import Service from "services/AuthService";
 import images from "core/images";
 
 import "./GoogleSignUpPage.scss";
-import * as Yup from "yup";
 
 export default (props) => {
   const dispatch = useDispatch();
@@ -103,11 +103,7 @@ export default (props) => {
       .oneOf([Yup.ref("password"), null], t("COMMON.VALIDATION.MISMATCH", {field: t("AUTH.PASSWORD")})),
   });
 
-  useEffect(() => {
-    scroll.scrollToTop({
-      duration: EFFECT.TRANSITION_TIME,
-    });
-
+  const validateAccount = () => {
     const hash2 = hash(cipher);
     if (hash2 !== checksum) {
       setIsInvalid(true);
@@ -145,7 +141,7 @@ export default (props) => {
           message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
-  }, [props]);
+  };
 
   const validate = ({email, username, firstName, fatherName, lastName, countryCode, phone, password, password2}) => {
     const errors = {};
@@ -201,24 +197,40 @@ export default (props) => {
     return errors;
   };
 
-  const handleSubmit = async (params) => {
+  const handleSubmit = (params, {setSubmitting}) => {
     params = {...params, social: SOCIAL.NAME.GOOGLE, socialId: googleId};
-    try {
-      dispatch(auth.requestSignUp(params));
-      let res = await Service.signUp(params);
-      if (res.result === RESULT.SUCCESS) {
-        dispatch(auth.successSignUp(res.data));
-        toast.success(res.message);
-      } else {
-        dispatch(auth.failureSignUp(res.message));
-        toast.error(res.message);
-      }
-
-    } catch (err) {
-      dispatch(auth.failureSignUp(ERROR.UNKNOWN_SERVER_ERROR));
-      toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
-    }
+    dispatch(auth.requestSignUp(params));
+    setSubmitting(true);
+    Service.signUp(params)
+      .then(res => {
+        if (res.result === RESULT.SUCCESS) {
+          dispatch(auth.successSignUp(res.data));
+          toast.success(res.message);
+          setSubmitting(false);
+        } else {
+          dispatch(auth.failureSignUp(res.message));
+          toast.error(res.message);
+          setSubmitting(false);
+        }
+      })
+      .catch(err => {
+        dispatch(auth.failureSignUp(ERROR.UNKNOWN_SERVER_ERROR));
+        toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
+        setSubmitting(false);
+      })
   };
+
+  useEffect(() => {
+    scroll.scrollToTop({
+      duration: EFFECT.TRANSITION_TIME,
+    });
+
+    validateAccount();
+  }, [props]);
+
+  useMemo(e => {
+
+  }, [t]);
 
   const payload = () => (
     <Fragment>

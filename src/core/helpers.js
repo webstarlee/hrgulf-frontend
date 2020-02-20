@@ -5,7 +5,7 @@ export const triggerChangeEvent = (id, value) => {
 
   let lastValue = input.value;
   input.value = value;
-  let event = new Event('input', { bubbles: true });
+  let event = new Event("input", { bubbles: true });
 
   let tracker = input._valueTracker;
   if (tracker) {

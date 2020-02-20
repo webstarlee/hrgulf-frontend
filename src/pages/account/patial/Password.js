@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {MDBBtn, MDBCol, MDBInput, MDBRow} from "mdbreact";
 import {useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
@@ -82,6 +82,10 @@ export default (props) => {
         toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
       });
   };
+
+  useMemo(e => {
+
+  }, [t]);
 
   const payload = () => (
     <div className="mt-4">

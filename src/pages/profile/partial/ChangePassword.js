@@ -29,24 +29,25 @@ export default (props) => {
     });
   }, [props]);
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    try {
-      const params = {id: auth.user.id, password0, password};
-      let res = await ProfileService.changePassword(params);
-      setAlert({
-        show: true,
-        color: res.result,
-        message: res.message,
+    const params = {id: auth.user.id, password0, password};
+    ProfileService.changePassword(params)
+      .then(res => {
+        setAlert({
+          show: true,
+          color: res.result,
+          message: res.message,
+        });
+      })
+      .catch(err => {
+        setAlert({
+          show: true,
+          color: ALERT.DANGER,
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
+        });
       });
-    } catch (err) {
-      setAlert({
-        show: true,
-        color: ALERT.DANGER,
-        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
-      });
-    }
   };
 
   return (

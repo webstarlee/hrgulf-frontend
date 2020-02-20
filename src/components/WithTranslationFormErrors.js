@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { useEffect }  from 'react';
-import { useTranslation } from 'react-i18next';
+import PropTypes from "prop-types";
+import React, { useEffect }  from "react";
+import { useTranslation } from "react-i18next";
 
 const useTranslateFormErrors = (errors, touched, setFieldTouched) => {
   const { i18n } = useTranslation();
   useEffect(() => {
-    i18n.on('languageChanged', lng => {
+    i18n.on("languageChanged", lng => {
       console.log("WithTranslateFormErrors", errors, touched);
       Object.keys(errors).forEach(fieldName => {
         if (Object.keys(touched).includes(fieldName)) {
@@ -14,7 +14,7 @@ const useTranslateFormErrors = (errors, touched, setFieldTouched) => {
       });
     });
     return () => {
-      i18n.off('languageChanged', lng => {});
+      i18n.off("languageChanged", lng => {});
     };
   }, [errors]);
 };

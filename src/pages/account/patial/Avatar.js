@@ -34,7 +34,7 @@ export default (props) => {
 
   const extensions = ["jpg", "jpeg", "png"];
 
-  useEffect(() => {
+  const loadData = () => {
     setLoading(true);
     Service.avatar({id: userId})
       .then(res => {
@@ -63,7 +63,7 @@ export default (props) => {
           message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
-  }, []);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -95,6 +95,10 @@ export default (props) => {
         toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
       });
   };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const payload = () => (
     <div className="mt-3">
