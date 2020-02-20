@@ -195,7 +195,7 @@ export default () => {
       const name = attachment.split("/").pop();
       const ext = attachment.split(".").pop();
       const mime = ext2mime[`.${ext}`];
-      if (!mime.startsWith("image")) {
+      if (!mime || !mime.startsWith("image")) {
         const div = document.createElement("div");
         const root = document.querySelector("#file .file-upload");
         ReactDOM.render(
