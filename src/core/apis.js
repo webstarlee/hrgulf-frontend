@@ -28,6 +28,18 @@ export default {
       get: "hire/letters/get",
       delete: "hire/letters/delete",
     },
+    myCompanyProfiles: {
+      loadSalary: "hire/my-company-profiles/load-salary",
+      saveSalary: "hire/my-company-profiles/save-salary",
+      loadAbout: "hire/my-company-profiles/load-about",
+      saveAbout: "hire/my-company-profiles/save-about",
+      loadVision: "hire/my-company-profiles/load-vision",
+      saveVision: "hire/my-company-profiles/save-vision",
+      loadMission: "hire/my-company-profiles/load-mission",
+      saveMission: "hire/my-company-profiles/save-mission",
+      loadCoverPhoto: "hire/my-company-profiles/load-cover-photo",
+      saveCoverPhoto: "hire/my-company-profiles/save-cover-photo",
+    },
   },
   work: {
 

@@ -5,12 +5,12 @@ import Loader from "./partial/Loader";
 
 import "./Error404.scss";
 
-export default (props) => {
+export default ({className, style}) => {
 
   const {t} = useTranslation();
 
   return (
-    <div className="loading-page">
+    <div className={!!className ? className : "loading-page"} style={style}>
       <Loader />
     </div>
   );

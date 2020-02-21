@@ -22,7 +22,7 @@ import routes from "core/routes";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
-import Service from "services/LettersService";
+import Service from "services/hire/LettersService";
 import ListView from "./partial/ListView";
 
 import "./AllLettersPage.scss";
@@ -124,7 +124,7 @@ export default () => {
         <MDBBreadcrumbItem active>{pageTitle}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       <MDBRow className="my-sm-2 my-md-4">
-        <MDBCol md="5">
+        <MDBCol md="5" className="order-1 order-md-0">
           <div className="full-width text-left mt-3">
             <Link to={routes.hire.workplace.letters.add}>
               <MDBBtn color="primary" size="sm" rounded disabled={!!loading}>
@@ -133,7 +133,7 @@ export default () => {
             </Link>
           </div>
         </MDBCol>
-        <MDBCol md="7">
+        <MDBCol md="7" className="order-0 order-md-1">
           <SearchBar onChangeType={setType} onChangeKeyword={setKeyword}/>
         </MDBCol>
       </MDBRow>
@@ -143,7 +143,7 @@ export default () => {
             <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
           </CSSTransition>
         </MDBCol>}
-        <MDBCol md="12" className="order-1 order-md-0">
+        <MDBCol md="12">
           {!!loading && <Loading/>}
           {!loading && !items.length && <ErrorNoData/>}
           {!loading && !!items.length && <Fragment>

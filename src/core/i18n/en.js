@@ -36,9 +36,12 @@ export default {
     VALIDATION: {
       REQUIRED: "{{field}} is required",
       INVALID: "{{field}} is invalid",
+      MIN: "{{field}} minimum value is {{value}}",
+      MAX: "{{field}} maximum value is {{value}}",
       MIN_LENGTH: "{{field}} minimum length is {{length}}",
       MAX_LENGTH: "{{field}} maximum length is {{length}}",
       MISMATCH: "Make sure same to {{field}}",
+      GREATER_THAN: "Make sure greater than {{field}} field",
     },
     QUESTION: {
       DELETE: "Do you want to delete \"{{item}}\"?",
@@ -288,6 +291,23 @@ export default {
           ADD_LETTER: "Add Letter",
           EDIT_LETTER: "Edit Letter",
         },
+      },
+      MY_COMPANY_PROFILES: {
+        FIELDS: {
+          SALARY: {
+            UNIT: "Unit",
+            MIN: "Minimum",
+            MAX: "Maximum",
+          },
+          ABOUT: "About",
+          VISION: "Vision",
+          MISSION: "Mission",
+        },
+        SALARY: "Salary",
+        ABOUT: "About",
+        VISION: "Vision",
+        MISSION: "Mission",
+        COVER_PHOTO: "Cover Photo",
       },
     },
   },

@@ -36,9 +36,12 @@ export default {
     VALIDATION: {
       REQUIRED: "{{field}} مطلوب",
       INVALID: "{{field}} غير صالح",
+      MIN: "{{field}} القيمة الدنيا {{value}}",
+      MAX: "{{field}} القيمة القصوى {{value}}",
       MIN_LENGTH: "الحد الأدنى لطول {{field}} هو {{length}} حرف",
       MAX_LENGTH: "الحد الأقصى لطول {{field}} هو {{length}} حرف",
       MISMATCH: "تأكد من تطابق {{field}}",
+      GREATER_THAN: "تأكد من أكبر من {{field}} الحقل",
     },
     QUESTION: {
       DELETE: "هل تريد حذف \"{{item}}\"؟",
@@ -288,6 +291,23 @@ export default {
           ADD_LETTER: "أضف رسالة",
           EDIT_LETTER: "تحرير الرسالة",
         },
+      },
+      MY_COMPANY_PROFILES: {
+        FIELDS: {
+          SALARY: {
+            UNIT: "وحدة",
+            MIN: "الحد الأدنى",
+            MAX: "أقصى",
+          },
+          ABOUT: "حول",
+          VISION: "رؤية",
+          MISSION: "مهمة",
+        },
+        SALARY: "راتب",
+        ABOUT: "حول",
+        VISION: "رؤية",
+        MISSION: "مهمة",
+        COVER_PHOTO: "صورة الغلاف",
       },
     },
   },

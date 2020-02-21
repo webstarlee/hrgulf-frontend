@@ -1,0 +1,29 @@
+@import "../../../../assets/consts";
+
+$file-upload-width: 300px;
+$file-upload-height: 250px;
+
+.letter-wrapper {
+}
+
+.letter-editor {
+  height: 16rem;
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .letter-editor {
+    height: 22rem;
+  }
+}
+
+@media (min-width: $screen-breakpoint-lg) {
+  .letter-editor {
+    height: 25rem;
+  }
+}
+
+.letter-attachment-upload {
+  //width: $file-upload-width;
+  //height: $file-upload-height;
+}
+

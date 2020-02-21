@@ -39,7 +39,7 @@ import Loading from "components/Loading";
 import MakeFilePreview from "components/MakeFilePreview";
 import toast, {Fade} from "components/MyToast";
 import goToBack from "helpers/goToBack";
-import Service from "services/LettersService";
+import Service from "services/hire/LettersService";
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./NewLetterPage.scss";
@@ -231,7 +231,7 @@ export default () => {
             <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
           </CSSTransition>
         </MDBCol>}
-        <MDBCol md="12" className="order-1 order-md-0">
+        <MDBCol md="12">
           <MDBCard>
             <MDBCardBody>
               {!!loading && <Loading/>}

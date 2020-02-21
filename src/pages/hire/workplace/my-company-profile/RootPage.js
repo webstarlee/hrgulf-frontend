@@ -6,15 +6,13 @@ import routes from "core/routes";
 
 import "./RootPage.scss";
 
-const LettersPage = lazy(() => import("./letters/RootPage"));
-const MyCompanyProfilesPage = lazy(() => import("./my-company-profile/RootPage"));
+const MainPage = lazy(() => import("./MainPage"));
 
 export default (props) => {
   return (
     <Fragment>
       <Switch>
-        <SignedInRoute path={routes.hire.workplace.letters.root} component={LettersPage}/>
-        <SignedInRoute path={routes.hire.workplace.myCompanyProfiles.root} component={MyCompanyProfilesPage}/>
+        <SignedInRoute path={`${routes.hire.workplace.myCompanyProfiles}`} component={MainPage}/>
         <Route component={Error404}/>
       </Switch>
     </Fragment>

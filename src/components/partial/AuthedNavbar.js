@@ -81,7 +81,7 @@ export default ({collapse, setCollapse}) => {
           </MDBNavItem>
           <MDBNavItem>
             <MDBDropdown>
-              <MDBDropdownToggle className="dopdown-toggle" nav>
+              <MDBDropdownToggle className="dopdown-toggle py-0" nav>
                 <img src={avatar} className="z-depth-1 white my-navbar-avatar" style={{borderRadius: NAVBAR.AVATAR.HEIGHT / 100 * borderRadius}} />
               </MDBDropdownToggle>
               <MDBDropdownMenu className="dropdown-default" right>
