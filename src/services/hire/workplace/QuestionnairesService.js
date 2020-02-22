@@ -5,7 +5,7 @@ import apis from "core/apis";
 export default {
   list: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.letters.list, params)
+      fetch(POST, apis.hire.workplace.questionnaire.list, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -16,7 +16,7 @@ export default {
 
   save: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.letters.save, params)
+      fetch(POST, apis.hire.workplace.questionnaire.save, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -27,7 +27,7 @@ export default {
 
   get: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.letters.get, params)
+      fetch(POST, apis.hire.workplace.questionnaire.get, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -38,7 +38,7 @@ export default {
 
   delete: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.letters.delete, params)
+      fetch(POST, apis.hire.workplace.questionnaire.delete, params)
         .then(res => {
           resolve(res);
         }, err => {

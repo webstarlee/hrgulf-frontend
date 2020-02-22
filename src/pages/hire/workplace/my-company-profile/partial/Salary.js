@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import {ALERT, EFFECT, RESULT} from "core/globals";
 import Loading from "components/Loading";
 import toast from "components/MyToast";
-import Service from "services/hire/MyCompanyProfilesService";
+import Service from "services/hire/workplace/MyCompanyProfilesService";
 
 export default () => {
   const {t} = useTranslation();

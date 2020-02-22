@@ -1,31 +1,23 @@
 @import "../../../../assets/consts";
 
-$file-upload-width: 300px;
-$file-upload-height: 250px;
-
-.letter-wrapper {
+.questionnaire-wrapper {
   border: solid 1px $gray-lighten-1;
   border-radius: $radius;
 }
 
-.letter-editor {
+.questionnaire-editor {
   height: 16rem;
 }
 
 @media (min-width: $screen-breakpoint-md) {
-  .letter-editor {
+  .questionnaire-editor {
     height: 22rem;
   }
 }
 
 @media (min-width: $screen-breakpoint-lg) {
-  .letter-editor {
+  .questionnaire-editor {
     height: 25rem;
   }
-}
-
-.letter-attachment-upload {
-  //width: $file-upload-width;
-  //height: $file-upload-height;
 }
 

@@ -23,11 +23,11 @@ import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
 import toast, {Fade} from "components/MyToast";
-import Service from "services/hire/workplace/LettersService";
+import Service from "services/hire/workplace/QuestionnairesService";
 import SearchBar from "./partial/SearchBar";
 import ListView from "./partial/ListView";
 
-import "./AllLettersPage.scss";
+import "./AllQuestionnairesPage.scss";
 
 export default () => {
   const {page} = useParams();
@@ -42,17 +42,16 @@ export default () => {
   const [pageCount, setPageCount] = useState(0);
   const [items, setItems] = useState([]);
 
-  const [type, setType] = useState(SCOPE.ALL);
   const [keyword, setKeyword] = useState("");
 
   const currentPage = page ? parseInt(page) : 1;
-  const pageTitle = t("NAVBAR.HIRE.WORKPLACE.LETTERS");
-  const addUrl = routes.hire.workplace.letters.add;
+  const pageTitle = t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE");
+  const addUrl = routes.hire.workplace.questionnaire.add;
 
   const loadData = () => {
     setLoading(true);
     setAlert({});
-    Service.list({page, pageSize: 9, userId: user.id, type: type === SCOPE.ALL ? undefined : type, keyword})
+    Service.list({page, pageSize: 9, userId: user.id, keyword})
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           setPageCount(res.pageCount);
@@ -80,7 +79,7 @@ export default () => {
   const deleteItem = ({id}) => {
     toggleModal();
     setLoading(true);
-    Service.delete({id: modal.deleteId, userId: user.id, type, keyword})
+    Service.delete({id: modal.deleteId, userId: user.id, keyword})
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           setPageCount(res.pageCount);
@@ -113,14 +112,14 @@ export default () => {
 
   useMemo(e => {
     loadData();
-  }, [page, t, type, keyword]);
+  }, [page, t, keyword]);
 
   useMemo(e => {
     scroll.scrollToTop({
       duration: EFFECT.TRANSITION_TIME,
     });
   }, [page]);
-  
+
   const payload = () => (
     <Fragment>
       <Helmet>
@@ -141,7 +140,7 @@ export default () => {
           </div>
         </MDBCol>
         <MDBCol md="7" className="order-0 order-md-1">
-          <SearchBar onChangeType={setType} onChangeKeyword={setKeyword}/>
+          <SearchBar onChangeKeyword={setKeyword}/>
         </MDBCol>
       </MDBRow>
       <MDBRow>
@@ -157,7 +156,7 @@ export default () => {
             <div className="my-4 text-center">
               <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
             </div>
-            <ListView items={items} showNewLink={false} newLink={addUrl} detailLabel={t("COMMON.BUTTON.EDIT")} detailLink={addUrl} deleteLabel={t("COMMON.BUTTON.DELETE")} page={page} onDelete={handleDeleteItem} />
+            <ListView items={items} newLink={addUrl} detailLabel={t("COMMON.BUTTON.EDIT")} detailLink={addUrl} deleteLabel={t("COMMON.BUTTON.DELETE")} page={page} onDelete={handleDeleteItem} />
             <div className="mt-4 text-center">
               <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
             </div>

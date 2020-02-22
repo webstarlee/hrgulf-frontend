@@ -7,10 +7,10 @@ import {EFFECT} from "core/globals";
 import {Fade} from "components/MyToast";
 import Salary from "./partial/Salary";
 import TextProperty from "./partial/TextProperty";
-import Service from "services/hire/MyCompanyProfilesService";
+import CoverPhoto from "./partial/CoverPhoto";
+import Service from "services/hire/workplace/MyCompanyProfilesService";
 
 import "./MainPage.scss";
-import CoverPhoto from "./partial/CoverPhoto";
 
 export default () => {
   const {t} = useTranslation();

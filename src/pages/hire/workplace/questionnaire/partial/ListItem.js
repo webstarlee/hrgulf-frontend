@@ -9,8 +9,7 @@ import "./ListItem.scss";
 export default ({data, detailLabel, detailLink, deleteLabel, page, onDelete}) => {
   const {t} = useTranslation();
 
-  const type = t(`HIRE.WORKPLACE.LETTERS.TYPE.${data.type}`);
-  const {name, subject, message} = data;
+  const {name, description} = data;
   const detailLinkParam = Base64.encode(JSON.stringify({
     id: data.id,
     page,
@@ -22,8 +21,8 @@ export default ({data, detailLabel, detailLink, deleteLabel, page, onDelete}) =>
         <MDBCardBody className="letter-item-wrapper">
           <div className="letter-inner-wrapper">
             {/*<h4 className="h4-responsive">{type}</h4>*/}
-            <div className="border-dark border-bottom mb-sm-1 mb-md-2"><span className="h4-responsive">{name}</span> - {type}</div>
-            <div className="letter-content" dangerouslySetInnerHTML={{__html: message}}/>
+            <div className="border-dark border-bottom mb-sm-1 mb-md-2"><span className="h4-responsive">{name}</span></div>
+            <div className="letter-content" dangerouslySetInnerHTML={{__html: description}}/>
           </div>
         </MDBCardBody>
         <MDBMask className="flex-center" overlay="grey-strong">

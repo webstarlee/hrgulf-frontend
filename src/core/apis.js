@@ -22,24 +22,32 @@ export default {
     changeAccountType: "account/change-account-type",
   },
   hire: {
-    letters: {
-      list: "hire/letters/list",
-      save: "hire/letters/save",
-      get: "hire/letters/get",
-      delete: "hire/letters/delete",
-    },
-    myCompanyProfiles: {
-      loadSalary: "hire/my-company-profiles/load-salary",
-      saveSalary: "hire/my-company-profiles/save-salary",
-      loadAbout: "hire/my-company-profiles/load-about",
-      saveAbout: "hire/my-company-profiles/save-about",
-      loadVision: "hire/my-company-profiles/load-vision",
-      saveVision: "hire/my-company-profiles/save-vision",
-      loadMission: "hire/my-company-profiles/load-mission",
-      saveMission: "hire/my-company-profiles/save-mission",
-      loadCoverPhoto: "hire/my-company-profiles/load-cover-photo",
-      saveCoverPhoto: "hire/my-company-profiles/save-cover-photo",
-    },
+    workplace : {
+      questionnaire: {
+        list: "hire/workplace/questionnaire/list",
+        save: "hire/workplace/questionnaire/save",
+        get: "hire/workplace/questionnaire/get",
+        delete: "hire/workplace/questionnaire/delete",
+      },
+      letters: {
+        list: "hire/workplace/letters/list",
+        save: "hire/workplace/letters/save",
+        get: "hire/workplace/letters/get",
+        delete: "hire/workplace/letters/delete",
+      },
+      myCompanyProfiles: {
+        loadSalary: "hire/workplace/my-company-profiles/load-salary",
+        saveSalary: "hire/workplace/my-company-profiles/save-salary",
+        loadAbout: "hire/workplace/my-company-profiles/load-about",
+        saveAbout: "hire/workplace/my-company-profiles/save-about",
+        loadVision: "hire/workplace/my-company-profiles/load-vision",
+        saveVision: "hire/workplace/my-company-profiles/save-vision",
+        loadMission: "hire/workplace/my-company-profiles/load-mission",
+        saveMission: "hire/workplace/my-company-profiles/save-mission",
+        loadCoverPhoto: "hire/workplace/my-company-profiles/load-cover-photo",
+        saveCoverPhoto: "hire/workplace/my-company-profiles/save-cover-photo",
+      },
+    }
   },
   work: {
 

@@ -189,22 +189,22 @@ export default (props) => {
             </MDBCol>
           </MDBRow>
           <div className="mt-3 mt-lg-5 mb-2 mb-lg-3 mx-lg-5">
-            <div className="text-center">
-              <FacebookLogin
-                appId={AUTH.FACEBOOK.APP_ID}
-                // autoLoad
-                fields="first_name,last_name,email"
-                cookie={true}
-                callback={callbackFacebook}
-                render={({isDisabled, isProcessing, isSdkLoaded, onClick}) => (
-                  <MDBBtn social="fb" rounded className="full-width z-depth-1a mx-0" onClick={onClick} disabled={!!isDisabled || !!isProcessing || !isSdkLoaded || !!loading}>
-                    <MDBIcon fab icon="facebook" size="lg"
-                    className="pr-1"/>
-                    {t("AUTH.SIGN_UP_FACEBOOK")}
-                  </MDBBtn>
-                )}
-              />
-            </div>
+            {/*<div className="text-center">*/}
+            {/*  <FacebookLogin*/}
+            {/*    appId={AUTH.FACEBOOK.APP_ID}*/}
+            {/*    // autoLoad*/}
+            {/*    fields="first_name,last_name,email"*/}
+            {/*    cookie={true}*/}
+            {/*    callback={callbackFacebook}*/}
+            {/*    render={({isDisabled, isProcessing, isSdkLoaded, onClick}) => (*/}
+            {/*      <MDBBtn social="fb" rounded className="full-width z-depth-1a mx-0" onClick={onClick} disabled={!!isDisabled || !!isProcessing || !isSdkLoaded || !!loading}>*/}
+            {/*        <MDBIcon fab icon="facebook" size="lg"*/}
+            {/*        className="pr-1"/>*/}
+            {/*        {t("AUTH.SIGN_UP_FACEBOOK")}*/}
+            {/*      </MDBBtn>*/}
+            {/*    )}*/}
+            {/*  />*/}
+            {/*</div>*/}
             <div className="text-center">
               <GoogleLogin
                 clientId={AUTH.GOOGLE.CLIENT_ID}

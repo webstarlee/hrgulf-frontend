@@ -71,7 +71,7 @@ body {
 }
 
 .text-transform-none {
-  text-transform: none;
+  text-transform: none !important;
 }
 
 .full-width {
@@ -327,7 +327,15 @@ textarea.form-control {
 }
 
 .text-decoration-none {
-  text-decoration: none;
+  text-decoration: none !important;
+}
+
+.classic-tabs .nav li a {
+  padding: 15px 13px;
+}
+
+@media (max-width: $screen-breakpoint-md) {
+
 }
 
 .rtl-content {

@@ -30,9 +30,13 @@ export const routes = {
         all: "/hire/workplace/letters",
         add: "/hire/workplace/letters/add",
       },
-      myCompanyProfiles: "/hire/workplace/my-company-profiles",
+      myCompanyProfiles: {
+        root: "/hire/workplace/my-company-profiles",
+        main: "/hire/workplace/my-company-profiles",
+      },
       employerTest: {
         root: "/hire/workplace/employer-test",
+        main: "/hire/workplace/employer-test",
       },
     },
     myJobs: {

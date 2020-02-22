@@ -6,13 +6,16 @@ import routes from "core/routes";
 
 import "./RootPage.scss";
 
-const MainPage = lazy(() => import("./MainPage"));
+const AllQuestionnairesPage = lazy(() => import("./AllQuestionnairesPage"));
+const NewQuestionnairePage = lazy(() => import("./NewQuestionnairePage"));
 
 export default (props) => {
+
   return (
     <Fragment>
       <Switch>
-        <SignedInRoute path={`${routes.hire.workplace.myCompanyProfiles.main}`} component={MainPage}/>
+        <SignedInRoute path={`${routes.hire.workplace.questionnaire.add}/:params?`} component={NewQuestionnairePage}/>
+        <SignedInRoute path={`${routes.hire.workplace.questionnaire.all}/:page?`} component={AllQuestionnairesPage}/>
         <Route component={Error404}/>
       </Switch>
     </Fragment>

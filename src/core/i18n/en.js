@@ -21,6 +21,7 @@ export default {
       DETAILS: "Details",
       CHANGE: "Change",
       ADD: "Add",
+      ADD_NEW_ITEM: "Add New Item",
       EDIT: "Edit",
       NEW: "New",
       CANCEL: "Cancel",
@@ -271,6 +272,21 @@ export default {
   },
   HIRE: {
     WORKPLACE: {
+      QUESTIONNAIRE: {
+        FIELDS: {
+          NAME: "Name",
+          DESCRIPTION: "Description",
+          FILTER_BY_SCORE: "Filter applicants by their score",
+          MIN_SCORE: "Minimum Score",
+        },
+        ALL: {
+          NEW_ITEM_DESCRIPTION: "Please click this card to add a new questionnaire."
+        },
+        ADD: {
+          ADD_QUESTIONNAIRE: "Add Questionnaire",
+          EDIT_QUESTIONNAIRE: "Edit Questionnaire",
+        },
+      },
       LETTERS: {
         FIELDS: {
           TYPE: "Letter Type",
@@ -286,6 +302,9 @@ export default {
           ACCEPTANCE: "Acceptance",
           REJECTION: "Rejection",
           ON_BOARDING: "On Boarding",
+        },
+        ALL: {
+          NEW_ITEM_DESCRIPTION: "Please click this card to add a new letter."
         },
         ADD: {
           ADD_LETTER: "Add Letter",
@@ -308,6 +327,14 @@ export default {
         VISION: "Vision",
         MISSION: "Mission",
         COVER_PHOTO: "Cover Photo",
+      },
+      EMPLOYER_TEST: {
+        FIELD: {
+
+        },
+        STEP1: "Send Test Invitation",
+        STEP2: "Invitation Status",
+        STEP3: "Test Result",
       },
     },
   },

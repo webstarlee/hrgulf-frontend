@@ -9,10 +9,11 @@ import "./RootPage.scss";
 const MainPage = lazy(() => import("./MainPage"));
 
 export default (props) => {
+
   return (
     <Fragment>
       <Switch>
-        <SignedInRoute path={`${routes.hire.workplace.myCompanyProfiles.main}`} component={MainPage}/>
+        <SignedInRoute path={`${routes.hire.workplace.employerTest.main}/:tab?`} component={MainPage}/>
         <Route component={Error404}/>
       </Switch>
     </Fragment>

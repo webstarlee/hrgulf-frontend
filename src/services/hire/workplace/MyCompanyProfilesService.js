@@ -5,7 +5,7 @@ import apis from "core/apis";
 export default {
   loadSalary: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.loadSalary, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.loadSalary, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -16,7 +16,7 @@ export default {
 
   saveSalary: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.saveSalary, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.saveSalary, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -27,7 +27,7 @@ export default {
 
   loadAbout: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.loadAbout, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.loadAbout, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -38,7 +38,7 @@ export default {
 
   saveAbout: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.saveAbout, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.saveAbout, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -49,7 +49,7 @@ export default {
 
   loadVision: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.loadVision, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.loadVision, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -60,7 +60,7 @@ export default {
 
   saveVision: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.saveVision, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.saveVision, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -71,7 +71,7 @@ export default {
 
   loadMission: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.loadMission, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.loadMission, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -82,7 +82,7 @@ export default {
 
   saveMission: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.saveMission, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.saveMission, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -93,7 +93,7 @@ export default {
 
   loadCoverPhoto: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.loadCoverPhoto, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.loadCoverPhoto, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -104,7 +104,7 @@ export default {
 
   saveCoverPhoto: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.hire.myCompanyProfiles.saveCoverPhoto, params)
+      fetch(POST, apis.hire.workplace.myCompanyProfiles.saveCoverPhoto, params)
         .then(res => {
           resolve(res);
         }, err => {

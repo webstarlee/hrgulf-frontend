@@ -21,6 +21,7 @@ export default {
       DETAILS: "تفاصيل",
       CHANGE: "يتغيرون",
       ADD: "إضافة",
+      ADD_NEW_ITEM: "أضف أداة جديدة",
       EDIT: "تعديل",
       NEW: "جديد",
       CANCEL: "إلغاء",
@@ -271,6 +272,21 @@ export default {
   },
   HIRE: {
     WORKPLACE: {
+      QUESTIONNAIRE: {
+        FIELDS: {
+          NAME: "اسم",
+          DESCRIPTION: "وصف",
+          FILTER_BY_SCORE: "تصفية المتقدمين حسب درجة",
+          MIN_SCORE: "الحد الأدنى من النقاط",
+        },
+        ALL: {
+          NEW_ITEM_DESCRIPTION: "يرجى النقر على هذه البطاقة لإضافة استبيان جديد."
+        },
+        ADD: {
+          ADD_QUESTIONNAIRE: "إضافة استبيان",
+          EDIT_QUESTIONNAIRE: "تحرير الاستبيان",
+        },
+      },
       LETTERS: {
         FIELDS: {
           TYPE: "نوع الرسالة",
@@ -286,6 +302,9 @@ export default {
           ACCEPTANCE: "قبول",
           REJECTION: "الرفض",
           ON_BOARDING: "على الصعود",
+        },
+        ALL: {
+          NEW_ITEM_DESCRIPTION: "يرجى النقر على هذه البطاقة لإضافة خطاب جديد."
         },
         ADD: {
           ADD_LETTER: "أضف رسالة",
@@ -308,6 +327,14 @@ export default {
         VISION: "رؤية",
         MISSION: "مهمة",
         COVER_PHOTO: "صورة الغلاف",
+      },
+      EMPLOYER_TEST: {
+        FIELD: {
+
+        },
+        STEP1: "إرسال اختبار دعوة",
+        STEP2: "حالة الدعوة",
+        STEP3: "نتيجة الفحص",
       },
     },
   },

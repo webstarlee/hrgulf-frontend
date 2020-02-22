@@ -39,7 +39,7 @@ import Loading from "components/Loading";
 import MakeFilePreview from "components/MakeFilePreview";
 import toast, {Fade} from "components/MyToast";
 import goToBack from "helpers/goToBack";
-import Service from "services/hire/LettersService";
+import Service from "services/hire/workplace/LettersService";
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import "./NewLetterPage.scss";
@@ -53,6 +53,9 @@ export default () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({});
 
+  const [id, setId] = useState();
+  const [page, setPage] = useState();
+
   const [itemId, setItemId] = useState();
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [attachment, setAttachment] = useState("");
@@ -61,10 +64,9 @@ export default () => {
 
   const fileRef = useRef(null);
 
-  let id, page;
-
-  const pageTitle = t(`HIRE.WORKPLACE.LETTERS.ADD.${!!id ? "EDIT" : "ADD"}_LETTER`);
-  const backUrl = `${routes.hire.workplace.letters.all}/${page || 1}`;
+  let pageTitle = t(`HIRE.WORKPLACE.LETTERS.ADD.${!!itemId ? "EDIT" : "ADD"}_LETTER`);
+  let backUrl = `${routes.hire.workplace.letters.all}/${page || 1}`;
+  const addUrl = routes.hire.workplace.letters.add;
 
   let formikProps;
 
@@ -103,6 +105,7 @@ export default () => {
           setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(message))));
           !!attachment && !!attachment.length && setAttachment(`${apis.assetsBaseUrl}${attachment}`);
           // !!fileRef.current && fileRef.current
+          setAlert({});
         } else {
           setAlert({
             show: true,
@@ -153,7 +156,7 @@ export default () => {
 
   const handleReset = ({setValues, setTouched, setErrors}) => {
     setValues({
-      type: LETTERS.TYPE.GENERIC,
+      // type: LETTERS.TYPE.GENERIC,
       name: "",
       subject: "",
     });
@@ -165,7 +168,7 @@ export default () => {
     setAlert({});
     setItemId(undefined);
 
-    history.location.pathname !== routes.hire.workplace.letters.add && history.push(routes.hire.workplace.letters.add);
+    history.location.pathname !== addUrl && history.push(addUrl);
   };
 
   useEffect(e => {
@@ -180,14 +183,18 @@ export default () => {
         const raw = Base64.decode(params);
         const json = JSON.parse(raw);
 
-        id = json["id"];
-        page = json["page"];
-        !!id && loadData();
+        const {id, page} = json;
+        setId(id);
+        setPage(page);
       } catch (e) {
 
       }
     }
   }, [params, t]);
+
+  useMemo(e => {
+    !!id && loadData();
+  }, [id]);
 
   useMemo(e => {
     // !!fileRef.current && console.log(fileRef, attachment);

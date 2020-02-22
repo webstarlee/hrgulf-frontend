@@ -9,7 +9,7 @@ import {ALERT, AVATAR, EFFECT, FILE_UPLOAD, RESULT} from "core/globals";
 import apis from "core/apis";
 import Loading from "components/Loading";
 import toast from "components/MyToast";
-import Service from "services/hire/MyCompanyProfilesService";
+import Service from "services/hire/workplace/MyCompanyProfilesService";
 
 export default () => {
   const {t} = useTranslation();
