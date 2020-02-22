@@ -20,9 +20,6 @@ import {Base64} from "js-base64";
 import {useFormik} from "formik";
 import {useSelector} from "react-redux";
 import * as Yup from "yup";
-import {ContentState, convertFromHTML, convertToRaw, EditorState} from 'draft-js';
-import {Editor} from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
 
 import {ALERT, EFFECT, RESULT} from "core/globals";
 import routes from "core/routes";
@@ -31,8 +28,7 @@ import toast, {Fade} from "components/MyToast";
 import goToBack from "helpers/goToBack";
 import Service from "services/hire/workplace/QuestionnairesService";
 
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import "./NewQuestionnairePage.scss";
+import "./NewQuestionPage.scss";
 
 export default () => {
   const {params} = useParams();
@@ -43,51 +39,50 @@ export default () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({});
 
+  // const [id, setId] = useState();
+  // const [questionnaireId, setQuestionnaireId] = useState();
+  // const [page, setPage] = useState();
+  // const [page2, setPage2] = useState();
   const [urlParams, setUrlParams] = useState({});
 
   const [itemId, setItemId] = useState();
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
 
-  let pageTitle = t(`HIRE.WORKPLACE.QUESTIONNAIRE.ADD.${!!itemId ? "EDIT" : "ADD"}_QUESTIONNAIRE`);
-  let backUrl = `${routes.hire.workplace.questionnaire.all}/${urlParams.page || 1}`;
-  const addUrl = `${routes.hire.workplace.questionnaire.add}/${Base64.encode(JSON.stringify({
+  let pageTitle = t(`HIRE.WORKPLACE.QUESTIONNAIRE.QUESTIONS.ADD.${!!itemId ? "EDIT" : "ADD"}_QUESTION`);
+  let questionnaireUrl = `${routes.hire.workplace.questionnaire.all}/${urlParams.page || 1}`;
+  let questionsUrl = `${routes.hire.workplace.questionnaire.questions}/${Base64.encode(JSON.stringify({
+    ...urlParams,
+    id: urlParams.questionnaireId,
+  }))}`;
+  const addUrl = `${routes.hire.workplace.questionnaire.addQuestion}/${Base64.encode(JSON.stringify({
+    questionnaireId: urlParams.questionnaireId,
     page: urlParams.page,
+    page2: urlParams.page2,
   }))}`;
 
   let formikProps;
 
   let initialValues = {
-    name: "",
-    filterByScore: false,
-    minScore: 0,
+    question: "",
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.NAME")})),
-    minScore: Yup.string()
-      .min(0, t("COMMON.VALIDATION.MIN", {field: t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.MIN_SCORE"),  value: 0}))
-      .test("min-score", t("COMMON.VALIDATION.MIN", {field: t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.MIN_SCORE"), value: 0}), function (value) {
-          return !this.parent.filterByScore || value >= 0;
-      }),
+    question: Yup.string()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.WORKPLACE.QUESTIONNAIRE.QUESTIONS.FIELDS.QUESTION")})),
   });
 
   const loadData = () => {
     setLoading(true);
-    Service.get({id: urlParams.id})
+    Service.getQuestion({id: urlParams.id})
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           const data = res.data;
           setItemId(urlParams.id);
-          const {name, description, filterByScore, minScore} = data;
+          const {question} = data;
           !!formikProps && formikProps.setValues({
-            name,
-            filterByScore,
-            minScore,
+            question,
           });
-          setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(description))));
-          // !!fileRef.current && fileRef.current
+
           setAlert({});
         } else {
           setAlert({
@@ -109,14 +104,12 @@ export default () => {
   };
 
   const handleSubmit = (values, {setSubmitting}) => {
-    const {name, filterByScore, minScore} = values;
-    console.log(values);
-    const description = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    const {question} = values;
 
-    const params = {id: itemId, userId: user.id, name, description, filterByScore: filterByScore || false, minScore};
+    const params = {id: itemId, questionnaireId: urlParams.questionnaireId, question};
 
     setSubmitting(true);
-    Service.save(params)
+    Service.saveQuestion(params)
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           toast.success(res.message);
@@ -134,11 +127,8 @@ export default () => {
 
   const handleReset = ({setValues, setTouched, setErrors}) => {
     setValues({
-      name: "",
-      filterByScore: false,
-      minScore: 0,
+      question: "",
     });
-    setEditorState(EditorState.createEmpty());
     setTouched({});
     setErrors({});
 
@@ -160,7 +150,6 @@ export default () => {
         const raw = Base64.decode(params);
         const json = JSON.parse(raw);
         setUrlParams(json);
-        console.log("params-change");
       } catch (e) {
 
       }
@@ -177,8 +166,6 @@ export default () => {
     onSubmit: handleSubmit,
   });
 
-  console.log(params, urlParams);
-
   const {values, touched, errors, setValues, setTouched, setErrors, handleChange, handleBlur, isSubmitting} = formikProps;
 
   const payload = () => (
@@ -188,7 +175,8 @@ export default () => {
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t("NAVBAR.HIRE.WORKPLACE.ROOT")}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={backUrl}>{t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={questionnaireUrl}>{t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={questionsUrl}>{t("HIRE.WORKPLACE.QUESTIONNAIRE.QUESTIONS.QUESTIONS")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{pageTitle}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       <MDBRow>
@@ -205,35 +193,9 @@ export default () => {
                 <form className="mx-md-4 mx-sm-1 text-left" onSubmit={formikProps.handleSubmit}>
                   <MDBRow>
                     <MDBCol md="12">
-                      <MDBInput id="name" name="name" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.NAME")} background
-                                containerClass="mb-0" value={values.name} onChange={handleChange} onBlur={handleBlur}>
-                        {!!touched.name && !!errors.name && <div className="text-left invalid-field">{errors.name}</div>}
-                      </MDBInput>
-                    </MDBCol>
-                  </MDBRow>
-                  <MDBRow>
-                    <MDBCol md="12">
-                      <div className="text-left">
-                        <div className="grey-text">{t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.DESCRIPTION")}</div>
-                        <Editor
-                          id="editor"
-                          editorState={editorState}
-                          wrapperClassName="questionnaire-wrapper"
-                          editorClassName="questionnaire-editor"
-                          onEditorStateChange={setEditorState}
-
-                        />
-                      </div>
-                    </MDBCol>
-                  </MDBRow>
-                  <MDBRow>
-                    <MDBCol md="6">
-                      <MDBInput id="filterByScore" name="filterByScore" type="checkbox" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.FILTER_BY_SCORE")} filled containerClass="text-left mt-4 mb-0" checked={values.filterByScore || false} onChange={handleChange} />
-                    </MDBCol>
-                    <MDBCol md="6">
-                      <MDBInput id="minScore" name="minScore" type="number" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.MIN_SCORE")} background
-                                containerClass="text-left mt-3 mb-0" disabled={!values.filterByScore} value={values.minScore} onChange={handleChange} onBlur={handleBlur}>
-                        {!!errors.minScore && <div className="text-left invalid-field">{errors.minScore}</div>}
+                      <MDBInput id="question" name="question" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.QUESTIONS.FIELDS.QUESTION")} background
+                                containerClass="mb-0" value={values.question} onChange={handleChange} onBlur={handleBlur}>
+                        {!!touched.question && !!errors.question && <div className="text-left invalid-field">{errors.question}</div>}
                       </MDBInput>
                     </MDBCol>
                   </MDBRow>

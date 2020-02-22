@@ -6,11 +6,11 @@ import {Base64} from "js-base64";
 
 import "./ListItem.scss";
 
-export default ({data, detailLabel, detailLink, deleteLabel, page, onDelete}) => {
+export default ({data, page, detailLabel, detailLink, deleteLabel, onDelete, questionsLink, questionsLabel}) => {
   const {t} = useTranslation();
 
   const {name, description} = data;
-  const detailLinkParam = Base64.encode(JSON.stringify({
+  const linkParam = Base64.encode(JSON.stringify({
     id: data.id,
     page,
   }));
@@ -26,10 +26,13 @@ export default ({data, detailLabel, detailLink, deleteLabel, page, onDelete}) =>
           </div>
         </MDBCardBody>
         <MDBMask className="flex-center" overlay="grey-strong">
-          <Link to={`${detailLink}/${detailLinkParam}`} className="text-body">
+          <Link to={`${detailLink}/${linkParam}`} className="text-body">
             <MDBBtn color="primary" size="sm" className="white-text" rounded>{detailLabel}</MDBBtn>
           </Link>
           <MDBBtn color="danger" size="sm" onClick={e => onDelete({id: data.id, item: data.name})} rounded>{deleteLabel}</MDBBtn>
+          <Link to={`${questionsLink}/${linkParam}`} className="text-body">
+            <MDBBtn color="indigo" size="sm" className="white-text" rounded>{questionsLabel}</MDBBtn>
+          </Link>
         </MDBMask>
       </MDBView>
     </MDBCol>

@@ -338,6 +338,45 @@ textarea.form-control {
 
 }
 
+.nomer-col {
+  width: 60px;
+  max-width: 80px;
+}
+
+.edit-col {
+  $y-padding: 9px;
+  padding-top: $y-padding !important;
+  padding-bottom: $y-padding !important;
+}
+
+.edit-col-1 {
+  $width: calc(#{$table-button-width} + #{$table-cell-padding} * 2);
+  width: $width;
+  min-width: $width;
+  max-width: $width;
+}
+
+.edit-col-2 {
+  $width: calc(#{$table-button-width} * 2 + #{$table-button-spacing} + #{$table-cell-padding} * 2);
+  width: $width;
+  min-width: $width;
+  max-width: $width;
+}
+
+.edit-col-3 {
+  $width: calc(#{$table-button-width} * 3 + #{$table-button-spacing} * 2 + #{$table-cell-padding} * 2);
+  width: $width;
+  min-width: $width;
+  max-width: $width;
+}
+
+.edit-col-4 {
+  $width: calc(#{$table-button-width} * 4 + #{$table-button-spacing} * 3 + #{$table-cell-padding} * 2);
+  width: $width;
+  min-width: $width;
+  max-width: $width;
+}
+
 .rtl-content {
   direction: rtl;
 

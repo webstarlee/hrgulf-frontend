@@ -24,6 +24,8 @@ export const routes = {
         root: "/hire/workplace/questionnaire",
         all: "/hire/workplace/questionnaire",
         add: "/hire/workplace/questionnaire/add",
+        questions: "/hire/workplace/questionnaire/questions",
+        addQuestion: "/hire/workplace/questionnaire/questions/add",
       },
       letters: {
         root: "/hire/workplace/letters",

@@ -286,6 +286,16 @@ export default {
           ADD_QUESTIONNAIRE: "Add Questionnaire",
           EDIT_QUESTIONNAIRE: "Edit Questionnaire",
         },
+        QUESTIONS: {
+          FIELDS: {
+            QUESTION: "Question",
+          },
+          QUESTIONS: "Questions",
+          ADD: {
+            ADD_QUESTION: "Add Question",
+            EDIT_QUESTION: "Edit Question",
+          },
+        },
       },
       LETTERS: {
         FIELDS: {

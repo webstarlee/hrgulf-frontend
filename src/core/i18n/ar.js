@@ -286,6 +286,16 @@ export default {
           ADD_QUESTIONNAIRE: "إضافة استبيان",
           EDIT_QUESTIONNAIRE: "تحرير الاستبيان",
         },
+        QUESTIONS: {
+          FIELDS: {
+            QUESTION: "سؤال",
+          },
+          QUESTIONS: "الأسئلة",
+          ADD: {
+            ADD_QUESTION: "أضف سؤال",
+            EDIT_QUESTION: "تحرير السؤال",
+          },
+        },
       },
       LETTERS: {
         FIELDS: {

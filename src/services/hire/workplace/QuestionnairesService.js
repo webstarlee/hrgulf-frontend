@@ -46,4 +46,48 @@ export default {
         });
     });
   },
+
+  listQuestions: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.hire.workplace.questionnaire.listQuestions, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  saveQuestion: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.hire.workplace.questionnaire.saveQuestion, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  getQuestion: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.hire.workplace.questionnaire.getQuestion, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  deleteQuestion: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.hire.workplace.questionnaire.deleteQuestion, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
 };

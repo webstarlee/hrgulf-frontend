@@ -1,0 +1,23 @@
+@import "../../../../assets/consts";
+
+.questionnaire-wrapper {
+  border: solid 1px $gray-lighten-1;
+  border-radius: $radius;
+}
+
+.questionnaire-editor {
+  height: 16rem;
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .questionnaire-editor {
+    height: 22rem;
+  }
+}
+
+@media (min-width: $screen-breakpoint-lg) {
+  .questionnaire-editor {
+    height: 25rem;
+  }
+}
+

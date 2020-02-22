@@ -160,6 +160,7 @@ export default () => {
       name: "",
       subject: "",
     });
+    setEditorState(EditorState.createEmpty());
     setFile(null);
     !!fileRef.current && fileRef.current.resetPreview();
     setTouched({});

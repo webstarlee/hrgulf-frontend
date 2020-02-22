@@ -6,7 +6,7 @@ import {
   MDBBreadcrumb,
   MDBBreadcrumbItem,
   MDBBtn,
-  MDBCol,
+  MDBCol, MDBIcon,
   MDBModal, MDBModalBody, MDBModalFooter,
   MDBModalHeader,
   MDBRow,
@@ -24,13 +24,14 @@ import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
 import toast, {Fade} from "components/MyToast";
 import Service from "services/hire/workplace/QuestionnairesService";
-import SearchBar from "./partial/SearchBar";
 import ListView from "./partial/ListView";
 
-import "./AllQuestionnairesPage.scss";
+import "./QuestionsPage.scss";
+import {Base64} from "js-base64";
+import Questions from "./partial/Questions";
 
 export default () => {
-  const {page} = useParams();
+  const {params} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
   const {auth: {user}} = useSelector(state => state);
@@ -39,23 +40,35 @@ export default () => {
   const [alert, setAlert] = useState({});
   const [modal, setModal] = useState({});
 
+  // const [id, setId] = useState();
+  // const [page, setPage] = useState();
+  // const [page2, setPage2] = useState();
+  const [urlParams, setUrlParams] = useState({});
+
   const [pageCount, setPageCount] = useState(0);
   const [items, setItems] = useState([]);
 
-  const [keyword, setKeyword] = useState("");
+  const currentPage = urlParams.page2 ? parseInt(urlParams.page2) : 1;
+  const pageTitle = t("HIRE.WORKPLACE.QUESTIONNAIRE.QUESTIONS.QUESTIONS");
 
-  const currentPage = page ? parseInt(page) : 1;
-  const pageTitle = t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE");
-  const addUrl = routes.hire.workplace.questionnaire.add;
-  const questionsUrl = routes.hire.workplace.questionnaire.questions;
+  const params1 = Base64.encode(JSON.stringify({
+    questionnaireId: urlParams.id,
+    page: urlParams.page,
+    page2: urlParams.page2,
+  }));
+  const addUrl = `${routes.hire.workplace.questionnaire.addQuestion}/${params1}`;
+  const backUrl = `${routes.hire.workplace.questionnaire.all}/${urlParams.page || 1}`;
 
   const loadData = () => {
     setLoading(true);
     setAlert({});
-    Service.list({page, pageSize: 9, userId: user.id, keyword})
+    Service.listQuestions({questionnaireId: urlParams.id, page: urlParams.page2})
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           setPageCount(res.pageCount);
+          for (let row of res.data) {
+            row["button"] = makeButtons(row)
+          }
           setItems(res.data);
         } else {
           toast.error(res.message);
@@ -73,6 +86,24 @@ export default () => {
       });
   };
 
+  const makeButtons = (data) => {
+    const questionnaireId = urlParams.id;
+    const {id, number} = data;
+    const params = Base64.encode(JSON.stringify({
+      id,
+      questionnaireId,
+      page: urlParams.page,
+      page2: urlParams.page2,
+    }));
+
+    return (
+      <Fragment>
+        <Link to={`${routes.hire.workplace.questionnaire.addQuestion}/${params}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <MDBBtn tag="a" size="sm" color="danger" floating className="ml-2" onClick={e => handleDeleteItem({id, item: "#" + number})}><MDBIcon icon="trash"/></MDBBtn>
+      </Fragment>
+    );
+  };
+
   const toggleModal = e => {
     setModal(Object.assign({}, modal, {show: !modal.show}));
   };
@@ -80,7 +111,7 @@ export default () => {
   const deleteItem = ({id}) => {
     toggleModal();
     setLoading(true);
-    Service.delete({id: modal.deleteId, userId: user.id, keyword})
+    Service.deleteQuestion({id: modal.deleteId, questionnaireId: urlParams.id})
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           setPageCount(res.pageCount);
@@ -97,8 +128,13 @@ export default () => {
       });
   };
 
-  const handlePageChange = page => {
-    history.push(`${routes.hire.workplace.questionnaire.all}/${page}`);
+  const handlePageChange = page2 => {
+    const params = Base64.encode(JSON.stringify({
+      id: urlParams.id,
+      page: urlParams.page,
+      page2,
+    }));
+    history.push(`${routes.hire.workplace.questionnaire.questions}/${params}`);
   };
 
   const handleDeleteItem = ({id, item}) => {
@@ -112,14 +148,26 @@ export default () => {
   }, []);
 
   useMemo(e => {
-    loadData();
-  }, [page, t, keyword]);
+    if (!!params) {
+      try {
+        const raw = Base64.decode(params);
+        const json = JSON.parse(raw);
+        setUrlParams(json);
+      } catch (e) {
+
+      }
+    }
+  }, [params, t]);
+
+  useMemo(e => {
+    !!urlParams.id && loadData();
+  }, [urlParams.id, urlParams.page2]);
 
   useMemo(e => {
     scroll.scrollToTop({
       duration: EFFECT.TRANSITION_TIME,
     });
-  }, [page]);
+  }, [urlParams.page]);
 
   const payload = () => (
     <Fragment>
@@ -128,10 +176,11 @@ export default () => {
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t("NAVBAR.HIRE.WORKPLACE.ROOT")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={backUrl}>{t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{pageTitle}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       <MDBRow className="my-sm-2 my-md-4">
-        <MDBCol md="5" className="order-1 order-md-0">
+        <MDBCol md="12" className="order-1 order-md-0">
           <div className="full-width text-left mt-3">
             <Link to={addUrl}>
               <MDBBtn color="primary" size="sm" rounded disabled={!!loading}>
@@ -139,9 +188,6 @@ export default () => {
               </MDBBtn>
             </Link>
           </div>
-        </MDBCol>
-        <MDBCol md="7" className="order-0 order-md-1">
-          <SearchBar onChangeKeyword={setKeyword}/>
         </MDBCol>
       </MDBRow>
       <MDBRow>
@@ -152,15 +198,15 @@ export default () => {
         </MDBCol>}
         <MDBCol md="12">
           {!!loading && <Loading/>}
-          {!loading && !items.length && <ErrorNoData/>}
-          {!loading && !!items.length && <Fragment>
-            <div className="my-4 text-center">
+          {/*{!loading && !items.length && <ErrorNoData/>}*/}
+          {!loading && <Fragment>
+            {!!items.length && <div className="my-4 text-center">
               <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-            </div>
-            <ListView items={items} page={page} newLink={addUrl} detailLabel={t("COMMON.BUTTON.EDIT")} detailLink={addUrl} deleteLabel={t("COMMON.BUTTON.DELETE")} onDelete={handleDeleteItem} questionsLink={questionsUrl} questionsLabel={t("HIRE.WORKPLACE.QUESTIONNAIRE.QUESTIONS.QUESTIONS")} />
-            <div className="mt-4 text-center">
+            </div>}
+            <Questions items={items}/>
+            {!!items.length && <div className="mt-4 text-center">
               <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-            </div>
+            </div>}
           </Fragment>}
         </MDBCol>
       </MDBRow>

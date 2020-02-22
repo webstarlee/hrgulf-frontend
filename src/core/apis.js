@@ -28,6 +28,10 @@ export default {
         save: "hire/workplace/questionnaire/save",
         get: "hire/workplace/questionnaire/get",
         delete: "hire/workplace/questionnaire/delete",
+        listQuestions: "hire/workplace/questionnaire/list-questions",
+        saveQuestion: "hire/workplace/questionnaire/save-question",
+        getQuestion: "hire/workplace/questionnaire/get-question",
+        deleteQuestion: "hire/workplace/questionnaire/delete-question",
       },
       letters: {
         list: "hire/workplace/letters/list",
