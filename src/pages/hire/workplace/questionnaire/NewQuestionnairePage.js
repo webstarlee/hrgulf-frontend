@@ -110,7 +110,6 @@ export default () => {
 
   const handleSubmit = (values, {setSubmitting}) => {
     const {name, filterByScore, minScore} = values;
-    console.log(values);
     const description = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
     const params = {id: itemId, userId: user.id, name, description, filterByScore: filterByScore || false, minScore};
@@ -160,7 +159,6 @@ export default () => {
         const raw = Base64.decode(params);
         const json = JSON.parse(raw);
         setUrlParams(json);
-        console.log("params-change");
       } catch (e) {
 
       }
@@ -177,7 +175,6 @@ export default () => {
     onSubmit: handleSubmit,
   });
 
-  console.log(params, urlParams);
 
   const {values, touched, errors, setValues, setTouched, setErrors, handleChange, handleBlur, isSubmitting} = formikProps;
 

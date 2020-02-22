@@ -16,6 +16,7 @@ import {useTranslation} from "react-i18next";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
+import {Base64} from "js-base64";
 
 import {ALERT, EFFECT, RESULT, SCOPE} from "core/globals";
 import routes from "core/routes";
@@ -46,7 +47,9 @@ export default () => {
 
   const currentPage = page ? parseInt(page) : 1;
   const pageTitle = t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE");
-  const addUrl = routes.hire.workplace.questionnaire.add;
+  const addUrl = `${routes.hire.workplace.questionnaire.add}/${Base64.encode(JSON.stringify({
+    page,
+  }))}`;
   const questionsUrl = routes.hire.workplace.questionnaire.questions;
 
   const loadData = () => {
