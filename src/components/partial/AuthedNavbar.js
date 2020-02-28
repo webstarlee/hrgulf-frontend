@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {ACCOUNT, NAVBAR, RESULT} from "core/globals";
 
 import WorkNavbar from "./WorkNavbar";
@@ -14,26 +14,21 @@ import {
   MDBNavItem
 } from "mdbreact";
 import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
-
-import authActions from "actions/auth";
 import apis from "core/apis";
 import {changeLanguage} from "core/i18n";
 import routes from "core/routes";
+import INavbarProps from "./INavbarProps";
 
 import AccountService from "services/AccountService";
-import AuthService from "services/AuthService";
 
-export default ({collapse, setCollapse}) => {
+const AuthedNavbar = (props) => {
   const {t} = useTranslation();
-  const history = useHistory();
   const {auth} = useSelector(state => state);
-  const dispatch = useDispatch();
+
+  const {onNavigate, onChangeAccountType, onSignOut} = props;
 
   const [avatar, setAvatar] = useState("");
   const [borderRadius, setBorderRadius] = useState(0);
-
-  const pathname = history.location.pathname;
 
   useEffect(() => {
     AccountService.avatar({id: auth.user.id})
@@ -48,25 +43,11 @@ export default ({collapse, setCollapse}) => {
       })
   }, [auth]);
 
-  const goTo = to => {
-    setCollapse(false);
-    history.push(to);
-  };
-
-  const handleSignOut = e => {
-    AuthService.signOut();
-    dispatch(authActions.signOut());
-  };
-
-  const handleChangeAccountType = e => {
-
-  };
-
   return (
     <Fragment>
-      <MDBCollapse isOpen={collapse} navbar className="text-left nav-inner">
-        {auth.user.accountType === ACCOUNT.TYPE.HIRE && <HireNavbar collapse={collapse} setCollapse={setCollapse} onChangeAccountTypeChange={handleChangeAccountType}/>}
-        {auth.user.accountType === ACCOUNT.TYPE.WORK && <WorkNavbar collapse={collapse} setCollapse={setCollapse}/>}
+      <MDBCollapse isOpen={props.collapse} navbar className="text-left nav-inner">
+        {auth.user.accountType === ACCOUNT.TYPE.HIRE && <HireNavbar {...props}/>}
+        {auth.user.accountType === ACCOUNT.TYPE.WORK && <WorkNavbar {...props} />}
         <MDBNavbarNav right>
           <MDBNavItem>
             <MDBDropdown>
@@ -85,10 +66,10 @@ export default ({collapse, setCollapse}) => {
                 <img src={avatar} className="z-depth-1 white my-navbar-avatar" style={{borderRadius: NAVBAR.AVATAR.HEIGHT / 100 * borderRadius}} />
               </MDBDropdownToggle>
               <MDBDropdownMenu className="dropdown-default" right>
-                <MDBDropdownItem onClick={e => goTo(routes.account.settings)}>{t("NAVBAR.ACCOUNT.MY_ACCOUNT")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={e => goTo(routes.account.activityLog)}>{t("NAVBAR.ACCOUNT.ACTIVITY_LOG")}</MDBDropdownItem>
-                {auth.user.accountType === ACCOUNT.TYPE.WORK && <MDBDropdownItem onClick={handleChangeAccountType}>{t("NAVBAR.ACCOUNT.SWITCH_TO_HIRE")}</MDBDropdownItem>}
-                {auth.user.accountType === ACCOUNT.TYPE.HIRE && <MDBDropdownItem onClick={handleChangeAccountType}>{t("NAVBAR.ACCOUNT.SWITCH_TO_WORK")}</MDBDropdownItem>}
+                <MDBDropdownItem onClick={e => onNavigate(routes.account.settings)}>{t("NAVBAR.ACCOUNT.MY_ACCOUNT")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={e => onNavigate(routes.account.activityLog)}>{t("NAVBAR.ACCOUNT.ACTIVITY_LOG")}</MDBDropdownItem>
+                {auth.user.accountType === ACCOUNT.TYPE.WORK && <MDBDropdownItem onClick={onChangeAccountType}>{t("NAVBAR.ACCOUNT.SWITCH_TO_HIRE")}</MDBDropdownItem>}
+                {auth.user.accountType === ACCOUNT.TYPE.HIRE && <MDBDropdownItem onClick={onChangeAccountType}>{t("NAVBAR.ACCOUNT.SWITCH_TO_WORK")}</MDBDropdownItem>}
                 <MDBDropdownItem>
                   {/*{auth.user.social === SOCIAL.NAME.GOOGLE && <GoogleLogout*/}
                   {/*  clientId={AUTH.GOOGLE.CLIENT_ID}*/}
@@ -98,7 +79,7 @@ export default ({collapse, setCollapse}) => {
                   {/*>*/}
                   {/*</GoogleLogout>}*/}
                   {/*{!auth.user.social.length && <div onClick={handleSignOut}>{t("AUTH.SIGN_OUT")}</div>}*/}
-                  <div onClick={handleSignOut}>{t("AUTH.SIGN_OUT")}</div>
+                  <div onClick={onSignOut}>{t("AUTH.SIGN_OUT")}</div>
                 </MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
@@ -107,4 +88,8 @@ export default ({collapse, setCollapse}) => {
       </MDBCollapse>
     </Fragment>
   )
-}
+};
+
+AuthedNavbar.propTypes = INavbarProps;
+
+export default AuthedNavbar;

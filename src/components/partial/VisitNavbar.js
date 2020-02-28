@@ -13,22 +13,22 @@ import {
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import INavbarProps from "./INavbarProps";
 
 import routes from "core/routes";
 import {changeLanguage} from "core/i18n";
 
-export default ({collapse, setCollapse}) => {
+const VisitNavbar = (props) => {
   const {t} = useTranslation();
   const history = useHistory();
   const {auth} = useSelector(state => state);
   const dispatch = useDispatch();
 
-  const pathname = history.location.pathname;
+  const {goTo} = props;
 
-  const goTo = to => {
-    setCollapse(false);
-    history.push(to);
-  };
+  const {collapse, onNavigate} = props;
+
+  const pathname = history.location.pathname;
 
   return (
     <Fragment>
@@ -44,8 +44,8 @@ export default ({collapse, setCollapse}) => {
                 <span className="mr-2">{t("NAVBAR.CONTACT.CONTACT")}</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
-                <MDBDropdownItem onClick={() => goTo(routes.contact.us)}>{t("NAVBAR.CONTACT.US")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => goTo(routes.contact.consultants)}>{t("NAVBAR.CONTACT.CONSULTANTS")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => onNavigate(routes.contact.us)}>{t("NAVBAR.CONTACT.US")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => onNavigate(routes.contact.consultants)}>{t("NAVBAR.CONTACT.CONSULTANTS")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
@@ -55,18 +55,18 @@ export default ({collapse, setCollapse}) => {
                 <span className="mr-2">{t("NAVBAR.ABOUT.ABOUT")}</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
-                <MDBDropdownItem onClick={() => goTo(routes.about.portal)}>{t("NAVBAR.ABOUT.PORTAL")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => goTo(routes.about.us)}>{t("NAVBAR.ABOUT.US")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => onNavigate(routes.about.portal)}>{t("NAVBAR.ABOUT.PORTAL")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => onNavigate(routes.about.us)}>{t("NAVBAR.ABOUT.US")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
           <MDBNavItem>
-            <MDBBtn tag="a" size="sm" className="my-md-0 main-color white-text" onClick={e => goTo(routes.auth.signIn)}>{t("AUTH.SIGN_IN")}</MDBBtn>
+            <MDBBtn tag="a" size="sm" className="main-color white-text" onClick={e => onNavigate(routes.auth.signIn)}>{t("AUTH.SIGN_IN")}</MDBBtn>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBBtn tag="a" size="sm" className="my-md-0 main-color white-text" onClick={e => goTo(routes.auth.signUp)}>{t("AUTH.SIGN_UP")}</MDBBtn>
+            <MDBBtn tag="a" size="sm" outline onClick={e => onNavigate(routes.auth.signUp)}>{t("AUTH.SIGN_UP")}</MDBBtn>
           </MDBNavItem>
           <MDBNavItem>
             <MDBDropdown>
@@ -83,4 +83,8 @@ export default ({collapse, setCollapse}) => {
       </MDBCollapse>
     </Fragment>
   )
-}
+};
+
+VisitNavbar.propTypes = INavbarProps;
+
+export default VisitNavbar;

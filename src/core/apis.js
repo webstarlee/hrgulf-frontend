@@ -5,11 +5,6 @@ export default {
   assetsBaseUrl: PROJECT.IS_DEV ? "http://localhost:7080/assets/" : "/assets/",
   auth: {
     signIn: "auth/sign-in",
-    signUp: "auth/sign-up",
-    validateGoogleAccount: "auth/validate-google-account",
-    signInWithGoogle: "auth/sign-in-with-google",
-    validateFacebookAccount: "auth/validate-facebook-account",
-    signInWithFacebook: "auth/sign-in-with-facebook",
     sendForgotPasswordMail: "auth/send-forgot-password-mail",
     validateToken: "auth/validate-token",
     resetPassword: "auth/reset-password",
@@ -22,6 +17,10 @@ export default {
     changeAccountType: "account/change-account-type",
   },
   hire: {
+    auth: {
+      // signIn: "hire/auth/sign-in",
+      signUp: "hire/auth/sign-up",
+    },
     workplace : {
       questionnaire: {
         list: "hire/workplace/questionnaire/list",
@@ -54,7 +53,14 @@ export default {
     }
   },
   work: {
-
+    auth: {
+      // signIn: "work/auth/sign-in",
+      signUp: "work/auth/sign-up",
+      validateGoogleAccount: "work/auth/validate-google-account",
+      signInWithGoogle: "work/auth/sign-in-with-google",
+      validateFacebookAccount: "work/auth/validate-facebook-account",
+      signInWithFacebook: "work/auth/sign-in-with-facebook",
+    },
   },
   profile: {
     avatar: "profile/avatar",

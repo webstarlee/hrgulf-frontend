@@ -7,7 +7,9 @@ import {
   MDBBreadcrumbItem,
   MDBBtn,
   MDBCol,
-  MDBModal, MDBModalBody, MDBModalFooter,
+  MDBModal,
+  MDBModalBody,
+  MDBModalFooter,
   MDBModalHeader,
   MDBRow,
   ToastContainer
@@ -18,7 +20,7 @@ import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
 import {Base64} from "js-base64";
 
-import {ALERT, EFFECT, RESULT, SCOPE} from "core/globals";
+import {EFFECT, RESULT} from "core/globals";
 import routes from "core/routes";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
@@ -50,6 +52,7 @@ export default () => {
   const addUrl = `${routes.hire.workplace.questionnaire.add}/${Base64.encode(JSON.stringify({
     page,
   }))}`;
+  const detailLink = routes.hire.workplace.questionnaire.add;
   const questionsUrl = routes.hire.workplace.questionnaire.questions;
 
   const loadData = () => {
@@ -160,7 +163,7 @@ export default () => {
             <div className="my-4 text-center">
               <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
             </div>
-            <ListView items={items} page={page} newLink={addUrl} detailLabel={t("COMMON.BUTTON.EDIT")} detailLink={addUrl} deleteLabel={t("COMMON.BUTTON.DELETE")} onDelete={handleDeleteItem} questionsLink={questionsUrl} questionsLabel={t("HIRE.WORKPLACE.QUESTIONNAIRE.QUESTIONS.QUESTIONS")} />
+            <ListView items={items} page={page} newLink={addUrl} detailLabel={t("COMMON.BUTTON.EDIT")} detailLink={detailLink} deleteLabel={t("COMMON.BUTTON.DELETE")} onDelete={handleDeleteItem} questionsLink={questionsUrl} questionsLabel={t("HIRE.WORKPLACE.QUESTIONNAIRE.QUESTIONS.QUESTIONS")} />
             <div className="mt-4 text-center">
               <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
             </div>

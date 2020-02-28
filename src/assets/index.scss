@@ -92,10 +92,10 @@ button i, button div.spinner-grow, button div.spinner-border {
 }
 
 .screen-breakpoint {
-  width: $screen-breakpoint;
+  width: $screen-breakpoint-lg;
 }
 
-@media (max-width: $screen-breakpoint) {
+@media (max-width: $screen-breakpoint-lg) {
   .screen-breakpoint {
     width: 100%;
   }
@@ -240,6 +240,9 @@ textarea.form-control {
   margin-top: 6rem;
 }
 
+.fade-transition {
+}
+
 .fade-transition-enter {
   opacity: 0.01;
 }
@@ -255,7 +258,7 @@ textarea.form-control {
 
 .fade-transition-leave.fade-transition-leave-active {
   opacity: 0.01;
-  transition: opacity $transition-time ease-in;
+  transition: opacity $transition-time ease-out;
 }
 
 .ltr-force {
@@ -503,7 +506,7 @@ textarea.form-control {
     text-align: left !important
   }
 
-  @media (min-width: 576px) {
+  @media (min-width: $screen-breakpoint-sm) {
     .text-sm-left {
       text-align: right !important
     }
@@ -512,16 +515,7 @@ textarea.form-control {
     }
   }
 
-  @media (min-width: 768px) {
-    .text-sm-left {
-      text-align: right !important
-    }
-    .text-md-right {
-      text-align: left !important
-    }
-  }
-
-  @media (min-width: 768px) {
+  @media (min-width: $screen-breakpoint-md) {
     .text-md-left {
       text-align: right !important
     }
@@ -530,7 +524,7 @@ textarea.form-control {
     }
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: $screen-breakpoint-lg) {
     .text-lg-left {
       text-align: right !important
     }
@@ -539,7 +533,7 @@ textarea.form-control {
     }
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: $screen-breakpoint-xl) {
     .text-xl-left {
       text-align: right !important
     }
@@ -554,9 +548,15 @@ textarea.form-control {
   }
 
   .dropdown .dropdown-menu.dropdown-menu-right {
-    left: 0 !important;
-    right: auto !important;
-    text-align: right;
+
+  }
+
+  @media (min-width: $screen-breakpoint-sm) {
+    .dropdown .dropdown-menu.dropdown-menu-right {
+      left: 0 !important;
+      right: auto !important;
+      text-align: right;
+    }
   }
 
   //@media (max-width: $screen-breakpoint-md) {

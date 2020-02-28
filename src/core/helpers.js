@@ -1,3 +1,6 @@
+import {PROJECT, RESULT} from "./globals";
+import {setHeader} from "../apis/fetch";
+
 export const triggerChangeEvent = (id, value) => {
   const input = document.getElementById(id);
   if (!input)
@@ -14,6 +17,19 @@ export const triggerChangeEvent = (id, value) => {
   input.dispatchEvent(event);
 };
 
+const onSuccessSignIn = (params, res) => {
+  if (res.result === RESULT.SUCCESS) {
+    setHeader({Authorization: `Bearer ${res.data.token}`});
+    const authData = JSON.stringify({
+      signedIn: true,
+      user: res.data.user,
+      token: res.data.token,
+    });
+    params["rememberMe"] && localStorage.setItem(PROJECT.PERSIST_KEY, authData);
+  }
+};
+
 export default {
   triggerChangeEvent,
+  onSuccessSignIn,
 };

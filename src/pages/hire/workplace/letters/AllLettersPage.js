@@ -15,9 +15,9 @@ import {
 import {useTranslation} from "react-i18next";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
-import {CSSTransition} from "react-transition-group";
+import {TransitionGroup, CSSTransition} from "react-transition-group";
 
-import {ALERT, EFFECT, RESULT, SCOPE} from "core/globals";
+import {ALERT, EFFECT, LAYOUT, RESULT, SCOPE} from "core/globals";
 import routes from "core/routes";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
@@ -146,22 +146,34 @@ export default () => {
       </MDBRow>
       <MDBRow>
         {alert.show && <MDBCol md="12">
-          <CSSTransition in={alert.show} classNames="fade-transition" timeout={EFFECT.TRANSITION_TIME} unmountOnExit appear>
-            <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
-          </CSSTransition>
+          <TransitionGroup>
+            <CSSTransition in={alert.show} classNames="fade-transition" timeout={EFFECT.TRANSITION_TIME} unmountOnExit appear>
+              <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
+            </CSSTransition>
+          </TransitionGroup>
         </MDBCol>}
         <MDBCol md="12">
-          {!!loading && <Loading/>}
-          {!loading && !items.length && <ErrorNoData/>}
-          {!loading && !!items.length && <Fragment>
-            <div className="my-4 text-center">
-              <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-            </div>
-            <ListView items={items} showNewLink={false} newLink={addUrl} detailLabel={t("COMMON.BUTTON.EDIT")} detailLink={addUrl} deleteLabel={t("COMMON.BUTTON.DELETE")} page={page} onDelete={handleDeleteItem} />
-            <div className="mt-4 text-center">
-              <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-            </div>
-          </Fragment>}
+          <TransitionGroup>
+            <CSSTransition
+              key={page}
+              timeout={{enter: EFFECT.TRANSITION_TIME, exit: 0}}
+              classNames="fade-transition"
+            >
+              <div>
+                {!!loading && <Loading style={{height: LAYOUT.LISTVIEW_HEIGHT}}/>}
+                {!loading && !items.length && <ErrorNoData/>}
+                {!loading && !!items.length && <Fragment>
+                  <div className="my-4 text-center">
+                    <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+                  </div>
+                  <ListView items={items} showNewLink={false} newLink={addUrl} detailLabel={t("COMMON.BUTTON.EDIT")} detailLink={addUrl} deleteLabel={t("COMMON.BUTTON.DELETE")} page={page} onDelete={handleDeleteItem} />
+                  <div className="mt-4 text-center">
+                    <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+                  </div>
+                </Fragment>}
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
         </MDBCol>
       </MDBRow>
       <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered>

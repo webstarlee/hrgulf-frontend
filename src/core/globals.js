@@ -43,6 +43,22 @@ export const AVATAR = {
   },
 };
 
+export const COMPANY = {
+  SIZE: {
+    1: 1,
+    10: 10,
+    50: 50,
+    100: 100,
+    500: 500,
+  },
+  TYPE: {
+    PUBLIC: "PUBLIC",
+    PRIVATE: "PRIVATE",
+    NON_PROFIT: "NON_PROFIT",
+    AGENCY: "AGENCY",
+  },
+};
+
 export const CONTACT = {
   PHONE: "011-2304705",
   CONTACT_MOBILE: "+966 56 665 5007",
@@ -51,13 +67,23 @@ export const CONTACT = {
   CONTACT_ADDRESS: "شارع عثمان بن عفان حي الندى الرياض ص.ب 4423 - 13701 المملكة العربية السعودية",
 };
 
-export const COUNTRY_CODE = {
-  BAHRAIN: "+973",
-  KUWAIT: "+965",
-  OMAN: "+968",
-  QATAR: "+974",
-  SAUDI_ARABIA: "+966",
-  UAE: "+971",
+export const COUNTRY = {
+  CODE1: {
+    BAHRAIN: "BH",
+    KUWAIT: "KW",
+    OMAN: "OM",
+    QATAR: "QA",
+    SAUDI_ARABIA: "SA",
+    UAE: "AE",
+  },
+  CODE2: {
+    BAHRAIN: "+973",
+    KUWAIT: "+965",
+    OMAN: "+968",
+    QATAR: "+974",
+    SAUDI_ARABIA: "+966",
+    UAE: "+971",
+  },
 };
 
 export const DATE_FORMAT = {
@@ -72,18 +98,27 @@ export const DELAY = {
 };
 
 export const DEFAULT = {
-  EMAIL: "honey96dev@gmail.com",
-  USERNAME: "honey96dev",
-  FIRST_NAME: "Zhenlong",
-  FATHER_NAME: "Xuanming",
-  LAST_NAME: "Jin",
-  BIRTHDAY: "1994-01-22",
-  JOB_TITLE: "IT",
-  SECTOR: "Web",
-  COMPANY: "Wangzi",
-  CITY: "Hunchun",
-  PHONE: "571623415",
-  PASSWORD: "123456",
+  USER: {
+    EMAIL: "honey96dev@gmail.com",
+    USERNAME: "honey96dev",
+    PASSWORD: "123456",
+    FIRST_NAME: "Zhenlong",
+    FATHER_NAME: "Xuanming",
+    LAST_NAME: "Jin",
+    PHONE: "571623415",
+    WEBSITE: "",
+    NATIONALITY: "SA",
+    COUNTRY: "SA",
+    CITY: "Riyadh",
+    BIRTHDAY: "1994-01-22",
+    GENDER: "M",
+  },
+  COMPANY: {
+    NAME: "ERC",
+    LOCATION: COUNTRY.CODE1.SAUDI_ARABIA,
+    SIZE: 10,
+    TYPE: COMPANY.TYPE.PUBLIC,
+  },
 };
 
 export const EFFECT = {
@@ -112,6 +147,10 @@ export const INPUT = {
   TEXTAREA_MAX_LENGTH: 4096,
 };
 
+export const LAYOUT = {
+  LISTVIEW_HEIGHT: 800,
+};
+
 export const LETTERS = {
   TYPE: {
     GENERIC: "GENERIC",
@@ -127,6 +166,20 @@ export const NAVBAR = {
   SCROLLING_OFFSET: 40,
   AVATAR: {
     HEIGHT: 35,
+  },
+};
+
+export const QUESTIONNAIRE = {
+  QUESTION: {
+    TYPE: {
+      YES_NO: "YES_NO",
+      SELECT: "SELECT",
+      TEXT: "TEXT",
+    },
+  },
+  ANSWER: {
+    YES: "YES",
+    NO: "NO",
   },
 };
 
@@ -175,8 +228,8 @@ export default {
   PROJECT,
   ALERT,
   AUTH,
+  COMPANY,
   CONTACT,
-  COUNTRY_CODE,
   DATE_FORMAT,
   DEFAULT,
   EFFECT,

@@ -18,14 +18,21 @@ export const routes = {
   },
   hire: {
     root: "/hire",
+    auth: {
+      root: "/hire/auth",
+      signIn: "/hire/auth/sign-in",
+      signUp: "/hire/auth/sign-up",
+      forgotPassword: "/hire/auth/forgot-password",
+      resetPassword: "/hire/auth/reset-password",
+    },
     workplace: {
       root: "/hire/workplace",
       questionnaire: {
         root: "/hire/workplace/questionnaire",
         all: "/hire/workplace/questionnaire",
         add: "/hire/workplace/questionnaire/add",
-        questions: "/hire/workplace/questionnaire/questions",
-        addQuestion: "/hire/workplace/questionnaire/questions/add",
+        // questions: "/hire/workplace/questionnaire/questions",
+        // addQuestion: "/hire/workplace/questionnaire/questions/add",
       },
       letters: {
         root: "/hire/workplace/letters",
@@ -69,6 +76,17 @@ export const routes = {
   },
   work: {
     root: "/work",
+    auth: {
+      root: "/work/auth",
+      signIn: "/work/auth/sign-in",
+      facebookSignIn: "/work/auth/sign-in/facebook",
+      googleSignIn: "/work/auth/sign-in/google",
+      signUp: "/work/auth/sign-up",
+      facebookSignUp: "/work/auth/sign-up/facebook",
+      googleSignUp: "/work/auth/sign-up/google",
+      forgotPassword: "/work/auth/forgot-password",
+      resetPassword: "/work/auth/reset-password",
+    },
     findJobs: {
       root: "/work/find-jobs",
       findJobs: "/work/find-jobs/work/find-jobs",

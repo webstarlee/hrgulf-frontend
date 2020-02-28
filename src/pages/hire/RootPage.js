@@ -1,30 +1,27 @@
 import React, {Fragment, lazy} from "react";
 import {Route, Switch} from "react-router-dom";
-import {MDBContainer} from "mdbreact";
 
-import Navbar from "components/Navbar";
-import SignedInRoute from "components/SignedInRoute";
-import Footer from "components/Footer";
-import BackToTop from "components/BackToTop";
-import Error404 from "components/Error404";
 import routes from "core/routes";
+import {ACCOUNT} from "core/globals";
+import SignedInRoute from "components/SignedInRoute";
+import Error404Page from "pages/common/Error404Page";
 
 import "./RootPage.scss";
 
+const FrontPage = lazy(() => import("./front/RootPage"));
+const AuthPage = lazy(() => import("./auth/RootPage"));
 const WorkplacePage = lazy(() => import("./workplace/RootPage"));
 
 export default (props) => {
+  const accountType = ACCOUNT.TYPE.HIRE;
   return (
     <Fragment>
-      <Navbar/>
-      <MDBContainer className={"section my-section"}>
-        <Switch>
-          <SignedInRoute path={`${routes.hire.workplace.root}`} component={WorkplacePage}/>
-          <Route component={Error404}/>
-        </Switch>
-      </MDBContainer>
-      <Footer/>
-      <BackToTop/>
+      <Switch>
+        <Route path={`${routes.hire.root}`} exact component={FrontPage}/>
+        <Route path={`${routes.hire.auth.root}`} component={AuthPage}/>
+        <SignedInRoute path={`${routes.hire.workplace.root}`} component={WorkplacePage} type={accountType}/>
+        <Route component={() => <Error404Page accountType={accountType}/>}/>
+      </Switch>
     </Fragment>
   );
 }

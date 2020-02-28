@@ -1,0 +1,23 @@
+@import "../../../assets/consts.scss";
+
+.logo-img {
+  max-height: 115px;
+}
+
+//.auth-bg {
+//  background: url(../../../assets/img/bg/auth.png);
+//  background-size: cover !important;
+//}
+
+.underlined {
+  border-bottom: 1px solid;
+}
+
+.white-border {
+  border-color: white;
+}
+
+.form-control {
+  height: calc(1.5em + 0.75rem + 15px);
+  border-radius: 2.5rem;
+}

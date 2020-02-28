@@ -4,7 +4,7 @@ import {MDBCol, MDBInput, MDBRow, MDBSelect, MDBSelectInput, MDBSelectOption, MD
 import _ from "lodash";
 
 import {DELAY, LETTERS, SCOPE} from "core/globals";
-import useDebounce from "../../../../../helpers/useDebounce";
+import useDebounce from "helpers/useDebounce";
 
 export default ({onChangeKeyword}) => {
   const {t} = useTranslation();

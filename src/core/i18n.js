@@ -6,7 +6,7 @@ import {setHeader} from "apis/fetch";
 import en from "core/i18n/en";
 import ar from "core/i18n/ar";
 
-const fallbackLng = ["ar"];
+const fallbackLng = ["en"];
 const availableLanguages = ["en", "ar"];
 
 i18n

@@ -9,12 +9,12 @@ import Error404 from "components/Error404";
 
 import "./Error404Page.scss";
 
-export default () => {
+export default ({accountType}) => {
   const {t} = useTranslation();
 
   return (
     <Fragment>
-      <Navbar/>
+      <Navbar type={accountType}/>
       <MDBContainer className="section">
         <Error404 />
       </MDBContainer>

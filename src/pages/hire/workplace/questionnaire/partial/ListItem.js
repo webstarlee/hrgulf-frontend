@@ -30,9 +30,9 @@ export default ({data, page, detailLabel, detailLink, deleteLabel, onDelete, que
             <MDBBtn color="primary" size="sm" className="white-text" rounded>{detailLabel}</MDBBtn>
           </Link>
           <MDBBtn color="danger" size="sm" onClick={e => onDelete({id: data.id, item: data.name})} rounded>{deleteLabel}</MDBBtn>
-          <Link to={`${questionsLink}/${linkParam}`} className="text-body">
-            <MDBBtn color="indigo" size="sm" className="white-text" rounded>{questionsLabel}</MDBBtn>
-          </Link>
+          {/*<Link to={`${questionsLink}/${linkParam}`} className="text-body">*/}
+          {/*  <MDBBtn color="indigo" size="sm" className="white-text" rounded>{questionsLabel}</MDBBtn>*/}
+          {/*</Link>*/}
         </MDBMask>
       </MDBView>
     </MDBCol>
