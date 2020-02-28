@@ -21,7 +21,14 @@ export default ({data, page, detailLabel, detailLink, deleteLabel, onDelete, que
         <MDBCardBody className="letter-item-wrapper">
           <div className="letter-inner-wrapper">
             {/*<h4 className="h4-responsive">{type}</h4>*/}
-            <div className="border-dark border-bottom mb-sm-1 mb-md-2"><span className="h4-responsive">{name}</span></div>
+            <div className="border-dark border-bottom mb-sm-1 mb-md-2">
+              <div>
+                <span className="h4-responsive">{name}</span>
+              </div>
+              {/*<div>*/}
+              {/*  <span>{name}</span>*/}
+              {/*</div>*/}
+            </div>
             <div className="letter-content" dangerouslySetInnerHTML={{__html: description}}/>
           </div>
         </MDBCardBody>

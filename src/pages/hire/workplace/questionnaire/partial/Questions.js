@@ -36,6 +36,7 @@ const Questions = (props) => {
   let formikProps;
 
   const initialValues = {
+    id: null,
     index: -1,
     question: "",
     type: QUESTIONNAIRE.QUESTION.TYPE.YES_NO,
@@ -77,16 +78,26 @@ const Questions = (props) => {
     setModal1Open(true);
   };
 
+  const handleEdit = index => {
+    const values = items[index] || {};
+    values["index"] = index;
+    formikProps.setValues(values);
+    formikProps.setTouched({});
+    formikProps.setErrors({});
+    setModal1Open(true);
+  };
+
   const handleDelete = (item, index) => {
     setModal2(Object.assign({}, modal2, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: item.question}), deleteId: index}));
     setModal2Open(true);
   };
 
   const handleSubmit = (values, {setSubmitting}) => {
-    const {index, question, type, answers, required, hasCorrectAnswer, correctAnswer} = values;
+    const {id, index, question, type, answers, required, hasCorrectAnswer, correctAnswer} = values;
     setSubmitting(true);
     let newItems;
     const newItem = {
+      id,
       number: index === -1 ? items.length + 1 : index,
       question,
       type,
@@ -161,7 +172,7 @@ const Questions = (props) => {
               {/*<td>{t(`COMMON.BUTTON.${item.required ? "YES" : "NO"}`)}</td>*/}
               <td>{item.hasCorrectAnswer ? item.correctAnswer : ""}</td>
               <td className="edit-col">
-                <MDBBtn tag="a" floating color="secondary" size="sm">
+                <MDBBtn tag="a" floating color="secondary" size="sm" onClick={e => handleEdit(index)}>
                   <MDBIcon icon="edit"/>
                 </MDBBtn>
                 <MDBBtn tag="a" floating color="danger" size="sm" className="ml-2" onClick={e => handleDelete(item, index)}>
@@ -238,7 +249,7 @@ const Questions = (props) => {
                 </MDBInput>
               </MDBCol>
             </MDBRow>
-            {values.hasCorrectAnswer && values.type === QUESTIONNAIRE.QUESTION.TYPE.YES_NO && <MDBRow>
+            {!!values.hasCorrectAnswer && values.type === QUESTIONNAIRE.QUESTION.TYPE.YES_NO && <MDBRow>
               <MDBCol md="6" className="mt-0">
                 <MDBSelect label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.CORRECT_ANSWER")} className="mt-4 mb-0 white"
                            selected={values.correctAnswer} getValue={val => {
@@ -258,7 +269,7 @@ const Questions = (props) => {
                 <div className="text-left invalid-field">{errors.correctAnswer}</div>}
               </MDBCol>
             </MDBRow>}
-            {values.hasCorrectAnswer && values.type === QUESTIONNAIRE.QUESTION.TYPE.SELECT && <MDBRow>
+            {!!values.hasCorrectAnswer && values.type === QUESTIONNAIRE.QUESTION.TYPE.SELECT && <MDBRow>
               <MDBCol md="6" className="mt-0">
                 <MDBSelect label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.CORRECT_ANSWER")} className="mt-4 mb-0 white"
                            selected={values.correctAnswer} getValue={val => {
@@ -278,7 +289,7 @@ const Questions = (props) => {
                 <div className="text-left invalid-field">{errors.correctAnswer}</div>}
               </MDBCol>
             </MDBRow>}
-            {values.hasCorrectAnswer && values.type === QUESTIONNAIRE.QUESTION.TYPE.TEXT && <MDBRow>
+            {!!values.hasCorrectAnswer && values.type === QUESTIONNAIRE.QUESTION.TYPE.TEXT && <MDBRow>
               <MDBCol md="12">
                 <MDBInput id="correctAnswer" name="correctAnswer" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.CORRECT_ANSWER")} containerClass="mt-3" background value={values.correctAnswer} onChange={handleChange} onBlur={handleBlur}>
                   {!!touched.correctAnswer && !!errors.correctAnswer &&
