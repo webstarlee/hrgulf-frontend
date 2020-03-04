@@ -267,7 +267,7 @@ export default (props) => {
                 </div>
                 <div className="text-center mt-4 mb-3 button-wrapper">
                   <MDBBtn type="submit" color="white" rounded className="full-width z-depth-1a blue-grey-text"
-                          disabled={!!isSubmitting || (!!errors && !!Object.keys(errors).length)}>
+                          disabled={!!isSubmitting}>
                     {!isSubmitting && <MDBIcon size="lg" icon={"user-plus"}/>}
                     {!!isSubmitting && <div className="spinner-grow spinner-grow-sm" role="status"/>}
                     {!isSubmitting && t("COMMON.AUTH.SIGN_UP")}

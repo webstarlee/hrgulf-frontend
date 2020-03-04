@@ -380,6 +380,43 @@ textarea.form-control {
   max-width: $width;
 }
 
+.h4-responsive {
+  font-size: 125%;
+}
+
+@media (min-width: 1200px) {
+  .h4-responsive {
+    font-size: 140%;
+  }
+}
+
+.max-height-200 {
+  max-height: 200px;
+}
+//
+//.note-btn {
+//  padding-left: 0 !important;
+//  padding-right: 0 !important;
+//  background: unset !important;
+//}
+//
+//.note-btn.btn-default {
+//  background: unset !important;
+//}
+//
+//.btn-default.dropdown-toggle {
+//  background: unset !important;
+//  background-color: unset !important;
+//}
+//
+//.note-btn .note-icon-caret:before {
+//  content: unset !important;
+//}
+//
+//.note-btn-group .dropdown-menu a {
+//  color: unset !important;
+//}
+
 .rtl-content {
   direction: rtl;
 
@@ -667,5 +704,10 @@ textarea.form-control {
     left: 24px;
     right: unset;
     bottom: 45px;
+  }
+
+  .chip .close {
+    float: left;
+    padding-right: 8px;
   }
 }

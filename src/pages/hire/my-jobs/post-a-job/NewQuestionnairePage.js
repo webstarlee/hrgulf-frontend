@@ -9,22 +9,17 @@ import {useSelector} from "react-redux";
 
 import {EFFECT} from "core/globals";
 import routes from "core/routes";
-import NewQuestionnaire from "./partial/NewQuestionnaire";
+import NewQuestionnaire from "pages/hire/workplace/questionnaire/partial/NewQuestionnaire";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./NewQuestionnairePage.scss";
 
 export default () => {
-  const {params} = useParams();
   const {t} = useTranslation();
 
-  const [urlParams, setUrlParams] = useState({});
-
-  let pageTitle = t(`HIRE.WORKPLACE.QUESTIONNAIRE.ADD.${!!urlParams.id ? "EDIT" : "ADD"}_QUESTIONNAIRE`);
-  let backUrl = `${routes.hire.workplace.questionnaire.all}/${urlParams.page || 1}`;
-  const addUrl = `${routes.hire.workplace.questionnaire.add}/${Base64.encode(JSON.stringify({
-    page: urlParams.page,
-  }))}`;
+  let pageTitle = t("HIRE.MY_JOBS.POST_A_JOB.ADD_QUESTIONNAIRE.ADD_QUESTIONNAIRE");
+  let backUrl = routes.hire.myJobs.postAJob.main;
+  const addUrl = routes.hire.myJobs.postAJob.addQuestionnaire;
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -32,29 +27,17 @@ export default () => {
     });
   }, []);
 
-  useMemo(e => {
-    if (!!params) {
-      try {
-        const raw = Base64.decode(params);
-        const json = JSON.parse(raw);
-        setUrlParams(json);
-      } catch (e) {
-
-      }
-    }
-  }, [params, t]);
-
   const payload = () => (
     <Fragment>
       <Helmet>
         <title>{pageTitle} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t("NAVBAR.HIRE.WORKPLACE.ROOT")}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={backUrl}>{t("NAVBAR.HIRE.WORKPLACE.QUESTIONNAIRE")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.HIRE.MY_JOBS.ROOT")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={backUrl}>{t("NAVBAR.HIRE.MY_JOBS.POST_A_JOB")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{pageTitle}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
-      <NewQuestionnaire id={urlParams.id} addUrl={addUrl} backUrl={backUrl} showNewButton={true}/>
+      <NewQuestionnaire id={null} addUrl={addUrl} backUrl={backUrl} showNewButton={false}/>
     </Fragment>
   );
 

@@ -13,7 +13,6 @@ authSession = !!authSession ? JSON.parse(authSession) : undefined;
 
 const initialState = {
   signedIn: !!authSession ? authSession.signedIn : false,
-  account: !!authSession ? authSession.account : false,
   user: !!authSession ? authSession.user : undefined,
   token: !!authSession ? authSession.token : undefined,
   redirectUrl: null,

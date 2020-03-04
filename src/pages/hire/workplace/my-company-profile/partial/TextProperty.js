@@ -57,7 +57,7 @@ export default ({title, onLoad, onSave}) => {
           setAlert({
             show: true,
             color: ALERT.DANGER,
-            message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+            message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
           });
           setLoading(false);
         });
@@ -118,7 +118,7 @@ export default ({title, onLoad, onSave}) => {
           <MDBCol>
             <div className="text-right ml-auto mr-md-4">
               {!!isEditing && <MDBBtn type="submit" tag="a" floating color="primary" size="sm" rounded className="my-0"
-                                      disabled={!!loading || !!isSubmitting || (!!errors && !!Object.keys(errors).length)} onClick={formikProps.handleSubmit}>
+                                      disabled={!!loading || !!isSubmitting} onClick={formikProps.handleSubmit}>
                 <MDBIcon icon="save" size="lg" />
               </MDBBtn>}
               {!!isEditing && <MDBBtn type="button" tag="a" floating color="warning" size="sm" rounded className="my-0"

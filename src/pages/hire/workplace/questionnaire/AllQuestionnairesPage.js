@@ -72,9 +72,9 @@ export default () => {
         // setAlert({
         //   show: true,
         //   color: ALERT.DANGER,
-        //   message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        //   message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         // });
-        toast.error(t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'));
+        toast.error(t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"));
         setLoading(false);
       });
   };
@@ -86,7 +86,7 @@ export default () => {
   const deleteItem = ({id}) => {
     toggleModal();
     setLoading(true);
-    Service.delete({id: modal.deleteId, userId: user.id, keyword})
+    Service.delete({page, pageSize: 9, id: modal.deleteId, userId: user.id, keyword})
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           setPageCount(res.pageCount);

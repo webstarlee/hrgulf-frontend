@@ -49,7 +49,7 @@ export default (props) => {
         <MDBBreadcrumbItem active>{pageTitle}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       <div className="classic-tabs">
-        <MDBNav classicTabs color='mdb-color'>
+        <MDBNav classicTabs color="mdb-color">
           <MDBNavItem>
             <MDBNavLink to={`${routes.hire.workplace.employerTest.main}/${TAB.STEP1}`} link={routes.hire.workplace.employerTest.main} active={tab === TAB.STEP1} role="tab" className="text-transform-none" >
               {t("HIRE.WORKPLACE.EMPLOYER_TEST.STEP1")}

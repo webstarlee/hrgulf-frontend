@@ -147,6 +147,20 @@ export const INPUT = {
   TEXTAREA_MAX_LENGTH: 4096,
 };
 
+export const KEY_CODES = {
+  COMMA: 188,
+  ENTER: 13,
+};
+
+export const JOB = {
+  CANDIDATE: {
+    TYPE: {
+      PROFESSIONAL: "PROFESSIONAL",
+      SKILLED: "SKILLED",
+    },
+  },
+};
+
 export const LAYOUT = {
   LISTVIEW_HEIGHT: 800,
 };
@@ -224,12 +238,19 @@ export const VALIDATION = {
   MISMATCH: "MISMATCH",
 };
 
+export const WYSIWYG = {
+  toolbar: {
+    options:["inline", /*"fontSize"/*, "fontFamily"*/, "list", "textAlign", "colorPicker"/*, "link", "embedded"*/, "emoji", "history"]
+  },
+};
+
 export default {
   PROJECT,
   ALERT,
   AUTH,
   COMPANY,
   CONTACT,
+  COUNTRY,
   DATE_FORMAT,
   DEFAULT,
   EFFECT,
@@ -244,4 +265,5 @@ export default {
   SOCIAL,
   SCOPE,
   VALIDATION,
+  WYSIWYG,
 };

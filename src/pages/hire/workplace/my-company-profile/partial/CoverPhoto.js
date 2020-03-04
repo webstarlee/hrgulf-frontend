@@ -45,7 +45,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT.DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });

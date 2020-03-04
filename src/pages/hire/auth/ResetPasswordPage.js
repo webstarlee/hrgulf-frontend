@@ -149,7 +149,7 @@ export default (props) => {
                 </CSSTransition>
                 <div className="text-center mt-4 mb-3 mx-5">
                   <MDBBtn type="submit" color="white" rounded className="full-width z-depth-1a blue-grey-text"
-                          disabled={loading || IsInvalid || (!!errors && !!Object.keys(errors).length)}>
+                          disabled={loading || IsInvalid}>
                     {!loading && <MDBIcon icon={"lock"}/>}
                     {!!loading && <div className="spinner-grow spinner-grow-sm" role="status"/>}
                     {t("AUTH.RESET_PASSWORD")}

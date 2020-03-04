@@ -50,7 +50,11 @@ export const routes = {
     },
     myJobs: {
       root: "/hire/my-jobs",
-      postAJob: "/hire/my-jobs/post-a-job",
+      postAJob: {
+        root: "/hire/my-jobs/post-a-job",
+        main: "/hire/my-jobs/post-a-job",
+        addQuestionnaire: "/hire/my-jobs/post-a-job/add-questionnaire",
+      },
       myJobs: "/hire/my-jobs/hire/my-jobs",
       draftJobs: "my-jobs/draft-jobs",
     },

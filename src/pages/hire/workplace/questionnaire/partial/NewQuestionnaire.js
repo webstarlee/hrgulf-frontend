@@ -7,20 +7,29 @@ import {CSSTransition} from "react-transition-group";
 import {useFormik} from "formik";
 import {useSelector} from "react-redux";
 import * as Yup from "yup";
-import {ContentState, convertFromHTML, convertToRaw, EditorState} from 'draft-js';
-import {Editor} from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
+import {ContentState, convertToRaw, EditorState} from "draft-js";
+import {Editor} from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
+// import ReactSummernote from "react-summernote";
 import PropTypes from "prop-types";
 
-import {ALERT, EFFECT, RESULT} from "core/globals";
+import {ALERT, EFFECT, RESULT, WYSIWYG} from "core/globals";
 import Loading from "components/Loading";
 import toast, {Fade} from "components/MyToast";
 import goToBack from "helpers/goToBack";
+import Questions from "./Questions";
 import Service from "services/hire/workplace/QuestionnairesService";
 
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./NewQuestionnaire.scss";
-import Questions from "./Questions";
+
+// import "bootstrap/js/dist/modal";
+// import "bootstrap/js/dist/dropdown";
+// import "bootstrap/js/dist/tooltip";
+
+// import "react-summernote/dist/react-summernote.css"; // import styles
+// import "bootstrap/dist/css/bootstrap.css";
 
 const NewQuestionnaire = (props) => {
   const {id, addUrl, backUrl, showNewButton} = props;
@@ -55,6 +64,10 @@ const NewQuestionnaire = (props) => {
       .test("min-score", t("COMMON.VALIDATION.MIN", {field: t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.MIN_SCORE"), value: 0}), function (value) {
         return !this.parent.filterByScore || value >= 0;
       }),
+    description: Yup.string()
+      .test("description-required", t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.DESCRIPTION")}), function (value) {
+        return editorState.getCurrentContent().hasText();
+      }),
   });
 
   const loadData = () => {
@@ -70,7 +83,16 @@ const NewQuestionnaire = (props) => {
             filterByScore,
             minScore,
           });
-          setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(description))));
+
+          const blocksFromHtml = htmlToDraft(description);
+          const { contentBlocks, entityMap } = blocksFromHtml;
+          const state = ContentState.createFromBlockArray(
+            contentBlocks,
+            entityMap,
+          );
+          setEditorState(EditorState.createWithContent(
+              state,
+            ));
           // !!fileRef.current && fileRef.current
           setAlert({});
         } else {
@@ -86,7 +108,7 @@ const NewQuestionnaire = (props) => {
         setAlert({
           show: true,
           color: ALERT.DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -110,6 +132,10 @@ const NewQuestionnaire = (props) => {
   const handleSubmit = (values, {setSubmitting}) => {
     const {name, filterByScore, minScore} = values;
     const description = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    // const description = stateToHTML(editorState.getCurrentContent());
+    // const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
+    // const value = blocks.map(block => (!block.text.trim() && "\n") || block.text).join("\n");
+    // console.log(value);
 
     const questionnaire = {id: itemId, userId: user.id, name, description, filterByScore: filterByScore || false, minScore};
 
@@ -157,7 +183,7 @@ const NewQuestionnaire = (props) => {
   });
 
 
-  const {values, touched, errors, setValues, setTouched, setErrors, handleChange, handleBlur, isSubmitting} = formikProps;
+  const {values, touched, errors, setValues, setTouched, setErrors, setFieldValue, handleChange, handleBlur, isSubmitting} = formikProps;
 
   const payload = () => (
     <Fragment>
@@ -191,12 +217,34 @@ const NewQuestionnaire = (props) => {
                         <div className="grey-text">{t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.DESCRIPTION")}</div>
                         <Editor
                           id="editor"
+                          toolbar={WYSIWYG.toolbar}
                           editorState={editorState}
                           wrapperClassName="questionnaire-wrapper"
                           editorClassName="questionnaire-editor"
-                          onEditorStateChange={setEditorState}
+                          onEditorStateChange={state => {
+                            setEditorState(state);
+                            setFieldValue("description", draftToHtml(convertToRaw(state.getCurrentContent())))
+                          }}
 
                         />
+                        {!!touched.description && !!errors.description && <div className="text-left invalid-field">{errors.description}</div>}
+                        {/*<ReactSummernote*/}
+                        {/*  value="Default value"*/}
+                        {/*  options={{*/}
+                        {/*    height: 350,*/}
+                        {/*    dialogsInBody: true,*/}
+                        {/*    // toolbar: [*/}
+                        {/*    //   ["style", ["style"]],*/}
+                        {/*    //   ["font", ["bold", "underline", "clear"]],*/}
+                        {/*    //   ["fontname", ["fontname"]],*/}
+                        {/*    //   ["para", ["ul", "ol", "paragraph"]],*/}
+                        {/*    //   ["table", ["table"]],*/}
+                        {/*    //   ["insert", ["link", "picture", "video"]],*/}
+                        {/*    //   ["view", ["fullscreen", "codeview"]]*/}
+                        {/*    // ]*/}
+                        {/*  }}*/}
+                        {/*  onChange={console.log}*/}
+                        {/*/>*/}
                       </div>
                     </MDBCol>
                   </MDBRow>

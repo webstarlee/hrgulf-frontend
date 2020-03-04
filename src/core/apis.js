@@ -3,6 +3,19 @@ import {PROJECT} from "core/globals";
 export default {
   baseUrl: PROJECT.IS_DEV ? "http://localhost:7080/api/" : "/api/",
   assetsBaseUrl: PROJECT.IS_DEV ? "http://localhost:7080/assets/" : "/assets/",
+  core: {
+    getJobRoles: "core/get-job-roles",
+    getJobSubroles: "core/get-job-subroles",
+    getSectors: "core/get-sectors",
+    getIndustries: "core/get-industries",
+    getCountries: "core/get-countries",
+    getCities: "core/get-cities",
+    getEmploymentTypes: "core/get-employment-types",
+    getSalaryRanges: "core/get-salary-ranges",
+    getCareerLevels: "core/get-career-levels",
+    getMajors: "core/get-majors",
+    getDegrees: "core/get-degrees",
+  },
   auth: {
     signIn: "auth/sign-in",
     sendForgotPasswordMail: "auth/send-forgot-password-mail",
@@ -50,7 +63,12 @@ export default {
         loadCoverPhoto: "hire/workplace/my-company-profiles/load-cover-photo",
         saveCoverPhoto: "hire/workplace/my-company-profiles/save-cover-photo",
       },
-    }
+    },
+    myJobs: {
+      postAJob: {
+        postJob: "hire/my-jobs/post-a-job/post-job",
+      },
+    },
   },
   work: {
     auth: {

@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import PropTypes from "prop-types";
 import {useHistory} from "react-router-dom";
 import {MDBNavbar, MDBNavbarBrand, MDBNavbarToggler} from "mdbreact";
 import {useTranslation} from "react-i18next";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import useWindowScrollPosition from "@rehooks/window-scroll-position";
 
 import routes from "core/routes";
@@ -12,12 +11,10 @@ import {changeLanguage} from "core/i18n";
 import {ACCOUNT, NAVBAR, PROJECT} from "core/globals";
 import authActions from "actions/auth";
 import AuthService from "services/AuthService";
-import VisitNavbar from "./partial/VisitNavbar";
-import AuthedNavbar from "./partial/AuthedNavbar";
-
-import "./Navbar.scss";
 import HireNavbar from "./partial/HireNavbar";
 import WorkNavbar from "./partial/WorkNavbar";
+
+import "./Navbar.scss";
 
 export default ({type, thresholdY}) => {
   const {t} = useTranslation();

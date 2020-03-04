@@ -26,11 +26,12 @@ import {Base64} from "js-base64";
 import {useFormik} from "formik";
 import {useSelector} from "react-redux";
 import * as Yup from "yup";
-import {ContentState, convertFromHTML, convertToRaw, EditorState} from 'draft-js';
-import {Editor} from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
+import {ContentState, convertFromHTML, convertToRaw, EditorState} from "draft-js";
+import {Editor} from "react-draft-wysiwyg";
+import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
 
-import {ALERT, AVATAR, COUNTRY_CODE, EFFECT, FILE_UPLOAD, LETTERS, RESULT} from "core/globals";
+import {ALERT, AVATAR, COUNTRY_CODE, EFFECT, FILE_UPLOAD, LETTERS, RESULT, WYSIWYG} from "core/globals";
 import routes from "core/routes";
 import helpers from "core/helpers";
 import apis from "core/apis";
@@ -41,7 +42,7 @@ import toast, {Fade} from "components/MyToast";
 import goToBack from "helpers/goToBack";
 import Service from "services/hire/workplace/LettersService";
 
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./NewLetterPage.scss";
 
 export default () => {
@@ -75,7 +76,7 @@ export default () => {
     name: "",
     subject: "",
     // draft: "",
-    // message: "",
+    message: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -85,8 +86,10 @@ export default () => {
       .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.WORKPLACE.LETTERS.FIELDS.NAME")})),
     subject: Yup.string()
       .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.WORKPLACE.LETTERS.FIELDS.SUBJECT")})),
-    // message: Yup.string()
-    //   .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.WORKPLACE.LETTERS.FIELDS.MESSAGE")})),
+    message: Yup.string()
+      .test("message-required", t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.WORKPLACE.LETTERS.FIELDS.MESSAGE")}), function (value) {
+        return editorState.getCurrentContent().hasText();
+      }),
   });
 
   const loadData = () => {
@@ -102,7 +105,17 @@ export default () => {
             name,
             subject,
           });
-          setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(message))));
+
+          const blocksFromHtml = htmlToDraft(message);
+          const { contentBlocks, entityMap } = blocksFromHtml;
+          const state = ContentState.createFromBlockArray(
+            contentBlocks,
+            entityMap,
+          );
+          setEditorState(EditorState.createWithContent(
+            state,
+          ));
+          // setEditorState(EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(message))));
           !!attachment && !!attachment.length && setAttachment(`${apis.assetsBaseUrl}${attachment}`);
           // !!fileRef.current && fileRef.current
           setAlert({});
@@ -119,7 +132,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT.DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -221,7 +234,7 @@ export default () => {
     onSubmit: handleSubmit,
   });
 
-  const {values, touched, errors, setValues, setTouched, setErrors, handleChange, handleBlur, isSubmitting} = formikProps;
+  const {values, touched, errors, setValues, setTouched, setErrors, setFieldValue, handleChange, handleBlur, isSubmitting} = formikProps;
 
   const payload = () => (
     <Fragment>
@@ -285,16 +298,20 @@ export default () => {
                         <div className="grey-text">{t("HIRE.WORKPLACE.LETTERS.FIELDS.MESSAGE")}</div>
                         <Editor
                           id="editor"
+                          toolbar={WYSIWYG.toolbar}
                           editorState={editorState}
                           wrapperClassName="letter-wrapper"
                           editorClassName="letter-editor"
-                          onEditorStateChange={setEditorState}
-
+                          onEditorStateChange={state => {
+                            setEditorState(state);
+                            setFieldValue("message", draftToHtml(convertToRaw(state.getCurrentContent())))
+                          }}
                         />
                         {/*<textarea*/}
                         {/*  disabled*/}
                         {/*  value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}*/}
                         {/*/>*/}
+                        {!!touched.message && !!errors.message && <div className="text-left invalid-field">{errors.message}</div>}
                       </div>
                     </MDBCol>
                   </MDBRow>
@@ -323,7 +340,7 @@ export default () => {
                   </MDBRow>
                   {/*<div className="fixed-bottom white px-md-3 py-md-3">*/}
                   <div className="mt-4 mb-3">
-                    <MDBBtn type="submit" color="primary" size="sm" rounded disabled={!!loading || !!isSubmitting || (!!errors && !!Object.keys(errors).length)}>{t(`COMMON.BUTTON.${!!itemId ? "EDIT" : "ADD"}`)}</MDBBtn>
+                    <MDBBtn type="submit" color="primary" size="sm" rounded disabled={!!loading || !!isSubmitting}>{t(`COMMON.BUTTON.${!!itemId ? "EDIT" : "ADD"}`)}</MDBBtn>
                     <MDBBtn type="button" color="indigo" size="sm" rounded onClick={e => handleReset({setValues, setTouched, setErrors})}>{t(`COMMON.BUTTON.NEW`)}</MDBBtn>
                     <MDBBtn type="button" color="warning" size="sm" rounded onClick={goToBack}>{t(`COMMON.BUTTON.BACK`)}</MDBBtn>
                   </div>

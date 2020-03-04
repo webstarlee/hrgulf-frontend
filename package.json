@@ -5,6 +5,7 @@
   "// If You want to install mdbreact from our GitLab repository, please replace '4.21.1' with gitURL provided here ->": "git+https://oauth2:<YOUR-TOKEN-GOES-HERE>@git.mdbootstrap.com/mdb/react/re-pro.git",
   "dependencies": {
     "@fortawesome/fontawesome-pro": "^5.8.2",
+    "@material-ui/core": "^3.9.3",
     "@rehooks/component-size": "^1.0.3",
     "@rehooks/window-scroll-position": "^1.0.1",
     "axios": "^0.19.2",

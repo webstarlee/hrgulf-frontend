@@ -125,7 +125,7 @@ export default (props) => {
 
             <div className="text-center mt-4 mb-3">
               <MDBBtn type="submit" color="primary" rounded className="z-depth-1a"
-                      disabled={!!isSubmitting || (!!errors && !!Object.keys(errors).length)}>
+                      disabled={!!isSubmitting}>
                 {!!isSubmitting && <div className="spinner-grow spinner-grow-sm" role="status"/>}
                 {!isSubmitting && t("ACCOUNT.PASSWORD.CHANGE_PASSWORD")}
               </MDBBtn>

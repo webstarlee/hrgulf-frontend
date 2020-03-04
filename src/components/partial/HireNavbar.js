@@ -12,8 +12,9 @@ import {
 } from "mdbreact";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
+import myJobsActions from "actions/my-jobs";
 import routes from "core/routes";
 import apis from "core/apis";
 import {ACCOUNT, NAVBAR, RESULT} from "core/globals";
@@ -25,6 +26,7 @@ const HireNavbar = (props) => {
   const {t} = useTranslation();
   const history = useHistory();
   const {auth} = useSelector(state => state);
+  const dispatch = useDispatch();
 
   const {onNavigate, onChangeAccountType, onChangeLanguage, onSignOut} = props;
 
@@ -32,6 +34,11 @@ const HireNavbar = (props) => {
   const [borderRadius, setBorderRadius] = useState(0);
 
   const pathname = history.location.pathname;
+
+  const handlePostAJob = e => {
+    dispatch(myJobsActions.postAJob.resetAll());
+    onNavigate(routes.hire.myJobs.postAJob.main);
+  };
 
   useEffect(() => {
     !!auth && !!auth.user && !!auth.user.id && AccountService.avatar({id: auth.user.id})
@@ -73,7 +80,7 @@ const HireNavbar = (props) => {
                 <span className="mr-2">{t("NAVBAR.HIRE.MY_JOBS.ROOT")}</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
-                <MDBDropdownItem onClick={() => onNavigate(routes.hire.myJobs.postAJob)}>{t("NAVBAR.HIRE.MY_JOBS.POST_JOB")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={handlePostAJob}>{t("NAVBAR.HIRE.MY_JOBS.POST_A_JOB")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => onNavigate(routes.hire.myJobs.myJobs)}>{t("NAVBAR.HIRE.MY_JOBS.MY_JOBS")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => onNavigate(routes.hire.myJobs.draftJobs)}>{t("NAVBAR.HIRE.MY_JOBS.DRAFT_JOBS")}</MDBDropdownItem>
               </MDBDropdownMenu>
