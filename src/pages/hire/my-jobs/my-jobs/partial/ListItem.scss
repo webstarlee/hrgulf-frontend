@@ -1,0 +1,19 @@
+@import "../../../../../assets/consts";
+
+.letter-item-wrapper {
+  height: calc(#{$listview-item-height} * 0.8);
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .letter-item-wrapper {
+    height: $listview-item-height;
+  }
+}
+
+.letter-inner-wrapper {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.letter-content {
+}

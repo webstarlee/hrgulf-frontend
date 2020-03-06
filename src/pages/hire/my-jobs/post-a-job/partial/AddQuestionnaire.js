@@ -59,11 +59,12 @@ export default ({onPrev, onNext}) => {
       ...postAJob.jobInformation,
       specialties: !!postAJob.specialties.specialties ? postAJob.specialties.specialties.join(",") : "",
       ...values,
+      isActive: postAJob.isActive,
     };
     const candidateRequirements = postAJob.candidateRequirements;
 
     setSubmitting(true);
-    Service.postJob({jobInformation, candidateRequirements})
+    Service.postJob({hireId: user.hireId, jobInformation, candidateRequirements})
       .then(res => {
         if (res.result === RESULT.SUCCESS) {
           toast.success(t(`HIRE.MY_JOBS.POST_A_JOB.MESSAGE.SUCCESSFULLY_${!postAJob.jobInformation.id ? "POSTED" : "EDITED"}`));
@@ -115,7 +116,7 @@ export default ({onPrev, onNext}) => {
                 ))}
               </MDBSelectOptions>
             </MDBSelect>}
-            {!!touched.specialties && !!errors.specialties && <div className="text-left invalid-field">{errors.specialties}</div>}
+            {!!touched.specialties && !!errors.specialties && <div classNamdbmodalme="text-left invalid-field">{errors.specialties}</div>}
           </MDBCol>
         </MDBRow>
         <MDBRow>

@@ -73,6 +73,7 @@ const initialState = {
     questionnaire: {
       questionnaireId: "0",
     },
+    isActive: 0,
   },
 };
 
@@ -84,6 +85,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         postAJob : initialState.postAJob,
+      };
+    case POST_A_JOB.SET_IS_ACTIVE:
+      return {
+        ...state,
+        postAJob: {
+          ...state.postAJob,
+          isActive: payload,
+        },
       };
     case POST_A_JOB.SET_STEP:
       return {

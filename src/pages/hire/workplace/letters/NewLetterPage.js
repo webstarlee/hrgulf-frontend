@@ -107,7 +107,7 @@ export default () => {
           });
 
           const blocksFromHtml = htmlToDraft(message);
-          const { contentBlocks, entityMap } = blocksFromHtml;
+          const {contentBlocks, entityMap} = blocksFromHtml;
           const state = ContentState.createFromBlockArray(
             contentBlocks,
             entityMap,
@@ -248,7 +248,8 @@ export default () => {
       </MDBBreadcrumb>
       <MDBRow>
         {alert.show && <MDBCol md="12">
-          <CSSTransition in={alert.show} classNames="fade-transition" timeout={EFFECT.TRANSITION_TIME} unmountOnExit appear>
+          <CSSTransition in={alert.show} classNames="fade-transition" timeout={EFFECT.TRANSITION_TIME} unmountOnExit
+                         appear>
             <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
           </CSSTransition>
         </MDBCol>}
@@ -261,18 +262,24 @@ export default () => {
                   <input hidden id="type" name="type" onChange={handleChange} onBlur={handleBlur}/>
                   <MDBRow>
                     <MDBCol md="6">
-                      <MDBSelect label={t("HIRE.WORKPLACE.LETTERS.FIELDS.TYPE")} className="mt-3 mb-0"
+                      <MDBSelect label={t("HIRE.WORKPLACE.LETTERS.FIELDS.TYPE")} outline className="mt-3 mb-0"
                                  selected={values.type} getValue={val => {
                         helpers.triggerChangeEvent("type", val[0])
                       }}>
                         <MDBSelectInput/>
                         <MDBSelectOptions>
-                          <MDBSelectOption value={LETTERS.TYPE.GENERIC} checked={values.type === LETTERS.TYPE.GENERIC}>{t("HIRE.WORKPLACE.LETTERS.TYPE.GENERIC")}</MDBSelectOption>
-                          <MDBSelectOption value={LETTERS.TYPE.INTERVIEW} checked={values.type === LETTERS.TYPE.INTERVIEW}>{t("HIRE.WORKPLACE.LETTERS.TYPE.INTERVIEW")}</MDBSelectOption>
-                          <MDBSelectOption value={LETTERS.TYPE.FOLLOWUP} checked={values.type === LETTERS.TYPE.FOLLOWUP}>{t("HIRE.WORKPLACE.LETTERS.TYPE.FOLLOWUP")}</MDBSelectOption>
-                          <MDBSelectOption value={LETTERS.TYPE.ACCEPTANCE} checked={values.type === LETTERS.TYPE.ACCEPTANCE}>{t("HIRE.WORKPLACE.LETTERS.TYPE.ACCEPTANCE")}</MDBSelectOption>
-                          <MDBSelectOption value={LETTERS.TYPE.REJECTION} checked={values.type === LETTERS.TYPE.REJECTION}>{t("HIRE.WORKPLACE.LETTERS.TYPE.REJECTION")}</MDBSelectOption>
-                          <MDBSelectOption value={LETTERS.TYPE.ON_BOARDING} checked={values.type === LETTERS.TYPE.ON_BOARDING}>{t("HIRE.WORKPLACE.LETTERS.TYPE.ON_BOARDING")}</MDBSelectOption>
+                          <MDBSelectOption value={LETTERS.TYPE.GENERIC}
+                                           checked={values.type === LETTERS.TYPE.GENERIC}>{t("HIRE.WORKPLACE.LETTERS.TYPE.GENERIC")}</MDBSelectOption>
+                          <MDBSelectOption value={LETTERS.TYPE.INTERVIEW}
+                                           checked={values.type === LETTERS.TYPE.INTERVIEW}>{t("HIRE.WORKPLACE.LETTERS.TYPE.INTERVIEW")}</MDBSelectOption>
+                          <MDBSelectOption value={LETTERS.TYPE.FOLLOWUP}
+                                           checked={values.type === LETTERS.TYPE.FOLLOWUP}>{t("HIRE.WORKPLACE.LETTERS.TYPE.FOLLOWUP")}</MDBSelectOption>
+                          <MDBSelectOption value={LETTERS.TYPE.ACCEPTANCE}
+                                           checked={values.type === LETTERS.TYPE.ACCEPTANCE}>{t("HIRE.WORKPLACE.LETTERS.TYPE.ACCEPTANCE")}</MDBSelectOption>
+                          <MDBSelectOption value={LETTERS.TYPE.REJECTION}
+                                           checked={values.type === LETTERS.TYPE.REJECTION}>{t("HIRE.WORKPLACE.LETTERS.TYPE.REJECTION")}</MDBSelectOption>
+                          <MDBSelectOption value={LETTERS.TYPE.ON_BOARDING}
+                                           checked={values.type === LETTERS.TYPE.ON_BOARDING}>{t("HIRE.WORKPLACE.LETTERS.TYPE.ON_BOARDING")}</MDBSelectOption>
                         </MDBSelectOptions>
                       </MDBSelect>
                       {!!touched.type && !!errors.type && <div className="text-left invalid-field">{errors.type}</div>}
@@ -280,15 +287,17 @@ export default () => {
                   </MDBRow>
                   <MDBRow>
                     <MDBCol md="6">
-                      <MDBInput id="name" name="name" label={t("HIRE.WORKPLACE.LETTERS.FIELDS.NAME")} background
+                      <MDBInput id="name" name="name" label={t("HIRE.WORKPLACE.LETTERS.FIELDS.NAME")} outline
                                 containerClass="mb-0" value={values.name} onChange={handleChange} onBlur={handleBlur}>
-                        {!!touched.name && !!errors.name && <div className="text-left invalid-field">{errors.name}</div>}
+                        {!!touched.name && !!errors.name &&
+                        <div className="text-left invalid-field">{errors.name}</div>}
                       </MDBInput>
                     </MDBCol>
                     <MDBCol md="6">
-                      <MDBInput id="subject" name="subject" label={t("HIRE.WORKPLACE.LETTERS.FIELDS.SUBJECT")} background
+                      <MDBInput id="subject" name="subject" label={t("HIRE.WORKPLACE.LETTERS.FIELDS.SUBJECT")} outline
                                 containerClass="" value={values.subject} onChange={handleChange} onBlur={handleBlur}>
-                        {!!touched.subject && !!errors.subject && <div className="text-left invalid-field">{errors.subject}</div>}
+                        {!!touched.subject && !!errors.subject &&
+                        <div className="text-left invalid-field">{errors.subject}</div>}
                       </MDBInput>
                     </MDBCol>
                   </MDBRow>
@@ -311,13 +320,15 @@ export default () => {
                         {/*  disabled*/}
                         {/*  value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}*/}
                         {/*/>*/}
-                        {!!touched.message && !!errors.message && <div className="text-left invalid-field">{errors.message}</div>}
+                        {!!touched.message && !!errors.message &&
+                        <div className="text-left invalid-field">{errors.message}</div>}
                       </div>
                     </MDBCol>
                   </MDBRow>
                   <MDBRow>
                     <MDBCol md="12" className="text-left mt-4">
-                      <div className="grey-text">{t("HIRE.WORKPLACE.LETTERS.FIELDS.ATTACHMENT")} {!!attachmentName && `: ${attachmentName}`}</div>
+                      <div
+                        className="grey-text">{t("HIRE.WORKPLACE.LETTERS.FIELDS.ATTACHMENT")} {!!attachmentName && `: ${attachmentName}`}</div>
                       <div id="file" className="letter-attachment-upload mx-auto">
                         {!loading && <MDBFileupload
                           ref={fileRef}
@@ -340,9 +351,15 @@ export default () => {
                   </MDBRow>
                   {/*<div className="fixed-bottom white px-md-3 py-md-3">*/}
                   <div className="mt-4 mb-3">
-                    <MDBBtn type="submit" color="primary" size="sm" rounded disabled={!!loading || !!isSubmitting}>{t(`COMMON.BUTTON.${!!itemId ? "EDIT" : "ADD"}`)}</MDBBtn>
-                    <MDBBtn type="button" color="indigo" size="sm" rounded onClick={e => handleReset({setValues, setTouched, setErrors})}>{t(`COMMON.BUTTON.NEW`)}</MDBBtn>
-                    <MDBBtn type="button" color="warning" size="sm" rounded onClick={goToBack}>{t(`COMMON.BUTTON.BACK`)}</MDBBtn>
+                    <MDBBtn type="submit" color="primary" size="sm" rounded
+                            disabled={!!loading || !!isSubmitting}>{t(`COMMON.BUTTON.${!!itemId ? "EDIT" : "ADD"}`)}</MDBBtn>
+                    <MDBBtn type="button" color="indigo" size="sm" rounded onClick={e => handleReset({
+                      setValues,
+                      setTouched,
+                      setErrors
+                    })}>{t(`COMMON.BUTTON.NEW`)}</MDBBtn>
+                    <MDBBtn type="button" color="warning" size="sm" rounded
+                            onClick={goToBack}>{t(`COMMON.BUTTON.BACK`)}</MDBBtn>
                   </div>
                 </form>
               </Fragment>}

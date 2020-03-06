@@ -214,19 +214,21 @@ export default ({onPrev, onNext}) => {
         <MDBRow>
           <MDBCol md="12" className="mt-3 text-left">{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.CAREER_LEVEL")}</MDBCol>
           <MDBCol md="6">
-            <input hidden id="careerLevel" value={values.careerLevel} onChange={handleChange} onBlur={handleBlur}/>
-            {!!careerLevels.length && <MDBSelect className="my-0" outline search selected={values.careerLevel} getValue={val => {
-              helpers.triggerChangeEvent("careerLevel", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
-                {careerLevels.map((item, index) => (
-                  <MDBSelectOption key={index} value={item.level} checked={values.careerLevel == item.level}>{item[`careerLevel_${lang}`]}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.careerLevel && !!errors.careerLevel && <div className="text-left invalid-field">{errors.careerLevel}</div>}
+            {!!careerLevels.length && <Fragment>
+              <input hidden id="careerLevel" value={values.careerLevel} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline search selected={values.careerLevel} getValue={val => {
+                helpers.triggerChangeEvent("careerLevel", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
+                  {careerLevels.map((item, index) => (
+                    <MDBSelectOption key={index} value={item.level} checked={values.careerLevel == item.level}>{item[`careerLevel_${lang}`]}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.careerLevel && !!errors.careerLevel && <div className="text-left invalid-field">{errors.careerLevel}</div>}
+            </Fragment>}
           </MDBCol>
         </MDBRow>
         <MDBRow>
@@ -234,34 +236,38 @@ export default ({onPrev, onNext}) => {
             <label>{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.YEAR_OF_EXPERIENCE")}</label>
           </MDBCol>
           <MDBCol md="6">
-            <input hidden id="xpYear1" value={values.xpYear1} onChange={handleChange} onBlur={handleBlur}/>
-            {!!years.length && <MDBSelect className="my-0" outline selected={values.xpYear1} getValue={val => {
-              helpers.triggerChangeEvent("xpYear1", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.FIELDS.MIN")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBSelectOption disabled>{t("COMMON.FIELDS.MIN")}</MDBSelectOption>
-                {years.map((item, index) => (
-                  <MDBSelectOption key={index} value={item} checked={values.xpYear1 == item}>{item}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.xpYear1 && !!errors.xpYear1 && <div className="text-left invalid-field">{errors.xpYear1}</div>}
+            {!!years.length && <Fragment>
+              <input hidden id="xpYear1" value={values.xpYear1} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline selected={values.xpYear1} getValue={val => {
+                helpers.triggerChangeEvent("xpYear1", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.FIELDS.MIN")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBSelectOption disabled>{t("COMMON.FIELDS.MIN")}</MDBSelectOption>
+                  {years.map((item, index) => (
+                    <MDBSelectOption key={index} value={item} checked={values.xpYear1 == item}>{item}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.xpYear1 && !!errors.xpYear1 && <div className="text-left invalid-field">{errors.xpYear1}</div>}
+            </Fragment>}
           </MDBCol>
           <MDBCol md="6">
-            <input hidden id="xpYear2" value={values.xpYear1} onChange={handleChange} onBlur={handleBlur}/>
-            {!!years.length && <MDBSelect className="my-0" outline selected={values.xpYear2} getValue={val => {
-              helpers.triggerChangeEvent("xpYear2", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.FIELDS.MAX")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBSelectOption disabled>{t("COMMON.FIELDS.MAX")}</MDBSelectOption>
-                {years.map((item, index) => (
-                  <MDBSelectOption key={index} value={item} checked={values.xpYear2 == item}>{item}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.xpYear2 && !!errors.xpYear2 && <div className="text-left invalid-field">{errors.xpYear2}</div>}
+            {!!years.length && <Fragment>
+              <input hidden id="xpYear2" value={values.xpYear1} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline selected={values.xpYear2} getValue={val => {
+                helpers.triggerChangeEvent("xpYear2", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.FIELDS.MAX")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBSelectOption disabled>{t("COMMON.FIELDS.MAX")}</MDBSelectOption>
+                  {years.map((item, index) => (
+                    <MDBSelectOption key={index} value={item} checked={values.xpYear2 == item}>{item}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.xpYear2 && !!errors.xpYear2 && <div className="text-left invalid-field">{errors.xpYear2}</div>}
+            </Fragment>}
           </MDBCol>
         </MDBRow>
 
@@ -270,95 +276,105 @@ export default ({onPrev, onNext}) => {
         <h4 className="h4-responsive mt-5 text-left">{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.EDUCATION")}</h4>
         <MDBRow className="mt-3 text-left">
           <MDBCol md="6">
-            <label>{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.MAJOR")}</label>
-            <input hidden id="majorId" value={values.majorId} onChange={handleChange} onBlur={handleBlur}/>
-            {!!majors.length && <MDBSelect className="my-0" outline selected={values.majorId} getValue={val => {
-              helpers.triggerChangeEvent("majorId", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBInput id="selectSearchInput" data-search="true" placeHolder={t("COMMON.BUTTON.SEARCH")} value={majorSearch} getValue={setMajorSearch}/>
-                <MDBSelectOption value="0">{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
-                {majors.filter(item => item.lowercase.indexOf(debouncedMajorSearch) !== -1).map((item, index) => (
-                  <MDBSelectOption key={index} value={item.value} checked={values.majorId == item.value}>{item.text}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.major && !!errors.major && <div className="text-left invalid-field">{errors.major}</div>}
+            {!!majors.length && <Fragment>
+              <label>{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.MAJOR")}</label>
+              <input hidden id="majorId" value={values.majorId} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline selected={values.majorId} getValue={val => {
+                helpers.triggerChangeEvent("majorId", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBInput id="selectSearchInput" data-search="true" placeHolder={t("COMMON.BUTTON.SEARCH")} value={majorSearch} getValue={setMajorSearch}/>
+                  <MDBSelectOption value="0">{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
+                  {majors.filter(item => item.lowercase.indexOf(debouncedMajorSearch) !== -1).map((item, index) => (
+                    <MDBSelectOption key={index} value={item.value} checked={values.majorId == item.value}>{item.text}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.major && !!errors.major && <div className="text-left invalid-field">{errors.major}</div>}
+            </Fragment>}
             {/*<MDBInput id="major" name="major" outline*/}
             {/*          containerClass="my-0" className="my-0" value={values.title} onChange={handleChange} onBlur={handleBlur}>*/}
             {/*  {!!touched.major && !!errors.major && <div className="text-left invalid-field">{errors.major}</div>}*/}
             {/*</MDBInput>*/}
           </MDBCol>
-          {!!degrees.length && <MDBCol md="6">
-            <label>{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.DEGREE")}</label>
-            <input hidden id="degree" value={values.degree} onChange={handleChange} onBlur={handleBlur}/>
-            <MDBSelect className="my-0" outline search selected={values.degree} getValue={val => {
-              helpers.triggerChangeEvent("degree", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBSelectOption value="0">{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
-                {degrees.map((item, index) => (
-                  <MDBSelectOption key={index} value={item.level} checked={values.degree == item.level}>{item[`degree_${lang}`]}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>
-            {!!touched.degree && !!errors.degree && <div className="text-left invalid-field">{errors.degree}</div>}
-          </MDBCol>}
+          <MDBCol md="6">
+            {!!degrees.length && <Fragment>
+              <label>{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.DEGREE")}</label>
+              <input hidden id="degree" value={values.degree} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline search selected={values.degree} getValue={val => {
+                helpers.triggerChangeEvent("degree", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBSelectOption value="0">{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
+                  {degrees.map((item, index) => (
+                    <MDBSelectOption key={index} value={item.level} checked={values.degree == item.level}>{item[`degree_${lang}`]}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.degree && !!errors.degree && <div className="text-left invalid-field">{errors.degree}</div>}
+            </Fragment>}
+          </MDBCol>
         </MDBRow>
 
         <h4 className="h4-responsive mt-5 text-left">{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.PERSONAL_INFORMATION")}</h4>
         <MDBRow>
           <MDBCol md="12" className="mt-3 text-left">{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.LOCATION")}</MDBCol>
           <MDBCol md="6">
-            <input hidden id="countryId" value={values.countryId} onChange={handleChange} onBlur={handleBlur}/>
-            {!!countries.length && <MDBSelect className="my-0" outline selected={values.countryId} getValue={val => {
-              helpers.triggerChangeEvent("countryId", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
-                {countries.map((item, index) => (
-                  <MDBSelectOption key={index} value={item.id} checked={values.countryId == item.id}>{item[`country_${lang}`]}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.countryId && !!errors.countryId && <div className="text-left invalid-field">{errors.countryId}</div>}
+            {!!countries.length && <Fragment>
+              <input hidden id="countryId" value={values.countryId} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline selected={values.countryId} getValue={val => {
+                helpers.triggerChangeEvent("countryId", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
+                  {countries.map((item, index) => (
+                    <MDBSelectOption key={index} value={item.id} checked={values.countryId == item.id}>{item[`country_${lang}`]}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.countryId && !!errors.countryId && <div className="text-left invalid-field">{errors.countryId}</div>}
+            </Fragment>}
           </MDBCol>
           <MDBCol md="6">
-            <input hidden id="cityId" value={values.cityId} onChange={handleChange} onBlur={handleBlur}/>
-            {!!cities.length && <MDBSelect className="mt-2 mt-md-0 mb-0" outline selected={values.cityId} getValue={val => {
-              helpers.triggerChangeEvent("cityId", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBInput id="selectSearchInput" data-search="true" placeHolder={t("COMMON.BUTTON.SEARCH")} value={citySearch} getValue={setCitySearch}/>
-                <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
-                {cities.filter(item => item.lowercase.indexOf(debouncedCitySearch) !== -1).map((item, index) => (
-                  <MDBSelectOption key={index} value={item.value} checked={values.cityId == item.value}>{item.text}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.cityId && !!errors.cityId && <div className="text-left invalid-field">{errors.cityId}</div>}
+            {!!cities.length && <Fragment>
+              <input hidden id="cityId" value={values.cityId} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="mt-2 mt-md-0 mb-0" outline selected={values.cityId} getValue={val => {
+                helpers.triggerChangeEvent("cityId", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBInput id="selectSearchInput" data-search="true" placeHolder={t("COMMON.BUTTON.SEARCH")} value={citySearch} getValue={setCitySearch}/>
+                  <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
+                  {cities.filter(item => item.lowercase.indexOf(debouncedCitySearch) !== -1).map((item, index) => (
+                    <MDBSelectOption key={index} value={item.value} checked={values.cityId == item.value}>{item.text}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.cityId && !!errors.cityId && <div className="text-left invalid-field">{errors.cityId}</div>}
+            </Fragment>}
           </MDBCol>
         </MDBRow>
         <MDBRow>
           <MDBCol md="12" className="mt-3 text-left">{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.NATIONALITY")}</MDBCol>
           <MDBCol md="6">
-            <input hidden id="nationalityId" value={values.nationalityId} onChange={handleChange} onBlur={handleBlur}/>
-            {!!countries.length && <MDBSelect className="my-0" outline selected={values.nationalityId} getValue={val => {
-              helpers.triggerChangeEvent("nationalityId", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
-              <MDBSelectOptions>
-                <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
-                {countries.map((item, index) => (
-                  <MDBSelectOption key={index} value={item.id} checked={values.nationalityId == item.id}>{item[`country_${lang}`]}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.nationalityId && !!errors.nationalityId && <div className="text-left invalid-field">{errors.nationalityId}</div>}
+            {!!countries.length && <Fragment>
+              <input hidden id="nationalityId" value={values.nationalityId} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline selected={values.nationalityId} getValue={val => {
+                helpers.triggerChangeEvent("nationalityId", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
+                <MDBSelectOptions>
+                  <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
+                  {countries.map((item, index) => (
+                    <MDBSelectOption key={index} value={item.id} checked={values.nationalityId == item.id}>{item[`country_${lang}`]}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.nationalityId && !!errors.nationalityId && <div className="text-left invalid-field">{errors.nationalityId}</div>}
+            </Fragment>}
           </MDBCol>
         </MDBRow>
         <MDBRow>
@@ -366,34 +382,38 @@ export default ({onPrev, onNext}) => {
             <label>{t("HIRE.MY_JOBS.POST_A_JOB.FIELDS.CANDIDATE_REQUIREMENTS.AGE")}</label>
           </MDBCol>
           <MDBCol md="6">
-            <input hidden id="age1" value={values.age1} onChange={handleChange} onBlur={handleBlur}/>
-            {!!ages.length && <MDBSelect className="my-0" outline selected={values.age1} getValue={val => {
-              helpers.triggerChangeEvent("age1", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.FIELDS.MIN")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBSelectOption disabled>{t("COMMON.FIELDS.MIN")}</MDBSelectOption>
-                {ages.map((item, index) => (
-                  <MDBSelectOption key={index} value={item} checked={values.age1 == item}>{item}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.age1 && !!errors.age1 && <div className="text-left invalid-field">{errors.age1}</div>}
+            {!!ages.length && <Fragment>
+              <input hidden id="age1" value={values.age1} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline selected={values.age1} getValue={val => {
+                helpers.triggerChangeEvent("age1", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.FIELDS.MIN")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBSelectOption disabled>{t("COMMON.FIELDS.MIN")}</MDBSelectOption>
+                  {ages.map((item, index) => (
+                    <MDBSelectOption key={index} value={item} checked={values.age1 == item}>{item}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.age1 && !!errors.age1 && <div className="text-left invalid-field">{errors.age1}</div>}
+            </Fragment>}
           </MDBCol>
           <MDBCol md="6">
-            <input hidden id="age2" value={values.age2} onChange={handleChange} onBlur={handleBlur}/>
-            {!!ages.length && <MDBSelect className="my-0" outline selected={values.age2} getValue={val => {
-              helpers.triggerChangeEvent("age2", val[0])
-            }}>
-              <MDBSelectInput selected={t("COMMON.FIELDS.MAX")} />
-              <MDBSelectOptions className="max-height-200">
-                <MDBSelectOption disabled>{t("COMMON.FIELDS.MAX")}</MDBSelectOption>
-                {ages.map((item, index) => (
-                  <MDBSelectOption key={index} value={item} checked={values.age2 == item}>{item}</MDBSelectOption>
-                ))}
-              </MDBSelectOptions>
-            </MDBSelect>}
-            {!!touched.age2 && !!errors.age2 && <div className="text-left invalid-field">{errors.age2}</div>}
+            {!!ages.length && <Fragment>
+              <input hidden id="age2" value={values.age2} onChange={handleChange} onBlur={handleBlur}/>
+              <MDBSelect className="my-0" outline selected={values.age2} getValue={val => {
+                helpers.triggerChangeEvent("age2", val[0])
+              }}>
+                <MDBSelectInput selected={t("COMMON.FIELDS.MAX")} />
+                <MDBSelectOptions className="max-height-200">
+                  <MDBSelectOption disabled>{t("COMMON.FIELDS.MAX")}</MDBSelectOption>
+                  {ages.map((item, index) => (
+                    <MDBSelectOption key={index} value={item} checked={values.age2 == item}>{item}</MDBSelectOption>
+                  ))}
+                </MDBSelectOptions>
+              </MDBSelect>
+              {!!touched.age2 && !!errors.age2 && <div className="text-left invalid-field">{errors.age2}</div>}
+            </Fragment>}
           </MDBCol>
         </MDBRow>
 

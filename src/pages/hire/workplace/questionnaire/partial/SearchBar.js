@@ -32,8 +32,8 @@ export default ({onChangeKeyword}) => {
         <MDBCol md="6">
         </MDBCol>
         <MDBCol md="6">
-          <MDBInput id="name" name="name" label={t("COMMON.SEARCH.KEYWORD")} background
-                    containerClass="mt-2 mb-0" value={keyword} getValue={setKeyword}/>
+          <MDBInput id="name" name="name" label={t("COMMON.SEARCH.KEYWORD")} outline
+                    containerClass="mt-3 mb-0" value={keyword} getValue={setKeyword}/>
         </MDBCol>
       </MDBRow>
     </Fragment>

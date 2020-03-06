@@ -61,6 +61,8 @@ export default {
       CHOOSE_FILE: "Choose File",
       SELECT: "Select",
       NEXT: "Next",
+      ACTIVATE: "Activate",
+      DEACTIVATE: "Deactivate",
       SWITCH_TO_WORK: "Job seeking?",
       SWITCH_TO_HIRE: "Hiring?",
     },
@@ -76,6 +78,8 @@ export default {
     },
     QUESTION: {
       DELETE: "Do you want to delete \"{{item}}\"?",
+      ACTIVATE: "Do you want to activate \"{{item}}\"?",
+      DEACTIVATE: "Do you want to deactivate \"{{item}}\"?",
     },
     ERROR: {
       SORRY: "Sorry",
@@ -174,6 +178,10 @@ export default {
     VALUES: {
       UNDEFINED: "Undefined",
       SELECT_ONE: "Select One",
+    },
+    JOB_STATUS: {
+      ACTIVE: "Active",
+      INACTIVE: "Inactive",
     },
   },
   NAVBAR: {
@@ -411,6 +419,14 @@ export default {
         MESSAGE: {
           SUCCESSFULLY_POSTED: "Your job is successfully posted",
           SUCCESSFULLY_EDITED: "Your job is successfully edited",
+        },
+      },
+      MY_JOBS: {
+        FIELDS: {
+          TYPE: "Active Status",
+        },
+        EDIT_JOB: {
+          PAGE_TITLE: "Edit Job",
         },
       },
     },

@@ -417,6 +417,14 @@ textarea.form-control {
 //  color: unset !important;
 //}
 
+.modal-backdrop {
+  //backdrop-filter: blur(0.8);
+  backdrop-filter: blur($modal-backdrop-blur) grayscale(.9);
+  opacity: 1 !important;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: $transition-time ease-in;
+}
+
 .rtl-content {
   direction: rtl;
 

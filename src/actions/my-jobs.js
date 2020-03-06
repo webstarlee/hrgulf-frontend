@@ -4,6 +4,9 @@ const postAJob = {
   resetAll: (payload) => {
     return {type: POST_A_JOB.RESET_ALL, payload}
   },
+  setIsActive: (payload) => {
+    return {type: POST_A_JOB.SET_IS_ACTIVE, payload}
+  },
   setStep: (payload) => {
     return {type: POST_A_JOB.SET_STEP, payload}
   },

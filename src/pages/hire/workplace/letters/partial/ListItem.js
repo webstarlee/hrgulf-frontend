@@ -10,9 +10,9 @@ export default ({data, detailLabel, detailLink, deleteLabel, page, onDelete}) =>
   const {t} = useTranslation();
 
   const type = t(`HIRE.WORKPLACE.LETTERS.TYPE.${data.type}`);
-  const {name, subject, message} = data;
+  const {id, name, subject, message} = data;
   const detailLinkParam = Base64.encode(JSON.stringify({
-    id: data.id,
+    id,
     page,
   }));
 
@@ -30,7 +30,7 @@ export default ({data, detailLabel, detailLink, deleteLabel, page, onDelete}) =>
           <Link to={`${detailLink}/${detailLinkParam}`} className="text-body">
             <MDBBtn color="primary" size="sm" className="white-text" rounded>{detailLabel}</MDBBtn>
           </Link>
-          <MDBBtn color="danger" size="sm" onClick={e => onDelete({id: data.id, item: data.name})} rounded>{deleteLabel}</MDBBtn>
+          <MDBBtn color="danger" size="sm" onClick={e => onDelete({id: id, item: name})} rounded>{deleteLabel}</MDBBtn>
         </MDBMask>
       </MDBView>
     </MDBCol>

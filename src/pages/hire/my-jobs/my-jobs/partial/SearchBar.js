@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {MDBCol, MDBInput, MDBRow, MDBSelect, MDBSelectInput, MDBSelectOption, MDBSelectOptions} from "mdbreact";
 
-import {DELAY, LETTERS, SCOPE} from "core/globals";
+import {DELAY, JOB_STATUS, LETTERS, SCOPE} from "core/globals";
 import useDebounce from "helpers/useDebounce";
 
 export default ({onChangeType, onChangeKeyword}) => {
@@ -36,17 +36,13 @@ export default ({onChangeType, onChangeKeyword}) => {
     <Fragment>
       <MDBRow>
         <MDBCol md="6">
-          <MDBSelect label={t("HIRE.WORKPLACE.LETTERS.FIELDS.TYPE")} outline className="mt-sm-5 mt-md-3 mb-0"
+          <MDBSelect label={t("HIRE.MY_JOBS.MY_JOBS.FIELDS.TYPE")} outline className="mt-sm-5 mt-md-3 mb-0"
                      selected={type} getValue={val => setType(val[0])}>
             <MDBSelectInput/>
             <MDBSelectOptions>
-              <MDBSelectOption value={SCOPE.ALL} checked={type === SCOPE.ALL}>{t("COMMON.SCOPE.ALL")}</MDBSelectOption>
-              <MDBSelectOption value={LETTERS.TYPE.GENERIC} checked={type === LETTERS.TYPE.GENERIC}>{t("HIRE.WORKPLACE.LETTERS.TYPE.GENERIC")}</MDBSelectOption>
-              <MDBSelectOption value={LETTERS.TYPE.INTERVIEW} checked={type === LETTERS.TYPE.INTERVIEW}>{t("HIRE.WORKPLACE.LETTERS.TYPE.INTERVIEW")}</MDBSelectOption>
-              <MDBSelectOption value={LETTERS.TYPE.FOLLOWUP} checked={type === LETTERS.TYPE.FOLLOWUP}>{t("HIRE.WORKPLACE.LETTERS.TYPE.FOLLOWUP")}</MDBSelectOption>
-              <MDBSelectOption value={LETTERS.TYPE.ACCEPTANCE} checked={type === LETTERS.TYPE.ACCEPTANCE}>{t("HIRE.WORKPLACE.LETTERS.TYPE.ACCEPTANCE")}</MDBSelectOption>
-              <MDBSelectOption value={LETTERS.TYPE.REJECTION} checked={type === LETTERS.TYPE.REJECTION}>{t("HIRE.WORKPLACE.LETTERS.TYPE.REJECTION")}</MDBSelectOption>
-              <MDBSelectOption value={LETTERS.TYPE.ON_BOARDING} checked={type === LETTERS.TYPE.ON_BOARDING}>{t("HIRE.WORKPLACE.LETTERS.TYPE.ON_BOARDING")}</MDBSelectOption>
+              <MDBSelectOption value={SCOPE.ALL} checked={type == SCOPE.ALL}>{t("COMMON.SCOPE.ALL")}</MDBSelectOption>
+              <MDBSelectOption value={JOB_STATUS.ACTIVE} checked={type == JOB_STATUS.ACTIVE}>{t("COMMON.JOB_STATUS.ACTIVE")}</MDBSelectOption>
+              <MDBSelectOption value={JOB_STATUS.INACTIVE} checked={type == JOB_STATUS.INACTIVE}>{t("COMMON.JOB_STATUS.INACTIVE")}</MDBSelectOption>
             </MDBSelectOptions>
           </MDBSelect>
         </MDBCol>

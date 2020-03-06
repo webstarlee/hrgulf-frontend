@@ -13,6 +13,7 @@ import BackToTop from "components/BackToTop";
 import "./RootPage.scss";
 
 const PostAJobPage = lazy(() => import("./post-a-job/RootPage"));
+const MyJobsPage = lazy(() => import("./my-jobs/RootPage"));
 
 export default (props) => {
   return (
@@ -21,6 +22,7 @@ export default (props) => {
       <MDBContainer className="section">
         <Switch>
           <SignedInRoute path={routes.hire.myJobs.postAJob.root} component={PostAJobPage}/>
+          <SignedInRoute path={routes.hire.myJobs.myJobs.root} component={MyJobsPage}/>
           <Route component={Error404}/>
         </Switch>
       </MDBContainer>

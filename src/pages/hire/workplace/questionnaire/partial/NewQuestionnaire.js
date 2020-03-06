@@ -205,7 +205,7 @@ const NewQuestionnaire = (props) => {
                   {/*<h4 className="h4-responsive"></h4>*/}
                   <MDBRow>
                     <MDBCol md="12">
-                      <MDBInput id="name" name="name" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.NAME")} background
+                      <MDBInput id="name" name="name" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.NAME")} outline
                                 containerClass="mb-0" value={values.name} onChange={handleChange} onBlur={handleBlur}>
                         {!!touched.name && !!errors.name && <div className="text-left invalid-field">{errors.name}</div>}
                       </MDBInput>
@@ -253,7 +253,7 @@ const NewQuestionnaire = (props) => {
                       <MDBInput id="filterByScore" name="filterByScore" type="checkbox" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.FILTER_BY_SCORE")} filled containerClass="text-left mt-4 mb-0" checked={values.filterByScore || false} onChange={handleChange} />
                     </MDBCol>
                     <MDBCol md="6">
-                      <MDBInput id="minScore" name="minScore" type="number" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.MIN_SCORE")} background
+                      <MDBInput id="minScore" name="minScore" type="number" label={t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.MIN_SCORE")} outline
                                 containerClass="text-left mt-3 mb-0" disabled={!values.filterByScore} value={values.minScore} onChange={handleChange} onBlur={handleBlur}>
                         {!!errors.minScore && <div className="text-left invalid-field">{errors.minScore}</div>}
                       </MDBInput>

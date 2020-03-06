@@ -68,6 +68,12 @@ export default {
       postAJob: {
         postJob: "hire/my-jobs/post-a-job/post-job",
       },
+      myJobs: {
+        list: "hire/my-jobs/my-jobs/list",
+        get: "hire/my-jobs/my-jobs/get",
+        activate: "hire/my-jobs/my-jobs/activate",
+        delete: "hire/my-jobs/my-jobs/delete",
+      },
     },
   },
   work: {

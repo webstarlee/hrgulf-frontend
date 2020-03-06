@@ -170,7 +170,7 @@ export default () => {
           </Fragment>}
         </MDBCol>
       </MDBRow>
-      <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered>
+      <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered backdropClassName="modal-backdrop">
         <MDBModalHeader toggle={toggleModal}>{modal.title}</MDBModalHeader>
         <MDBModalBody className="text-left">{modal.message}</MDBModalBody>
         <MDBModalFooter>

@@ -9,9 +9,9 @@ import "./ListItem.scss";
 export default ({data, page, detailLabel, detailLink, deleteLabel, onDelete, questionsLink, questionsLabel}) => {
   const {t} = useTranslation();
 
-  const {name, description} = data;
+  const {id, name, description} = data;
   const linkParam = Base64.encode(JSON.stringify({
-    id: data.id,
+    id,
     page,
   }));
 
@@ -36,7 +36,7 @@ export default ({data, page, detailLabel, detailLink, deleteLabel, onDelete, que
           <Link to={`${detailLink}/${linkParam}`} className="text-body">
             <MDBBtn color="primary" size="sm" className="white-text" rounded>{detailLabel}</MDBBtn>
           </Link>
-          <MDBBtn color="danger" size="sm" onClick={e => onDelete({id: data.id, item: data.name})} rounded>{deleteLabel}</MDBBtn>
+          <MDBBtn color="danger" size="sm" onClick={e => onDelete({id: id, item: name})} rounded>{deleteLabel}</MDBBtn>
           {/*<Link to={`${questionsLink}/${linkParam}`} className="text-body">*/}
           {/*  <MDBBtn color="indigo" size="sm" className="white-text" rounded>{questionsLabel}</MDBBtn>*/}
           {/*</Link>*/}

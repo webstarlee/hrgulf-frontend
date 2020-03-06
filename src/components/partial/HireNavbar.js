@@ -17,7 +17,7 @@ import {useDispatch, useSelector} from "react-redux";
 import myJobsActions from "actions/my-jobs";
 import routes from "core/routes";
 import apis from "core/apis";
-import {ACCOUNT, NAVBAR, RESULT} from "core/globals";
+import {ACCOUNT, JOB_STATUS, NAVBAR, RESULT} from "core/globals";
 import {changeLanguage} from "core/i18n";
 import INavbarProps from "./INavbarProps";
 import AccountService from "services/AccountService";
@@ -37,6 +37,7 @@ const HireNavbar = (props) => {
 
   const handlePostAJob = e => {
     dispatch(myJobsActions.postAJob.resetAll());
+    dispatch(myJobsActions.postAJob.setIsActive(JOB_STATUS.INACTIVE));
     onNavigate(routes.hire.myJobs.postAJob.main);
   };
 
@@ -81,8 +82,8 @@ const HireNavbar = (props) => {
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
                 <MDBDropdownItem onClick={handlePostAJob}>{t("NAVBAR.HIRE.MY_JOBS.POST_A_JOB")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => onNavigate(routes.hire.myJobs.myJobs)}>{t("NAVBAR.HIRE.MY_JOBS.MY_JOBS")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => onNavigate(routes.hire.myJobs.draftJobs)}>{t("NAVBAR.HIRE.MY_JOBS.DRAFT_JOBS")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => onNavigate(routes.hire.myJobs.myJobs.main)}>{t("NAVBAR.HIRE.MY_JOBS.MY_JOBS")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => onNavigate(routes.hire.myJobs.draftJobs.main)}>{t("NAVBAR.HIRE.MY_JOBS.DRAFT_JOBS")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>

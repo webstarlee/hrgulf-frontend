@@ -147,6 +147,12 @@ export const INPUT = {
   TEXTAREA_MAX_LENGTH: 4096,
 };
 
+export const JOB_STATUS = {
+  INACTIVE: 0,
+  ACTIVE: 1,
+  DRAFT: 2,
+};
+
 export const KEY_CODES = {
   COMMA: 188,
   ENTER: 13,
@@ -173,6 +179,14 @@ export const LETTERS = {
     ACCEPTANCE: "ACCEPTANCE",
     REJECTION: "REJECTION",
     ON_BOARDING: "ON_BOARDING",
+  },
+};
+
+export const MODAL = {
+  TYPE: {
+    DELETE: "DELETE",
+    EDIT: "EDIT",
+    ACTIVATE: "ACTIVATE",
   },
 };
 
@@ -258,6 +272,7 @@ export default {
   FILE_UPLOAD,
   GENDER,
   INPUT,
+  JOB_STATUS,
   LETTERS,
   NAVBAR,
   PAGINATION,

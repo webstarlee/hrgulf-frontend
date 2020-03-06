@@ -55,8 +55,15 @@ export const routes = {
         main: "/hire/my-jobs/post-a-job",
         addQuestionnaire: "/hire/my-jobs/post-a-job/add-questionnaire",
       },
-      myJobs: "/hire/my-jobs/hire/my-jobs",
-      draftJobs: "my-jobs/draft-jobs",
+      myJobs: {
+        root: "/hire/my-jobs/my-jobs",
+        main: "/hire/my-jobs/my-jobs",
+        edit: "/hire/my-jobs/my-jobs/edit",
+      },
+      draftJobs: {
+        root: "/hire/my-jobs/draft-jobs",
+        main: "/hire/my-jobs/draft-jobs",
+      },
     },
     cvServices: {
       root: "/hire/cv-services",

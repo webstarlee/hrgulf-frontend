@@ -183,7 +183,7 @@ const Questions = (props) => {
           ))}
         </MDBTableBody>
       </MDBTable>
-      <MDBModal isOpen={modal1Open} toggle={e => {}} centered size="lg">
+      <MDBModal isOpen={modal1Open} toggle={e => {}} centered size="lg" backdropClassName="modal-backdrop">
         <MDBModalHeader
           toggle={e => setModal1Open(!modal1Open)}>{t("HIRE.WORKPLACE.QUESTIONNAIRE.FIELDS.QUESTION")}</MDBModalHeader>
         <MDBModalBody>
@@ -305,7 +305,7 @@ const Questions = (props) => {
         </MDBModalFooter>
       </MDBModal>
 
-      <MDBModal isOpen={modal2Open} toggle={e => {}} centered>
+      <MDBModal isOpen={modal2Open} toggle={e => {}} centered backdropClassName="modal-backdrop">
         <MDBModalHeader
           toggle={e => setModal2Open(!modal2Open)}>{modal2.title}</MDBModalHeader>
         <MDBModalBody className="text-left">{modal2.message}</MDBModalBody>
