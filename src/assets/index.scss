@@ -231,7 +231,7 @@ textarea.form-control {
 }
 
 .date-picker-label {
-  font-size: 12px;
+  //font-size: 12px;
   position: absolute;
   top: 5px;
 }
@@ -425,6 +425,20 @@ textarea.form-control {
   transition: $transition-time ease-in;
 }
 
+.PhoneInput .PhoneInputCountryIcon {
+  height: 1.5rem;
+}
+
+.PhoneInput .PhoneInputCountryIcon--border {
+  background-color: unset;
+  box-shadow: unset;
+}
+
+.PhoneInput input.PhoneInputInput {
+  margin-left: 6px;
+  padding: 6px;
+}
+
 .rtl-content {
   direction: rtl;
 
@@ -530,6 +544,11 @@ textarea.form-control {
 
   .mr-4 {
     margin-left: 1.5rem !important;
+    margin-right: unset !important;
+  }
+
+  .mr-5 {
+    margin-left: 3rem !important;
     margin-right: unset !important;
   }
 

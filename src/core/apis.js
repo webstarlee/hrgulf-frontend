@@ -3,6 +3,9 @@ import {PROJECT} from "core/globals";
 export default {
   baseUrl: PROJECT.IS_DEV ? "http://localhost:7080/api/" : "/api/",
   assetsBaseUrl: PROJECT.IS_DEV ? "http://localhost:7080/assets/" : "/assets/",
+  assets: {
+    flags: "images/flags",
+  },
   core: {
     getJobRoles: "core/get-job-roles",
     getJobSubroles: "core/get-job-subroles",

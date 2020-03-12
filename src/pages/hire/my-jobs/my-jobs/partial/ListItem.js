@@ -1,5 +1,5 @@
 import React from "react";
-import {MDBBtn, MDBCardBody, MDBCol, MDBIcon, MDBMask, MDBView} from "mdbreact";
+import {MDBBadge, MDBBtn, MDBCardBody, MDBCol, MDBIcon, MDBMask, MDBView} from "mdbreact";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {Base64} from "js-base64";
@@ -18,7 +18,10 @@ export default ({data, detailLabel, activateLabel, deactivateLabel, deleteLabel,
       <MDBView hover className="card">
         <MDBCardBody className="letter-item-wrapper">
           <div className="letter-inner-wrapper">
-            <div className="border-dark border-bottom mb-sm-1 mb-md-2"><span className="h4-responsive">{title}</span>
+            <div className="border-dark border-bottom mb-sm-1 mb-md-2">
+              <span className="h4-responsive">{title}</span>
+              <MDBBadge pill color={isActive ? "success" : "danger"} className="ml-2">{t(`COMMON.JOB_STATUS.${isActive ? "ACTIVE" : "INACTIVE"}`)}</MDBBadge>
+              {/*<p className="my-0">{t(`COMMON.JOB_STATUS.${isActive ? "ACTIVE" : "INACTIVE"}`)}</p>*/}
             </div>
             <div className="letter-content" dangerouslySetInnerHTML={{__html: description}}/>
           </div>
@@ -36,7 +39,10 @@ export default ({data, detailLabel, activateLabel, deactivateLabel, deleteLabel,
             {/*{deleteLabel}*/}
             <MDBIcon icon="trash"/>
           </MDBBtn>
-          <MDBBtn color={!!isActive ? "warning" : "success"} size="sm" onClick={e => onActivate({id, item: title, isActive: !isActive})} rounded>{!!isActive ? deactivateLabel : activateLabel}</MDBBtn>
+          <MDBBtn tag="a" floating color={!!isActive ? "warning" : "success"} size="sm" onClick={e => onActivate({id, item: title, isActive: !isActive})} rounded>
+            {/*{!!isActive ? deactivateLabel : activateLabel}*/}
+            <MDBIcon icon={!!isActive ? "times" : "check"}/>
+          </MDBBtn>
         </MDBMask>
       </MDBView>
     </MDBCol>

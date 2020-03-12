@@ -211,7 +211,6 @@ export default () => {
   }, [id]);
 
   useMemo(e => {
-    // !!fileRef.current && console.log(fileRef, attachment);
     if (!!fileRef.current && !!attachment.length) {
       const name = attachment.split("/").pop();
       const ext = attachment.split(".").pop();
@@ -367,16 +366,6 @@ export default () => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-      <ToastContainer
-        className="text-left"
-        position={t("DIRECTION") === "ltr" ? "top-right" : "top-left"}
-        dir={t("DIRECTION")}
-        hideProgressBar={true}
-        // newestOnTop={true}
-        // autoClose={0}
-        autoClose={EFFECT.TRANSITION_TIME5}
-        closeButton={false}
-        transition={Fade}/>
     </Fragment>
   );
 

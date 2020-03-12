@@ -89,6 +89,8 @@ export const COUNTRY = {
 export const DATE_FORMAT = {
   ISO: "YYYY-M-D",
   ISO2: "YYYY-MM-DD",
+  ISO_LOWER: "yyyy-m-d",
+  ISO2_LOWER: "yyyy-mm-dd",
 };
 
 export const DELAY = {
@@ -115,7 +117,8 @@ export const DEFAULT = {
   },
   COMPANY: {
     NAME: "ERC",
-    LOCATION: COUNTRY.CODE1.SAUDI_ARABIA,
+    // LOCATION: COUNTRY.CODE1.SAUDI_ARABIA,
+    LOCATION: 5,
     SIZE: 10,
     TYPE: COMPANY.TYPE.PUBLIC,
   },
@@ -138,6 +141,7 @@ export const FILE_UPLOAD = {
 export const GENDER = {
   MALE: "M",
   FEMALE: "F",
+  UNDEFINED: "U",
 };
 
 export const INPUT = {

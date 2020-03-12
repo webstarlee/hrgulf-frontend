@@ -11,11 +11,13 @@ const authStorage = localStorage.getItem(PROJECT.PERSIST_KEY);
 let authSession = !!authStorage ? authStorage : sessionStorage.getItem(PROJECT.PERSIST_KEY);
 authSession = !!authSession ? JSON.parse(authSession) : undefined;
 
-const initialState = {
-  signedIn: !!authSession ? authSession.signedIn : false,
-  user: !!authSession ? authSession.user : undefined,
-  token: !!authSession ? authSession.token : undefined,
-  redirectUrl: null,
+const initialState = authSession || {
+  signedIn: false,
+  user: undefined,
+  hire: undefined,
+  work: undefined,
+  token: undefined,
+  // redirectUrl: null,
 };
 
 export default (state = initialState, action) => {
@@ -26,23 +28,23 @@ export default (state = initialState, action) => {
         ...state,
         signedIn: false,
         user: null,
-        account: null,
+        hire: null,
+        work: null,
         token: null,
       };
     case AUTH_SIGN_IN_SUCCESS_SIGNAL:
       return {
         ...state,
+        ...payload,
         signedIn: true,
-        user: payload.user,
-        account: payload.account,
-        token: payload.token,
       };
     case AUTH_SIGN_IN_FAILURE_SIGNAL:
       return {
         ...state,
         signedIn: false,
         user: null,
-        account: null,
+        hire: null,
+        work: null,
         token: null,
       };
     case AUTH_SIGN_OUT_SIGNAL:
@@ -50,15 +52,16 @@ export default (state = initialState, action) => {
         ...state,
         signedIn: false,
         user: null,
-        account: null,
+        hire: null,
+        work: null,
         token: null,
-        redirectUrl: "",
+        // redirectUrl: "",
       };
-    case AUTH_REDIRECT_URL_SIGNAL:
-      return {
-        ...state,
-        redirectUrl: payload,
-      };
+    // case AUTH_REDIRECT_URL_SIGNAL:
+    //   return {
+    //     ...state,
+    //     redirectUrl: payload,
+    //   };
     default:
       return state
   }

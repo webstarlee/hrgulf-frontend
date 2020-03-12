@@ -89,16 +89,6 @@ export default (props) => {
       </MDBBreadcrumb>
       {!!loading && <Loading style={{height: LAYOUT.LISTVIEW_HEIGHT}}/>}
       {!loading && <PostAJob backLink={routes.hire.myJobs.myJobs.main}/>}
-      <ToastContainer
-        className="text-left"
-        position={t("DIRECTION") === "ltr" ? "top-right" : "top-left"}
-        dir={t("DIRECTION")}
-        hideProgressBar={true}
-        // newestOnTop={true}
-        // autoClose={0}
-        autoClose={EFFECT.TRANSITION_TIME5}
-        closeButton={false}
-        transition={Fade}/>
     </Fragment>
   );
 

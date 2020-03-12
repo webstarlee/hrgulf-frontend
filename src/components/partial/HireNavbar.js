@@ -150,13 +150,11 @@ const HireNavbar = (props) => {
               <MDBDropdownToggle className="dopdown-toggle py-0" nav>
                 <img src={avatar} className="z-depth-1 white my-navbar-avatar" style={{borderRadius: NAVBAR.AVATAR.HEIGHT / 100 * borderRadius}} />
               </MDBDropdownToggle>
-              <MDBDropdownMenu className="dropdown-default dropdown-menu-right" right>
-                <MDBDropdownItem onClick={e => onNavigate(routes.account.settings)}>{t("NAVBAR.ACCOUNT.MY_ACCOUNT")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={e => onNavigate(routes.account.activityLog)}>{t("NAVBAR.ACCOUNT.ACTIVITY_LOG")}</MDBDropdownItem>
+              <MDBDropdownMenu className="dropdown-default dropdown-menu-right">
+                <MDBDropdownItem onClick={e => onNavigate(routes.hire.account.main)}>{t("NAVBAR.HIRE.ACCOUNT.MY_ACCOUNT")}</MDBDropdownItem>
+                {/*<MDBDropdownItem onClick={e => onNavigate(routes.account.activityLog)}>{t("NAVBAR.ACCOUNT.ACTIVITY_LOG")}</MDBDropdownItem>*/}
                 <MDBDropdownItem onClick={e => onNavigate(routes.work.root)}>{t("COMMON.BUTTON.SWITCH_TO_WORK")}</MDBDropdownItem>
-                <MDBDropdownItem>
-                  <div onClick={onSignOut}>{t("COMMON.AUTH.SIGN_OUT")}</div>
-                </MDBDropdownItem>
+                <MDBDropdownItem onClick={onSignOut}>{t("COMMON.AUTH.SIGN_OUT")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>}

@@ -84,6 +84,18 @@ export const routes = {
       root: "/hire/contact-us",
       main: "/hire/contact-us/main",
     },
+    account: {
+      root: "/hire/account",
+      main: "/hire/account",
+      password: "/hire/account/password",
+      personalProfile: "/hire/account/personal-profile",
+      companyProfile: "/hire/account/company-profile",
+      emailNotifications: "/hire/account/email-notifications",
+      emailSpecialties: "/hire/account/email-specialties",
+      controlShare: "/hire/account/control-share",
+      userManagement: "/hire/account/user-management",
+      cvTags: "/hire/account/cv-tags",
+    },
   },
   work: {
     root: "/work",

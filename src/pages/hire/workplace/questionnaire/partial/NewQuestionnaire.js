@@ -132,10 +132,6 @@ const NewQuestionnaire = (props) => {
   const handleSubmit = (values, {setSubmitting}) => {
     const {name, filterByScore, minScore} = values;
     const description = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-    // const description = stateToHTML(editorState.getCurrentContent());
-    // const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
-    // const value = blocks.map(block => (!block.text.trim() && "\n") || block.text).join("\n");
-    // console.log(value);
 
     const questionnaire = {id: itemId, userId: user.id, name, description, filterByScore: filterByScore || false, minScore};
 
@@ -228,23 +224,6 @@ const NewQuestionnaire = (props) => {
 
                         />
                         {!!touched.description && !!errors.description && <div className="text-left invalid-field">{errors.description}</div>}
-                        {/*<ReactSummernote*/}
-                        {/*  value="Default value"*/}
-                        {/*  options={{*/}
-                        {/*    height: 350,*/}
-                        {/*    dialogsInBody: true,*/}
-                        {/*    // toolbar: [*/}
-                        {/*    //   ["style", ["style"]],*/}
-                        {/*    //   ["font", ["bold", "underline", "clear"]],*/}
-                        {/*    //   ["fontname", ["fontname"]],*/}
-                        {/*    //   ["para", ["ul", "ol", "paragraph"]],*/}
-                        {/*    //   ["table", ["table"]],*/}
-                        {/*    //   ["insert", ["link", "picture", "video"]],*/}
-                        {/*    //   ["view", ["fullscreen", "codeview"]]*/}
-                        {/*    // ]*/}
-                        {/*  }}*/}
-                        {/*  onChange={console.log}*/}
-                        {/*/>*/}
                       </div>
                     </MDBCol>
                   </MDBRow>
@@ -272,16 +251,6 @@ const NewQuestionnaire = (props) => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-      <ToastContainer
-        className="text-left"
-        position={t("DIRECTION") === "ltr" ? "top-right" : "top-left"}
-        dir={t("DIRECTION")}
-        hideProgressBar={true}
-        // newestOnTop={true}
-        // autoClose={0}
-        autoClose={EFFECT.TRANSITION_TIME5}
-        closeButton={false}
-        transition={Fade}/>
     </Fragment>
   );
 

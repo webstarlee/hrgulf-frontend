@@ -17,11 +17,21 @@ export default {
         PHONE: "Phone Number",
         WEBSITE: "Website",
         NATIONALITY: "Nationality",
+        LOCATION: "Location",
         COUNTRY: "Country",
+        RESIDENCE_COUNTRY: "Residence Country",
         CITY: "City",
         BIRTHDAY: "Birthday",
         GENDER: "Gender",
         REMEMBER_ME: "Remember Me",
+        CURRENT_PASSWORD: "Current Password",
+        NEW_PASSWORD: "New Password",
+        // CONFIRM_PASSWORD: "Confirm Password",
+      },
+      AVATAR: {
+        AVATAR: "Avatar",
+        SCALE: "Scale",
+        BORDER_RADIUS: "Border Radius",
       },
       JOB: {
         TITLE: "Job Title",
@@ -90,6 +100,7 @@ export default {
     GENDER: {
       MALE: "Male",
       FEMALE: "Female",
+      UNDEFINED: "Not Specified",
     },
     LANGUAGE: {
       LANGUAGE: "Language",
@@ -220,6 +231,9 @@ export default {
       CONTACT_US: {
         ROOT: "Contact Us",
         MAIN: "Contact Us",
+      },
+      ACCOUNT: {
+        MY_ACCOUNT: "My Account",
       },
     },
     //WORK===========================================
@@ -427,6 +441,44 @@ export default {
         },
         EDIT_JOB: {
           PAGE_TITLE: "Edit Job",
+        },
+      },
+    },
+    MY_ACCOUNT: {
+      MAIN: {
+        INFORMATION: {
+          HEADING: "Account Information",
+          PASSWORD: "Password",
+          PASSWORD_DESCRIPTION: "Change your account password",
+          PERSONAL_PROFILE: "Personal Profile",
+          PERSONAL_PROFILE_DESCRIPTION: "Update your personal information and your contact details.",
+          COMPANY_PROFILE: "Company Profile",
+          COMPANY_PROFILE_DESCRIPTION: "Update your company profile and your company address details",
+          EMAIL_NOTIFICATIONS: "Emails Notifications and Newsletter Subscriptions",
+          EMAIL_NOTIFICATIONS_DESCRIPTION: "Modify your email subscription settings.",
+          EMAIL_SPECIALTIES: "Email Notifications Related to Specialties",
+          EMAIL_SPECIALTIES_DESCRIPTION: "Control when we send you email notifications related to your activities on Specialties.",
+        },
+        PRIVACY_SETTINGS: {
+          HEADING: "Privacy Settings",
+          CONTROL_SHARE: "Control what you share with job seekers",
+        },
+        MANAGEMENT: {
+          HEADING: "Management",
+          USER_MANAGEMENT: "User Management",
+          USER_MANAGEMENT_DESCRIPTION: "Create user accounts for other members of your organization and allow them to post jobs and search CVs.",
+          CV_TAGS: "CV Tags Management",
+          CV_TAGS_DESCRIPTION: "Create, edit, and delete tags that you can use to manage your applicants’ CVs.",
+        },
+      },
+      PASSWORD: {
+        PAGE_TITLE: "Change Password",
+      },
+      PERSONAL_PROFILE: {
+        PAGE_TITLE: "Personal Profile",
+        FIELDS: {
+          PERSONAL_INFORMATION: "Personal Information",
+          CONTACT_INFORMATION: "Contact Information",
         },
       },
     },

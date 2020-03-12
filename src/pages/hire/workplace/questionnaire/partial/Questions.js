@@ -128,7 +128,6 @@ const Questions = (props) => {
 
   const debouncedAnswers = useDebounce(values.answers, DELAY.DELAY2);
   useMemo(e => {
-    console.log(debouncedAnswers);
     const arr = debouncedAnswers.split(",");
     const answerItems = arr.filter(answer => !!answer.trim().length);
     setAnswerItems(answerItems);

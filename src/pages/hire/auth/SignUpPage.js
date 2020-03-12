@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Link, useHistory} from "react-router-dom";
 import {
@@ -31,12 +31,17 @@ import Service from "services/hire/AuthService";
 import auth from "actions/auth";
 
 import "./SignUpPage.scss";
+import CoreService from "../../../services/CoreService";
 
 export default (props) => {
   const dispatch = useDispatch();
   const {t} = useTranslation();
 
   const pageTitle = `${t("COMMON.AUTH.SIGN_UP")} - ${t("SITE_NAME")}`;
+
+  const [countries, setCountries] = useState([]);
+
+  const lang = t("CODE");
 
   const initialValues = {
     name: PROJECT.IS_DEV ? DEFAULT.COMPANY.NAME : "",
@@ -55,8 +60,9 @@ export default (props) => {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.NAME")})),
-    location: Yup.string()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")})),
+    location: Yup.number()
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")}))
+      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")})),
     size: Yup.number()
       .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")}))
       .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")})),
@@ -86,6 +92,20 @@ export default (props) => {
       })),
   });
 
+  const loadCountries = e => {
+    CoreService.getCountries()
+      .then(res => {
+        if (res.result === RESULT.SUCCESS) {
+          setCountries(res.data);
+        } else {
+          setCountries([]);
+        }
+      })
+      .catch(err => {
+        setCountries([]);
+      });
+  };
+
   const handleSubmit = (params, {setSubmitting}) => {
     setSubmitting(true);
     dispatch(auth.requestSignUp(params));
@@ -111,6 +131,7 @@ export default (props) => {
     scroll.scrollToTop({
       duration: EFFECT.TRANSITION_TIME,
     });
+    loadCountries();
   }, [props]);
 
   const payload = () => (
@@ -144,10 +165,6 @@ export default (props) => {
               {({values, touched, errors, handleChange, handleBlur, handleSubmit, isSubmitting}) => {
                 return (
                   <form onSubmit={handleSubmit}>
-                    <input hidden id="location" name="location" onChange={handleChange} onBlur={handleBlur}/>
-                    <input hidden id="size" name="size" onChange={handleChange} onBlur={handleBlur}/>
-                    <input hidden id="type" name="type" onChange={handleChange} onBlur={handleBlur}/>
-                    <input hidden id="countryCode" name="countryCode" onChange={handleChange} onBlur={handleBlur}/>
                     <div className="white-text">
                       <MDBRow>
                         <MDBCol md="6">
@@ -157,37 +174,53 @@ export default (props) => {
                           </MDBInput>
                         </MDBCol>
                         <MDBCol md="6" className="mt-3">
-                          <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")} className="mt-3 mb-0 white"
-                                     selected={values.location} getValue={val => {
-                            helpers.triggerChangeEvent("location", val[0])
-                          }}>
-                            <MDBSelectInput/>
-                            <MDBSelectOptions>
-                              <MDBSelectOption
-                                value={COUNTRY.CODE1.BAHRAIN}
-                                checked={values.location === COUNTRY.CODE1.BAHRAIN}>{t("COMMON.GCC_COUNTRIES.BAHRAIN")}</MDBSelectOption>
-                              <MDBSelectOption
-                                value={COUNTRY.CODE1.KUWAIT}
-                                checked={values.location === COUNTRY.CODE1.KUWAIT}>{t("COMMON.GCC_COUNTRIES.KUWAIT")}</MDBSelectOption>
-                              <MDBSelectOption
-                                value={COUNTRY.CODE1.OMAN}
-                                checked={values.location === COUNTRY.CODE1.OMAN}>{t("COMMON.GCC_COUNTRIES.OMAN")}</MDBSelectOption>
-                              <MDBSelectOption
-                                value={COUNTRY.CODE1.QATAR}
-                                checked={values.location === COUNTRY.CODE1.QATAR}>{t("COMMON.GCC_COUNTRIES.QATAR")}</MDBSelectOption>
-                              <MDBSelectOption
-                                value={COUNTRY.CODE1.SAUDI_ARABIA}
-                                checked={values.location === COUNTRY.CODE1.SAUDI_ARABIA}>{t("COMMON.GCC_COUNTRIES.SAUDI_ARABIA")}</MDBSelectOption>
-                              <MDBSelectOption
-                                value={COUNTRY.CODE1.UAE}
-                                checked={values.location === COUNTRY.CODE1.UAE}>{t("COMMON.GCC_COUNTRIES.UAE")}</MDBSelectOption>
-                            </MDBSelectOptions>
-                          </MDBSelect>
-                          {!!touched.location && !!errors.location && <div className="text-left invalid-field2">{errors.location}</div>}
+                          {!!countries.length && <Fragment>
+                            <input hidden id="location" value={values.location} onChange={handleChange} onBlur={handleBlur}/>
+                            <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")} className="mt-3 mb-0 white" selected={values.location} getValue={val => {
+                              helpers.triggerChangeEvent("location", val[0])
+                            }}>
+                              <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
+                              <MDBSelectOptions className="max-height-200">
+                                <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
+                                {countries.map((item, index) => (
+                                  <MDBSelectOption key={index} value={item.id} checked={values.location == item.id}>{item[`country_${lang}`]}</MDBSelectOption>
+                                ))}
+                              </MDBSelectOptions>
+                            </MDBSelect>
+                            {!!touched.location && !!errors.location && <div className="text-left invalid-field">{errors.location}</div>}
+                          </Fragment>}
+                          {/*<MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")} className="mt-3 mb-0 white"*/}
+                          {/*           selected={values.location} getValue={val => {*/}
+                          {/*  helpers.triggerChangeEvent("location", val[0])*/}
+                          {/*}}>*/}
+                          {/*  <MDBSelectInput/>*/}
+                          {/*  <MDBSelectOptions>*/}
+                          {/*    <MDBSelectOption*/}
+                          {/*      value={COUNTRY.CODE1.BAHRAIN}*/}
+                          {/*      checked={values.location === COUNTRY.CODE1.BAHRAIN}>{t("COMMON.GCC_COUNTRIES.BAHRAIN")}</MDBSelectOption>*/}
+                          {/*    <MDBSelectOption*/}
+                          {/*      value={COUNTRY.CODE1.KUWAIT}*/}
+                          {/*      checked={values.location === COUNTRY.CODE1.KUWAIT}>{t("COMMON.GCC_COUNTRIES.KUWAIT")}</MDBSelectOption>*/}
+                          {/*    <MDBSelectOption*/}
+                          {/*      value={COUNTRY.CODE1.OMAN}*/}
+                          {/*      checked={values.location === COUNTRY.CODE1.OMAN}>{t("COMMON.GCC_COUNTRIES.OMAN")}</MDBSelectOption>*/}
+                          {/*    <MDBSelectOption*/}
+                          {/*      value={COUNTRY.CODE1.QATAR}*/}
+                          {/*      checked={values.location === COUNTRY.CODE1.QATAR}>{t("COMMON.GCC_COUNTRIES.QATAR")}</MDBSelectOption>*/}
+                          {/*    <MDBSelectOption*/}
+                          {/*      value={COUNTRY.CODE1.SAUDI_ARABIA}*/}
+                          {/*      checked={values.location === COUNTRY.CODE1.SAUDI_ARABIA}>{t("COMMON.GCC_COUNTRIES.SAUDI_ARABIA")}</MDBSelectOption>*/}
+                          {/*    <MDBSelectOption*/}
+                          {/*      value={COUNTRY.CODE1.UAE}*/}
+                          {/*      checked={values.location === COUNTRY.CODE1.UAE}>{t("COMMON.GCC_COUNTRIES.UAE")}</MDBSelectOption>*/}
+                          {/*  </MDBSelectOptions>*/}
+                          {/*</MDBSelect>*/}
+                          {/*{!!touched.location && !!errors.location && <div className="text-left invalid-field2">{errors.location}</div>}*/}
                         </MDBCol>
                       </MDBRow>
                       <MDBRow>
                         <MDBCol md="6" className="mt-3">
+                          <input hidden id="size" name="size" onChange={handleChange} onBlur={handleBlur}/>
                           <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")} className="mt-3 mb-0 white"
                                      selected={values.size} getValue={val => {
                             helpers.triggerChangeEvent("size", val[0])
@@ -214,6 +247,7 @@ export default (props) => {
                           {!!touched.size && !!errors.size && <div className="text-left invalid-field2">{errors.size}</div>}
                         </MDBCol>
                         <MDBCol md="6" className="mt-3">
+                          <input hidden id="type" name="type" onChange={handleChange} onBlur={handleBlur}/>
                           <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.TYPE")} className="mt-3 mb-0 white"
                                      selected={values.type} getValue={val => {
                             helpers.triggerChangeEvent("type", val[0])
@@ -239,6 +273,7 @@ export default (props) => {
                       </MDBRow>
                       <MDBRow>
                         <MDBCol md="6" className="mt-2">
+                          <input hidden id="countryCode" name="countryCode" onChange={handleChange} onBlur={handleBlur}/>
                           <MDBSelect label={t("COMMON.FIELDS.USER.COUNTRY_CODE")} className="mt-3 mb-0 white"
                                      selected={values.countryCode} getValue={val => {
                             helpers.triggerChangeEvent("countryCode", val[0])
@@ -323,16 +358,6 @@ export default (props) => {
           </div>
         </MDBCardBody>
       </MDBCard>
-      <ToastContainer
-        className="text-left"
-        position={t("DIRECTION") === "ltr" ? "top-right" : "top-left"}
-        dir={t("DIRECTION")}
-        hideProgressBar={true}
-        // newestOnTop={true}
-        // autoClose={0}
-        autoClose={EFFECT.TRANSITION_TIME5}
-        closeButton={false}
-        transition={Fade}/>
     </Fragment>
   );
 

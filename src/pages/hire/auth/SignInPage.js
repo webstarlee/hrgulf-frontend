@@ -152,16 +152,6 @@ export default (props) => {
           </MDBRow>
         </MDBCardBody>
       </MDBCard>
-      <ToastContainer
-        className="text-left"
-        position={t("DIRECTION") === "ltr" ? "top-right" : "top-left"}
-        dir={t("DIRECTION")}
-        hideProgressBar={true}
-        // newestOnTop={true}
-        // autoClose={0}
-        autoClose={EFFECT.TRANSITION_TIME5}
-        closeButton={false}
-        transition={Fade}/>
 
     </Fragment>
   );

@@ -1,0 +1,15 @@
+@import "../../../../../assets/consts";
+
+$avatar-upload-width: 250px;
+$avatar-upload-height: 250px;
+
+.my-avatar-upload {
+  width: $avatar-upload-width;
+  height: $avatar-upload-height;
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .my-avatar-sliders-container {
+    width: 60%;
+  }
+}

@@ -49,7 +49,9 @@ export default (props) => {
 
   const [type, setType] = useState(SCOPE.ALL);
   const [keyword, setKeyword] = useState("");
+
   const currentPage = page ? parseInt(page) : 1;
+  const pageTitle = t("NAVBAR.HIRE.MY_JOBS.MY_JOBS");
 
   const loadData = e => {
     setLoading(true);
@@ -84,7 +86,7 @@ export default (props) => {
         if (res.result === RESULT.SUCCESS) {
           setPageCount(res.pageCount);
           setItems(res.data);
-          // toast.success(res.message);
+          toast.success(res.message);
         } else {
           toast.error(res.message);
         }
@@ -130,14 +132,15 @@ export default (props) => {
   };
 
   const handleActivateItem = ({id, item, isActive}) => {
+    const text = isActive ? t("COMMON.BUTTON.ACTIVATE") : t("COMMON.BUTTON.DEACTIVATE");
     setModal(Object.assign({}, modal, {
       type: MODAL.TYPE.ACTIVATE,
       show: true,
-      title: t("COMMON.BUTTON.DELETE"),
+      title: text,
       message: isActive ? t("COMMON.QUESTION.ACTIVATE", {item: item}) : t("COMMON.QUESTION.DEACTIVATE", {item: item}),
       primaryButton: {
         color: isActive ? "success" : "warning",
-        text: isActive ? t("COMMON.BUTTON.ACTIVATE") : t("COMMON.BUTTON.DEACTIVATE"),
+        text: text,
       },
       item: {
         id,
@@ -179,8 +182,6 @@ export default (props) => {
       duration: EFFECT.TRANSITION_TIME,
     });
   }, [page]);
-
-  const pageTitle = t("NAVBAR.HIRE.MY_JOBS.MY_JOBS");
 
   const payload = () => (
     <Fragment>
@@ -239,16 +240,6 @@ export default (props) => {
           <MDBBtn type="button" color="secondary" size="sm" rounded onClick={toggleModal}>{t("COMMON.BUTTON.CANCEL")}</MDBBtn>
         </MDBModalFooter>
       </MDBModal>
-      <ToastContainer
-        className="text-left"
-        position={t("DIRECTION") === "ltr" ? "top-right" : "top-left"}
-        dir={t("DIRECTION")}
-        hideProgressBar={true}
-        // newestOnTop={true}
-        // autoClose={0}
-        autoClose={EFFECT.TRANSITION_TIME5}
-        closeButton={false}
-        transition={Fade}/>
     </Fragment>
   );
 

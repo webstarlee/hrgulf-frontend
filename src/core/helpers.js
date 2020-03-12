@@ -21,9 +21,8 @@ const onSuccessSignIn = (params, res) => {
   if (res.result === RESULT.SUCCESS) {
     setHeader({Authorization: `Bearer ${res.data.token}`});
     const authData = JSON.stringify({
+      ...res.data,
       signedIn: true,
-      user: res.data.user,
-      token: res.data.token,
     });
     params["rememberMe"] && localStorage.setItem(PROJECT.PERSIST_KEY, authData);
   }

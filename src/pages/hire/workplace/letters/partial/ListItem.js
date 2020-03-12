@@ -1,5 +1,5 @@
 import React from "react";
-import {MDBBtn, MDBCardBody, MDBCol, MDBMask, MDBView} from "mdbreact";
+import {MDBBtn, MDBCardBody, MDBCol, MDBIcon, MDBMask, MDBView} from "mdbreact";
 import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {Base64} from "js-base64";
@@ -28,9 +28,15 @@ export default ({data, detailLabel, detailLink, deleteLabel, page, onDelete}) =>
         </MDBCardBody>
         <MDBMask className="flex-center" overlay="grey-strong">
           <Link to={`${detailLink}/${detailLinkParam}`} className="text-body">
-            <MDBBtn color="primary" size="sm" className="white-text" rounded>{detailLabel}</MDBBtn>
+            <MDBBtn tag="a" floating color="primary" size="sm" className="white-text" rounded>
+              {/*{detailLabel}*/}
+              <MDBIcon icon="edit"/>
+            </MDBBtn>
           </Link>
-          <MDBBtn color="danger" size="sm" onClick={e => onDelete({id: id, item: name})} rounded>{deleteLabel}</MDBBtn>
+          <MDBBtn tag="a" floating color="danger" size="sm" onClick={e => onDelete({id: id, item: name})} rounded>
+            {/*{deleteLabel}*/}
+            <MDBIcon icon="trash"/>
+          </MDBBtn>
         </MDBMask>
       </MDBView>
     </MDBCol>
