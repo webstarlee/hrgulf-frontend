@@ -128,7 +128,7 @@ export default () => {
           const data = {
             ...auth,
             user: {
-              ...auth.user,
+              ...user,
               ...res.data.user,
             },
             token: res.data.token,
@@ -156,8 +156,11 @@ export default () => {
 
   useEffect(e => {
     loadCountries();
-    loadCities();
   }, []);
+
+  useMemo(e => {
+    !!countries.length && loadCities();
+  }, [countries.length, values.countryId]);
 
   useMemo(e => {
     const items = [];
@@ -170,7 +173,6 @@ export default () => {
     }
     setCities(items);
   }, [t, rawCities]);
-  console.log(values);
 
   const payload = () => (
     <MDBCard className="mt-4">
@@ -205,8 +207,8 @@ export default () => {
                 </MDBInput>
               </MDBCol>
             </MDBRow>
-            <MDBRow>
-              <MDBCol md="12" className="mt-3 text-left">
+            <MDBRow className="mt-3 text-left">
+              <MDBCol md="12">
                 <label>{t("COMMON.FIELDS.USER.NATIONALITY")}</label>
               </MDBCol>
               <MDBCol md="6">
@@ -227,8 +229,8 @@ export default () => {
                 </Fragment>}
               </MDBCol>
             </MDBRow>
-            <MDBRow>
-              <MDBCol md="12" className="mt-3 text-left">
+            <MDBRow className="mt-3 text-left">
+              <MDBCol md="12">
                 <label>{t("COMMON.FIELDS.USER.LOCATION")}</label>
               </MDBCol>
               <MDBCol md="6">
@@ -267,15 +269,15 @@ export default () => {
                 </Fragment>}
               </MDBCol>
             </MDBRow>
-            <MDBRow>
-              <MDBCol md="6" className="mt-3">
+            <MDBRow className="mt-3 text-left">
+              <MDBCol md="6">
                 <label>{t("COMMON.FIELDS.USER.BIRTHDAY")}</label>
                 <input hidden id="birthday" value={values.birthday} onChange={handleChange} onBlur={handleBlur}/>
                 <MDBDatePicker format={DATE_FORMAT.ISO} outline autoOk keyboard /*locale={moment.locale(t("CODE"))}*/ background className="md-outline date-picker grey-text mt-0 mb-0" value={values.birthday} getValue={value => helpers.triggerChangeEvent("birthday", value)}
                 />
                 {!!touched.birthday && !!errors.birthday && <div className="text-left invalid-field">{errors.birthday}</div>}
               </MDBCol>
-              <MDBCol md="6" className="mt-3">
+              <MDBCol md="6" className="mt-3 mt-md-0">
                 <label>{t("COMMON.FIELDS.USER.GENDER")}</label>
                 <MDBFormInline>
                   <MDBInput
@@ -305,9 +307,9 @@ export default () => {
               </MDBCol>
             </MDBRow>
           </div>
-          <div className="mb-0">
+          <div className="mt-3 mb-0">
             <h4 className="h4-responsive text-left grey-text">{t("HIRE.MY_ACCOUNT.PERSONAL_PROFILE.FIELDS.CONTACT_INFORMATION")}</h4>
-            <MDBRow>
+            <MDBRow className="mt-3 text-left">
               <MDBCol md="6">
                 <label>{t("COMMON.FIELDS.USER.EMAIL")}</label>
                 <MDBInput id="email" name="email" type="email" outline

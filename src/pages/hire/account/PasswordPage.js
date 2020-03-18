@@ -108,7 +108,7 @@ export default () => {
                         </MDBInput>
                       </MDBCol>
                     </MDBRow>
-                    <MDBRow>
+                    <MDBRow className="mt-3 text-left">
                       <MDBCol md="6">
                         <label>{t("COMMON.FIELDS.USER.NEW_PASSWORD")}</label>
                         <MDBInput id="password" name="password" type="password" outline

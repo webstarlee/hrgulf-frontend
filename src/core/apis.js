@@ -37,6 +37,9 @@ export default {
       // signIn: "hire/auth/sign-in",
       signUp: "hire/auth/sign-up",
     },
+    account: {
+      save: "hire/account/save",
+    },
     workplace : {
       questionnaire: {
         list: "hire/workplace/questionnaire/list",

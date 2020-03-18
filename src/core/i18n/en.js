@@ -286,7 +286,12 @@ export default {
           NAME: "Company Name",
           LOCATION: "Company Location",
           SIZE: "Company Size",
+          SECTOR_N_INDUSTRY: "Company Industry",
+          SECTOR: "Sector",
+          INDUSTRY: "Industry",
           TYPE: "Company Type",
+          HIDE_LOCATION: "Hide Location",
+          WEBSITE: "Website",
           TAX_REG_NUMBER: "Tax Registration Number",
         },
       },
@@ -479,6 +484,18 @@ export default {
         FIELDS: {
           PERSONAL_INFORMATION: "Personal Information",
           CONTACT_INFORMATION: "Contact Information",
+        },
+      },
+      COMPANY_PROFILE: {
+        PAGE_TITLE: "Company Profile",
+        FIELDS: {
+
+        },
+      },
+      EMAIL_NOTIFICATIONS: {
+        PAGE_TITLE: "Subscription Settings",
+        FIELDS: {
+
         },
       },
     },

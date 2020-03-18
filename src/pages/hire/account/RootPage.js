@@ -15,6 +15,8 @@ import "./RootPage.scss";
 const MainPage = lazy(() => import("./main/RootPage"));
 const PasswordPage = lazy(() => import("./PasswordPage"));
 const PersonalProfilePage = lazy(() => import("./personal-profile/RootPage"));
+const CompanyProfilePage = lazy(() => import("./CompanyProfilePage"));
+const EmailNotificationsPage = lazy(() => import("./EmailNotificationsPage"));
 
 export default (props) => {
   return (
@@ -25,6 +27,8 @@ export default (props) => {
           <SignedInRoute path={routes.hire.account.main} exact component={MainPage}/>
           <SignedInRoute path={routes.hire.account.password} component={PasswordPage}/>
           <SignedInRoute path={routes.hire.account.personalProfile} component={PersonalProfilePage}/>
+          <SignedInRoute path={routes.hire.account.companyProfile} component={CompanyProfilePage}/>
+          <SignedInRoute path={routes.hire.account.emailNotifications} component={EmailNotificationsPage}/>
           <Route component={Error404}/>
         </Switch>
       </MDBContainer>
