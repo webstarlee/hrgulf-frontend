@@ -522,7 +522,7 @@ export default {
         UNIVERSITY: "University or Institution",
         MAJOR: "Field of Study(Major)",
         GRADUATED_DATE: "Graduated Date",
-        GRADE: "Grade",
+        GRADE: "Grade System",
       },
     },
     MY_ACCOUNT: {

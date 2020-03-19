@@ -217,7 +217,7 @@ export default ({onPrev, onNext}) => {
           </MDBCol>
           <MDBCol md="6" className="mt-3 text-left">
             {!!grades.length && <Fragment>
-              <label>{t("WORK.ACCOUNT.FIELDS.JOB_VISA_STATUS")}</label>
+              <label>{t("WORK.ACCOUNT.FIELDS.GRADE")}</label>
               <input hidden id="gradeId" value={values.gradeId} onChange={handleChange} onBlur={handleBlur}/>
               <MDBSelect className="my-0" outline selected={values.gradeId}
                          getValue={val => {
