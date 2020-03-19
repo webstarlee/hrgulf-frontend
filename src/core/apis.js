@@ -18,6 +18,8 @@ export default {
     getCareerLevels: "core/get-career-levels",
     getMajors: "core/get-majors",
     getDegrees: "core/get-degrees",
+    getGrades: "core/get-grades",
+    getVisaStatuses: "core/get-visa-statuses",
   },
   auth: {
     signIn: "auth/sign-in",
@@ -90,6 +92,10 @@ export default {
       signInWithGoogle: "work/auth/sign-in-with-google",
       validateFacebookAccount: "work/auth/validate-facebook-account",
       signInWithFacebook: "work/auth/sign-in-with-facebook",
+    },
+    account: {
+      save: "work/account/save",
+      saveMinifiedProfile: "work/account/save-minified-profile",
     },
   },
   profile: {

@@ -1,0 +1,31 @@
+@import "../../../../../assets/consts";
+
+.description-wrapper {
+  border: solid 1px $gray-lighten-1;
+  border-radius: $radius;
+}
+
+.description-editor {
+  height: 16rem;
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .description-editor {
+    height: 22rem;
+  }
+}
+
+@media (min-width: $screen-breakpoint-lg) {
+  .description-editor {
+    height: 25rem;
+  }
+}
+
+.skills-wrapper {
+  border: solid 1px $gray-lighten-1;
+  border-radius: $radius;
+}
+
+.skills-editor {
+  height: 8rem;
+}

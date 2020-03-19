@@ -13,7 +13,7 @@ $admin-nav-margin-top: 90px;
 
 .section {
   //margin-top: calc(#{$form-margin-top} - #{$admin-nav-margin-top});
-  margin-top: calc(#{$form-margin-top});
+  //margin-top: calc(#{$form-margin-top});
 }
 
 .auth-bg .md-form .prefix.active {
@@ -23,6 +23,38 @@ $admin-nav-margin-top: 90px;
 .back-to-top-container {
   right: 24px;
   bottom: 45px;
+}
+
+.logo-img {
+  max-height: 115px;
+}
+//
+//.auth-bg {
+//  background: url(../../../assets/img/bg/auth.png);
+//}
+
+.underlined {
+  border-bottom: 1px solid;
+}
+
+.white-border {
+  border-color: white;
+}
+
+.select-wrapper.white > label.mdb-main-label.active {
+  color: #ffffff !important;
+}
+
+.button-wrapper {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .button-wrapper {
+    margin-left: 8rem;
+    margin-right: 8rem;
+  }
 }
 
 .rtl-content {

@@ -17,10 +17,9 @@ import {useDispatch, useSelector} from "react-redux";
 import myJobsActions from "actions/my-jobs";
 import routes from "core/routes";
 import apis from "core/apis";
-import {ACCOUNT, JOB_STATUS, NAVBAR, RESULT} from "core/globals";
-import {changeLanguage} from "core/i18n";
-import INavbarProps from "./INavbarProps";
+import {JOB_STATUS, NAVBAR, RESULT} from "core/globals";
 import AccountService from "services/AccountService";
+import INavbarProps from "./INavbarProps";
 
 const HireNavbar = (props) => {
   const {t} = useTranslation();

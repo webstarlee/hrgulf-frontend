@@ -439,6 +439,15 @@ textarea.form-control {
   padding: 6px;
 }
 
+.date-picker.md-outline div:first-child:before, .date-picker.md-outline div:first-child:after {
+  border-bottom: none !important;
+}
+
+.date-picker input {
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
 .rtl-content {
   direction: rtl;
 

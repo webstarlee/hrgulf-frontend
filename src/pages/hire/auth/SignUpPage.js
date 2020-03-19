@@ -59,15 +59,15 @@ export default (props) => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.NAME")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.NAME")})),
     location: Yup.number()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")}))
-      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.LOCATION")}))
+      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.LOCATION")})),
     size: Yup.number()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")}))
-      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.SIZE")}))
+      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.SIZE")})),
     type: Yup.string()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.TYPE")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.TYPE")})),
     countryCode: Yup.string()
       .required(t("COMMON.VALIDATION.REQUIRED", {field: t("COMMON.FIELDS.USER.COUNTRY_CODE")})),
     phone: Yup.string()
@@ -168,7 +168,7 @@ export default (props) => {
                     <div className="white-text">
                       <MDBRow>
                         <MDBCol md="6">
-                          <MDBInput id="name" name="name" label={t("HIRE.ACCOUNT.FIELDS.COMPANY.NAME")} background
+                          <MDBInput id="name" name="name" label={t("HIRE.ACCOUNT.FIELDS.NAME")} background
                                     containerClass="mb-0" value={values.name} onChange={handleChange} onBlur={handleBlur}>
                             {!!touched.name && !!errors.name && <div className="text-left invalid-field2">{errors.name}</div>}
                           </MDBInput>
@@ -176,7 +176,7 @@ export default (props) => {
                         <MDBCol md="6" className="mt-3">
                           {!!countries.length && <Fragment>
                             <input hidden id="location" value={values.location} onChange={handleChange} onBlur={handleBlur}/>
-                            <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")} className="mt-3 mb-0 white" selected={values.location} getValue={val => {
+                            <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.LOCATION")} className="mt-3 mb-0 white round-border-top" selected={values.location} getValue={val => {
                               helpers.triggerChangeEvent("location", val[0])
                             }}>
                               <MDBSelectInput selected={t("COMMON.VALUES.SELECT_ONE")} />
@@ -189,7 +189,7 @@ export default (props) => {
                             </MDBSelect>
                             {!!touched.location && !!errors.location && <div className="text-left invalid-field">{errors.location}</div>}
                           </Fragment>}
-                          {/*<MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")} className="mt-3 mb-0 white"*/}
+                          {/*<MDBSelect label={t("HIRE.ACCOUNT.FIELDS.LOCATION")} className="mt-3 mb-0 white"*/}
                           {/*           selected={values.location} getValue={val => {*/}
                           {/*  helpers.triggerChangeEvent("location", val[0])*/}
                           {/*}}>*/}
@@ -221,7 +221,7 @@ export default (props) => {
                       <MDBRow>
                         <MDBCol md="6" className="mt-3">
                           <input hidden id="size" name="size" onChange={handleChange} onBlur={handleBlur}/>
-                          <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")} className="mt-3 mb-0 white"
+                          <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.SIZE")} className="mt-3 mb-0 white round-border-top"
                                      selected={values.size} getValue={val => {
                             helpers.triggerChangeEvent("size", val[0])
                           }}>
@@ -248,7 +248,7 @@ export default (props) => {
                         </MDBCol>
                         <MDBCol md="6" className="mt-3">
                           <input hidden id="type" name="type" onChange={handleChange} onBlur={handleBlur}/>
-                          <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.COMPANY.TYPE")} className="mt-3 mb-0 white"
+                          <MDBSelect label={t("HIRE.ACCOUNT.FIELDS.TYPE")} className="mt-3 mb-0 white round-border-top"
                                      selected={values.type} getValue={val => {
                             helpers.triggerChangeEvent("type", val[0])
                           }}>
@@ -274,7 +274,7 @@ export default (props) => {
                       <MDBRow>
                         <MDBCol md="6" className="mt-2">
                           <input hidden id="countryCode" name="countryCode" onChange={handleChange} onBlur={handleBlur}/>
-                          <MDBSelect label={t("COMMON.FIELDS.USER.COUNTRY_CODE")} className="mt-3 mb-0 white"
+                          <MDBSelect label={t("COMMON.FIELDS.USER.COUNTRY_CODE")} className="mt-3 mb-0 white round-border-top"
                                      selected={values.countryCode} getValue={val => {
                             helpers.triggerChangeEvent("countryCode", val[0])
                           }}>

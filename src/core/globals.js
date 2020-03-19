@@ -107,6 +107,7 @@ export const DEFAULT = {
     FIRST_NAME: "Zhenlong",
     FATHER_NAME: "Xuanming",
     LAST_NAME: "Jin",
+    COUNTRY_CODE: "+966",
     PHONE: "571623415",
     WEBSITE: "",
     NATIONALITY: "SA",
@@ -114,6 +115,7 @@ export const DEFAULT = {
     CITY: "Riyadh",
     BIRTHDAY: "1994-01-22",
     GENDER: "M",
+    JOB_ROLE_ID: "1",
   },
   COMPANY: {
     NAME: "ERC",

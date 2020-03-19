@@ -17,7 +17,6 @@ setHeader({lang: i18n.language});
 export default () => {
   const {t} = useTranslation();
   const {auth} = useSelector(state => state);
-  console.log(auth);
   sessionStorage.setItem(PROJECT.PERSIST_KEY, JSON.stringify(auth));
 
   setHeader({Authorization: `Bearer ${auth.token}`});

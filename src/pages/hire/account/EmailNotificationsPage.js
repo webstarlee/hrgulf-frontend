@@ -67,25 +67,25 @@ export default () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.NAME")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.NAME")})),
     size: Yup.number()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")}))
-      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.SIZE")}))
+      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.SIZE")})),
     sectorId: Yup.number()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.SECTOR")}))
-      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.SECTOR")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.SECTOR")}))
+      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.SECTOR")})),
     industryId: Yup.number()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.INDUSTRY")}))
-      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.INDUSTRY")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.INDUSTRY")}))
+      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.INDUSTRY")})),
     type: Yup.string()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.TYPE")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.TYPE")})),
     countryId: Yup.number()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")}))
-      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.LOCATION")}))
+      .min(1, t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.LOCATION")})),
     // website: Yup.string()
-    //   .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.WEBSITE")})),
+    //   .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.WEBSITE")})),
     taxRegNumber: Yup.string()
-      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.COMPANY.TAX_REG_NUMBER")})),
+      .required(t("COMMON.VALIDATION.REQUIRED", {field: t("HIRE.ACCOUNT.FIELDS.TAX_REG_NUMBER")})),
   });
 
   const loadSectors = e => {
@@ -215,7 +215,7 @@ export default () => {
               <h4 className="h4-responsive text-left grey-text">{pageTitle}</h4>
               <MDBRow className="mt-3 text-left">
                 <MDBCol md="6">
-                  <label>{t("HIRE.ACCOUNT.FIELDS.COMPANY.NAME")}</label>
+                  <label>{t("HIRE.ACCOUNT.FIELDS.NAME")}</label>
                   <MDBInput id="name" name="name" outline
                             containerClass="my-0" value={values.name} onChange={handleChange}
                             onBlur={handleBlur}>
@@ -223,7 +223,7 @@ export default () => {
                   </MDBInput>
                 </MDBCol>
                 <MDBCol md="6">
-                  <label>{t("HIRE.ACCOUNT.FIELDS.COMPANY.SIZE")}</label>
+                  <label>{t("HIRE.ACCOUNT.FIELDS.SIZE")}</label>
                   <MDBSelect className="my-0" outline
                              selected={values.size} getValue={val => {
                     helpers.triggerChangeEvent("size", val[0])
@@ -251,7 +251,7 @@ export default () => {
                 </MDBCol>
               </MDBRow>
               <MDBRow className="mt-2 text-left">
-                <MDBCol md="12">{t("HIRE.ACCOUNT.FIELDS.COMPANY.SECTOR_N_INDUSTRY")}</MDBCol>
+                <MDBCol md="12">{t("HIRE.ACCOUNT.FIELDS.SECTOR_N_INDUSTRY")}</MDBCol>
                 <MDBCol md="6">
                   {!!sectors.length && <Fragment>
                     <input hidden id="sectorId" value={values.sectorId} onChange={handleChange} onBlur={handleBlur}/>
@@ -297,7 +297,7 @@ export default () => {
               </MDBRow>
               <MDBRow className="mt-3 text-left">
                 <MDBCol md="6">
-                  <label>{t("HIRE.ACCOUNT.FIELDS.COMPANY.TYPE")}</label>
+                  <label>{t("HIRE.ACCOUNT.FIELDS.TYPE")}</label>
                   <input hidden id="type" value={values.type} onChange={handleChange} onBlur={handleBlur}/>
                   <MDBSelect className="my-0" outline
                              selected={values.type} getValue={val => {
@@ -325,7 +325,7 @@ export default () => {
               <MDBRow>
                 <MDBCol md="6" className="mt-3 text-left">
                   {!!countries.length && <Fragment>
-                    <label>{t("HIRE.ACCOUNT.FIELDS.COMPANY.LOCATION")}</label>
+                    <label>{t("HIRE.ACCOUNT.FIELDS.LOCATION")}</label>
                     <input hidden id="countryId" value={values.countryId} onChange={handleChange} onBlur={handleBlur}/>
                     <MDBSelect className="my-0" outline selected={values.countryId} getValue={val => {
                       helpers.triggerChangeEvent("countryId", val[0])
@@ -345,13 +345,13 @@ export default () => {
                 </MDBCol>
                 <MDBCol md="6" className="mt-3 mt-md-2 text-left">
                   <MDBInput onChange={handleChange} checked={values.hideLocation || false}
-                            label={t("HIRE.ACCOUNT.FIELDS.COMPANY.HIDE_LOCATION")} type="checkbox" filled id="hideLocation"
+                            label={t("HIRE.ACCOUNT.FIELDS.HIDE_LOCATION")} type="checkbox" filled id="hideLocation"
                             containerClass="mt-0 mt-md-5"/>
                 </MDBCol>
               </MDBRow>
               <MDBRow className="mt-3 text-left">
                 <MDBCol md="6">
-                  <label>{t("HIRE.ACCOUNT.FIELDS.COMPANY.WEBSITE")}</label>
+                  <label>{t("HIRE.ACCOUNT.FIELDS.WEBSITE")}</label>
                   <MDBInput id="website" name="website" outline
                             containerClass="my-0" value={values.website} onChange={handleChange}
                             onBlur={handleBlur}>
@@ -359,7 +359,7 @@ export default () => {
                   </MDBInput>
                 </MDBCol>
                 <MDBCol md="6" className="mt-3 mt-md-0">
-                  <label>{t("HIRE.ACCOUNT.FIELDS.COMPANY.TAX_REG_NUMBER")}</label>
+                  <label>{t("HIRE.ACCOUNT.FIELDS.TAX_REG_NUMBER")}</label>
                   <MDBInput id="taxRegNumber" name="taxRegNumber" outline
                             containerClass="my-0" value={values.taxRegNumber} onChange={handleChange}
                             onBlur={handleBlur}>

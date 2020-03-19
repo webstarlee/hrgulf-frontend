@@ -123,4 +123,26 @@ export default {
         });
     });
   },
+
+  getGrades: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.core.getGrades, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  getVisaStatuses: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.core.getVisaStatuses, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
 };

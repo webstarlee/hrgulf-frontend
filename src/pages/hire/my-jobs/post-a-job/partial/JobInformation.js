@@ -389,7 +389,7 @@ export default ({backLink, onNext}) => {
           <MDBCol md="6">
             {!!jobRoles.length && <Fragment>
               <input hidden id="jobRoleId" value={values.jobRoleId} onChange={handleChange} onBlur={handleBlur}/>
-              <MDBSelect className="my-0" outline search searchLabel="Write here" selected={values.jobRoleId}
+              <MDBSelect className="my-0" outline selected={values.jobRoleId}
                          getValue={val => {
                            helpers.triggerChangeEvent("jobRoleId", val[0])
                          }}>

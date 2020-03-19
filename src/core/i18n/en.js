@@ -276,24 +276,25 @@ export default {
         COVER_LETTER_WRITING: "Cover Letter Writing",
         CV_EVALUATION: "CV Evaluation",
       },
+      ACCOUNT: {
+        MY_ACCOUNT: "My Account",
+      },
     },
   },
   HIRE: {
     PAGE_TITLE: "Employers",
     ACCOUNT: {
       FIELDS: {
-        COMPANY: {
-          NAME: "Company Name",
-          LOCATION: "Company Location",
-          SIZE: "Company Size",
-          SECTOR_N_INDUSTRY: "Company Industry",
-          SECTOR: "Sector",
-          INDUSTRY: "Industry",
-          TYPE: "Company Type",
-          HIDE_LOCATION: "Hide Location",
-          WEBSITE: "Website",
-          TAX_REG_NUMBER: "Tax Registration Number",
-        },
+        NAME: "Company Name",
+        LOCATION: "Company Location",
+        SIZE: "Company Size",
+        SECTOR_N_INDUSTRY: "Company Industry",
+        SECTOR: "Sector",
+        INDUSTRY: "Industry",
+        TYPE: "Company Type",
+        HIDE_LOCATION: "Hide Location",
+        WEBSITE: "Website",
+        TAX_REG_NUMBER: "Tax Registration Number",
       },
     },
     WORKPLACE: {
@@ -500,4 +501,41 @@ export default {
       },
     },
   },
+  WORK: {
+    PAGE_TITLE: "Job Seekers",
+    ACCOUNT: {
+      FIELDS: {
+        JOB_ROLE: "Job Role",
+        CV: "CV",
+        JOB_TITLE: "Job Title",
+        COMPANY_NAME: "Company Name",
+        START_DATE: "Start Date",
+        END_DATE: "End Date",
+        IS_PRESENT: "I still work here",
+        JOB_LOCATION: "Job Location",
+        COMPANY_SECTOR_N_INDUSTRY: "Company Sector",
+        COMPANY_SECTOR: "Sector",
+        COMPANY_INDUSTRY: "Industry",
+        JOB_VISA_STATUS: "Visa Status",
+        CAREER_LEVEL: "Career Level",
+        DEGREE: "Degree",
+        UNIVERSITY: "University or Institution",
+        MAJOR: "Field of Study(Major)",
+        GRADUATED_DATE: "Graduated Date",
+        GRADE: "Grade",
+      },
+    },
+    MY_ACCOUNT: {
+      ROOT: "Account",
+      MINIFIED_PROFILE: {
+        PAGE_TITLE: "Minified Profile",
+        STEPS: {
+          POSITION: "Your Position",
+          JOB_KIND: "Job Kind",
+          EDUCATION: "Education",
+          CONTACT: "Contact",
+        },
+      },
+    },
+  }
 };

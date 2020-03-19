@@ -148,6 +148,13 @@ export const routes = {
       coverLetterWriting: "/work/cv-services/cover-letter-writing",
       cvEvaluation: "/work/cv-services/cv-evaluation",
     },
+    account: {
+      root: "/work/account",
+      main: "/work/account",
+      minifiedProfile: {
+        root: "/work/account/minified-profile",
+      },
+    },
   },
   account: {
     root: "/account",

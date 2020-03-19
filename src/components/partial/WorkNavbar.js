@@ -12,14 +12,13 @@ import {
 } from "mdbreact";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {useSelector} from "react-redux";
 
 import routes from "core/routes";
+import {NAVBAR, RESULT} from "core/globals";
+import apis from "core/apis";
+import AccountService from "services/AccountService";
 import INavbarProps from "./INavbarProps";
-import {changeLanguage} from "../../core/i18n";
-import {NAVBAR, RESULT} from "../../core/globals";
-import {useSelector} from "react-redux";
-import AccountService from "../../services/AccountService";
-import apis from "../../core/apis";
 
 const WorkNavbar = (props) => {
   const {t} = useTranslation();
@@ -145,12 +144,9 @@ const WorkNavbar = (props) => {
                 <img src={avatar} className="z-depth-1 white my-navbar-avatar" style={{borderRadius: NAVBAR.AVATAR.HEIGHT / 100 * borderRadius}} />
               </MDBDropdownToggle>
               <MDBDropdownMenu className="dropdown-default" right>
-                <MDBDropdownItem onClick={e => onNavigate(routes.account.settings)}>{t("NAVBAR.ACCOUNT.MY_ACCOUNT")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={e => onNavigate(routes.account.activityLog)}>{t("NAVBAR.ACCOUNT.ACTIVITY_LOG")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={e => onNavigate(routes.work.account.main)}>{t("NAVBAR.WORK.ACCOUNT.MY_ACCOUNT")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={e => onNavigate(routes.hire.root)}>{t("COMMON.BUTTON.SWITCH_TO_HIRE")}</MDBDropdownItem>
-                <MDBDropdownItem>
-                  <div onClick={onSignOut}>{t("COMMON.AUTH.SIGN_OUT")}</div>
-                </MDBDropdownItem>
+                <MDBDropdownItem onClick={onSignOut}>{t("COMMON.AUTH.SIGN_OUT")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>}

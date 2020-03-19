@@ -1,34 +1,7 @@
 @import "../../../assets/consts.scss";
 
-.logo-img {
-  max-height: 115px;
-}
-//
-//.auth-bg {
-//  background: url(../../../assets/img/bg/auth.png);
-//}
-
-.underlined {
-  border-bottom: 1px solid;
+.work-auth-cv-upload {
+  width: 300px;
 }
 
-.white-border {
-  border-color: white;
-}
-
-.select-wrapper.white > label.mdb-main-label.active {
-  color: #ffffff !important;
-}
-
-.button-wrapper {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-@media (min-width: $screen-breakpoint-md) {
-  .button-wrapper {
-    margin-left: 8rem;
-    margin-right: 8rem;
-  }
-}
 

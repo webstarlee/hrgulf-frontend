@@ -21,16 +21,16 @@ export default () => {
   const {t} = useTranslation();
   return (
     <Fragment>
-      <Navbar type={ACCOUNT.TYPE.HIRE}/>
+      <Navbar type={ACCOUNT.TYPE.WORK}/>
       <MDBContainer>
         <MDBRow className={"section mb-5"}>
           <MDBCol lg="2" md="0"/>
           <MDBCol lg="8" md="12">
             <Switch>
-              <Route path={routes.hire.auth.signIn} exact component={SignInPage}/>
-              <Route path={routes.hire.auth.signUp} exact component={SignUpPage}/>
-              <Route path={routes.hire.auth.forgotPassword} component={ForgotPasswordPage}/>
-              <Route path={`${routes.hire.auth.resetPassword}/:email?/:token?`} component={ResetPasswordPage}/>
+              <Route path={routes.work.auth.signIn} exact component={SignInPage}/>
+              <Route path={routes.work.auth.signUp} exact component={SignUpPage}/>
+              <Route path={routes.work.auth.forgotPassword} component={ForgotPasswordPage}/>
+              <Route path={`${routes.work.auth.resetPassword}/:email?/:token?`} component={ResetPasswordPage}/>
               <Route component={Error404}/>
             </Switch>
           </MDBCol>
