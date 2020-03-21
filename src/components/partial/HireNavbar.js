@@ -146,9 +146,12 @@ const HireNavbar = (props) => {
           </MDBNavItem>
           {!!auth && auth.signedIn && <MDBNavItem>
             <MDBDropdown>
-              <MDBDropdownToggle className="dopdown-toggle py-0" nav>
+              {!!avatar.length && <MDBDropdownToggle className="dopdown-toggle py-0" nav>
                 <img src={avatar} className="z-depth-1 white my-navbar-avatar" style={{borderRadius: NAVBAR.AVATAR.HEIGHT / 100 * borderRadius}} />
-              </MDBDropdownToggle>
+              </MDBDropdownToggle>}
+              {!avatar.length && <MDBDropdownToggle nav caret>
+                <span className="mr-2 language-dropdown">{t("NAVBAR.ACCOUNT.ROOT")}</span>
+              </MDBDropdownToggle>}
               <MDBDropdownMenu className="dropdown-default dropdown-menu-right">
                 <MDBDropdownItem onClick={e => onNavigate(routes.hire.account.main)}>{t("NAVBAR.HIRE.ACCOUNT.MY_ACCOUNT")}</MDBDropdownItem>
                 {/*<MDBDropdownItem onClick={e => onNavigate(routes.account.activityLog)}>{t("NAVBAR.ACCOUNT.ACTIVITY_LOG")}</MDBDropdownItem>*/}

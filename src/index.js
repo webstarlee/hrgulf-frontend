@@ -17,7 +17,7 @@ import "assets/index.scss";
 
 initStateWithPrevTab(configureStore);
 ReactDOM.render(
-  <Suspense fallback={<Loading/>}>
+  <Suspense fallback={<Loading className="loading-page-full"/>}>
     <Provider store={configureStore}>
       <AppPage/>
     </Provider>

@@ -197,6 +197,9 @@ export default {
   },
   NAVBAR: {
     HOME: "Home",
+    ACCOUNT: {
+      ROOT: "Account",
+    },
     //HIRE===========================================
     HIRE: {
       WORKPLACE: {

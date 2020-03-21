@@ -14,6 +14,7 @@ import {
 import {useFormik} from "formik";
 import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
+import dateformat from "dateformat";
 import {useDispatch, useSelector} from "react-redux";
 import {animateScroll as scroll} from "react-scroll";
 import PhoneInput, {isValidPhoneNumber, parsePhoneNumber} from "react-phone-number-input";
@@ -21,6 +22,8 @@ import PhoneInput, {isValidPhoneNumber, parsePhoneNumber} from "react-phone-numb
 import apis from "core/apis";
 import {DATE_FORMAT, DEFAULT, DELAY, EFFECT, GENDER, PROJECT, RESULT} from "core/globals";
 import helpers from "core/helpers";
+import routes from "core/routes";
+import authActions from "actions/auth";
 import toast from "components/MyToast";
 import useDebounce from "helpers/useDebounce";
 import Service from "services/work/account/AccountService";
@@ -28,8 +31,6 @@ import CoreService from "services/CoreService";
 
 import "react-phone-number-input/style.css";
 import "./Contact.scss";
-import routes from "core/routes";
-import authActions from "actions/auth";
 
 export default ({onPrev, onNext}) => {
   const {t} = useTranslation();
@@ -107,6 +108,7 @@ export default ({onPrev, onNext}) => {
     const mobile = parsePhoneNumber(values.phone);
     const params = {
       ...values,
+      birthday: dateformat(new Date(values.birthday), DATE_FORMAT.ISO2_LOWER),
       countryCode: `+${mobile.countryCallingCode}`,
       phone: mobile.nationalNumber,
       userId: user.id,
@@ -125,7 +127,6 @@ export default ({onPrev, onNext}) => {
               ...res.data.user,
             },
             work: res.data.work,
-            token: res.data.token,
           };
           dispatch(authActions.successSignIn(data));
           sessionStorage.setItem(PROJECT.PERSIST_KEY, JSON.stringify(data));

@@ -14,6 +14,7 @@ import {
 import {useFormik} from "formik";
 import {useHistory} from "react-router-dom";
 import * as Yup from "yup";
+import dateformat from "dateformat";
 import {useDispatch, useSelector} from "react-redux";
 import {animateScroll as scroll} from "react-scroll";
 
@@ -112,6 +113,7 @@ export default ({onPrev, onNext}) => {
   const handleSubmit = (values, {setSubmitting}) => {
     const params = {
       ...values,
+      graduatedDate: dateformat(new Date(values.graduatedDate), DATE_FORMAT.ISO2_LOWER),
     };
     dispatch(minifiedProfileActions.setValues(params));
 
@@ -165,8 +167,8 @@ export default ({onPrev, onNext}) => {
                 <MDBSelectOptions className="max-height-200">
                   <MDBSelectOption disabled>{t("COMMON.VALUES.SELECT_ONE")}</MDBSelectOption>
                   {degrees.map((item, index) => (
-                    <MDBSelectOption key={index} value={item.degree}
-                                     checked={values.degree == item.degree}>{item[`degree_${lang}`]}</MDBSelectOption>
+                    <MDBSelectOption key={index} value={item.level}
+                                     checked={values.degree == item.level}>{item[`degree_${lang}`]}</MDBSelectOption>
                   ))}
                 </MDBSelectOptions>
               </MDBSelect>
