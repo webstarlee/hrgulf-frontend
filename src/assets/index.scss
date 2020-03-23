@@ -566,6 +566,51 @@ textarea.form-control {
     margin-right: unset !important;
   }
 
+  .pl-2 {
+    padding-left: unset !important;
+    padding-right: 0.5rem !important;
+  }
+
+  .pl-3 {
+    padding-left: unset !important;
+    padding-right: 1rem !important;
+  }
+
+  .pl-4 {
+    padding-left: unset !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .pl-5 {
+    padding-left: unset !important;
+    padding-right: 3rem !important;
+  }
+
+  .pr-auto {
+    padding-left: auto !important;
+    padding-right: unset !important;
+  }
+
+  .pr-2 {
+    padding-left: 0.5rem !important;
+    padding-right: unset !important;
+  }
+
+  .pr-3 {
+    padding-left: 1rem !important;
+    padding-right: unset !important;
+  }
+
+  .pr-4 {
+    padding-left: 1.5rem !important;
+    padding-right: unset !important;
+  }
+
+  .pr-5 {
+    padding-left: 3rem !important;
+    padding-right: unset !important;
+  }
+
   ul {
     padding-inline-start: 0;
     padding-inline-end: 0;

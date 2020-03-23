@@ -10,6 +10,7 @@ export default {
         USERNAME: "Username",
         PASSWORD: "Password",
         PASSWORD2: "Confirm Password",
+        FULL_NAME: "Name",
         FIRST_NAME: "First Name",
         FATHER_NAME: "Father's Name",
         LAST_NAME: "Last Name",
@@ -101,6 +102,9 @@ export default {
       MALE: "Male",
       FEMALE: "Female",
       UNDEFINED: "Not Specified",
+      M: "Male",
+      F: "Female",
+      U: "Not Specified",
     },
     LANGUAGE: {
       LANGUAGE: "Language",
@@ -522,10 +526,19 @@ export default {
         JOB_VISA_STATUS: "Visa Status",
         CAREER_LEVEL: "Career Level",
         DEGREE: "Degree",
+        EDUCATION: "Education",
         UNIVERSITY: "University or Institution",
         MAJOR: "Field of Study(Major)",
         GRADUATED_DATE: "Graduated Date",
         GRADE: "Grade System",
+      },
+    },
+    MY_CV: {
+      MY_CV: {
+        SECTIONS: {
+          PERSONAL_INFORMATION: "Personal Information",
+          JOB_SEEKER_PROFILE: "Job Seeker Profile",
+        },
       },
     },
     MY_ACCOUNT: {

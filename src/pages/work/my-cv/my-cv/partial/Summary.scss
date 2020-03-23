@@ -1,0 +1,9 @@
+@import "../../../../../assets/consts";
+
+$avatar-upload-width: 200px;
+$avatar-upload-height: 200px;
+
+.my-avatar {
+  width: $avatar-upload-width;
+  height: $avatar-upload-height;
+}

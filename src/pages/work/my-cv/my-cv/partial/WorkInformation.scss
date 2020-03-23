@@ -1,0 +1,19 @@
+@import "../../../../../assets/consts";
+
+table td {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.edit-button-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.rtl-content {
+  .edit-button-wrapper {
+    left: 0;
+    right: unset;
+  }
+}
