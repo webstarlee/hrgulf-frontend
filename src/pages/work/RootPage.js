@@ -12,6 +12,7 @@ import "./RootPage.scss";
 
 const FrontPage = lazy(() => import("./front/RootPage"));
 const AuthPage = lazy(() => import ("./auth/RootPage"));
+const FindJobsPage = lazy(() => import ("./find-jobs/RootPage"));
 const MyCVPage = lazy(() => import ("./my-cv/RootPage"));
 const AccountPage = lazy(() => import ("./account/RootPage"));
 
@@ -29,6 +30,7 @@ export default (props) => {
         {!!auth && !!auth.work && !auth.work.isVisited && !pathname.startsWith(minifiedProfilePath) && <Redirect to={minifiedProfilePath} />}
         <Route path={`${routes.work.root}`} exact component={FrontPage}/>
         <SignedOutRoute path={`${routes.work.auth.root}`} component={AuthPage}/>
+        <SignedInRoute path={`${routes.work.findJobs.root}`} component={FindJobsPage}/>
         <SignedInRoute path={`${routes.work.myCV.root}`} component={MyCVPage}/>
         <SignedInRoute path={`${routes.work.account.root}`} component={AccountPage}/>
         <Route component={() => <Error404Page accountType={accountType}/>}/>

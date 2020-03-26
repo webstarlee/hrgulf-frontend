@@ -1,0 +1,14 @@
+@import "../../../../assets/consts";
+
+$jobrolelist-item-height: 180px;
+
+.jobrole-item-wrapper {
+  height: calc(#{$jobrolelist-item-height} * 0.8);
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .jobrole-item-wrapper {
+    height: $jobrolelist-item-height;
+  }
+}
+

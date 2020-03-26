@@ -354,6 +354,7 @@ export default ({countries, allCities, countries2, allCities2}) => {
         </form>}
         {!isEditing && <Fragment>
           <table border={0} className="ml-4 ml-md-5 mt-2 mt-md-3 grey-text">
+            <tbody>
             <tr>
               <td className="pr-5">{t("COMMON.FIELDS.USER.FULL_NAME")}</td>
               <td className="">{user.firstName} {user.fatherName} {user.lastName}</td>
@@ -386,6 +387,7 @@ export default ({countries, allCities, countries2, allCities2}) => {
               <td className="pr-5">{t("COMMON.FIELDS.USER.WEBSITE")}</td>
               <td className="">{user.website}</td>
             </tr>
+            </tbody>
           </table>
           <div className="edit-button-wrapper">
             <MDBBtn tag="a" floating color="primary" size="sm" onClick={() => setIsEditing(true)}><MDBIcon icon="edit"/></MDBBtn>

@@ -6,7 +6,7 @@ import {
   MDBCardBody,
   MDBCol,
   MDBDatePicker,
-  MDBFormInline, MDBIcon,
+  MDBIcon,
   MDBInput,
   MDBRow,
   MDBSelect,
@@ -19,10 +19,8 @@ import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
 import dateformat from "dateformat";
 
-import {DATE_FORMAT, DELAY, GENDER, PROJECT, RESULT} from "core/globals";
+import {DATE_FORMAT, DELAY, PROJECT, RESULT} from "core/globals";
 import helpers from "core/helpers";
-import apis from "core/apis";
-import validators from "core/validators";
 import authActions from "actions/auth";
 import useDebounce from "helpers/useDebounce";
 import toast from "components/MyToast";
@@ -259,7 +257,7 @@ export default ({jobRoles, countries, sectors, allIndustries, visaStatuses, care
               <MDBCol md="4">
                 <label>{t("WORK.ACCOUNT.FIELDS.END_DATE")}</label>
                 <input hidden id="endDate" value={values.endDate} onChange={handleChange} onBlur={handleBlur}/>
-                <MDBDatePicker format={DATE_FORMAT.ISO} outline autoOk keyboard /*locale={moment.locale(t("CODE"))}*/ background className="md-outline date-picker grey-text mt-0 mb-0" value={values.endDate} getValue={value => helpers.triggerChangeEvent("endDate", value)}
+                <MDBDatePicker format={DATE_FORMAT.ISO} outline autoOk keyboard /*locale={moment.locale(t("CODE"))}*/ background className="md-outline date-picker grey-text mt-0 mb-0" value={values.endDate} getValue={value => helpers.triggerChangeEvent("endDate", value)} disabled={!!values.isPresent}
                 />
                 {!!touched.endDate && !!errors.endDate && <div className="text-left invalid-field">{errors.endDate}</div>}
               </MDBCol>
@@ -480,6 +478,7 @@ export default ({jobRoles, countries, sectors, allIndustries, visaStatuses, care
         </form>}
         {!isEditing && <Fragment>
           <table border={0} className="ml-4 ml-md-5 mt-2 mt-md-3 grey-text">
+            <tbody>
             <tr>
               <td className="pr-5">{t("WORK.ACCOUNT.FIELDS.JOB_TITLE")}</td>
               <td className="">{work.jobTitle}</td>
@@ -499,7 +498,7 @@ export default ({jobRoles, countries, sectors, allIndustries, visaStatuses, care
             <tr>
               <td className="pr-5">{t("WORK.ACCOUNT.FIELDS.END_DATE")}</td>
               {!work.isPresent && <td className="">{work.endDate}</td>}
-              {work.isPresent && <td className="">{t("WORK.ACCOUNT.FIELDS.IS_PRESENT")}</td>}
+              {!!work.isPresent && <td className="">{t("WORK.ACCOUNT.FIELDS.IS_PRESENT")}</td>}
             </tr>
             <tr>
               <td className="pr-5">{t("WORK.ACCOUNT.FIELDS.JOB_LOCATION")}</td>
@@ -541,6 +540,7 @@ export default ({jobRoles, countries, sectors, allIndustries, visaStatuses, care
               <td className="pr-5">{t("WORK.ACCOUNT.FIELDS.GRADE")}</td>
               {!!grades2 && <td className="">{!!grades2[work.gradeId] && grades2[work.gradeId][`grade_${lang}`]}</td>}
             </tr>
+            </tbody>
           </table>
           <div className="edit-button-wrapper">
             <MDBBtn tag="a" floating color="primary" size="sm" onClick={() => setIsEditing(true)}><MDBIcon icon="edit"/></MDBBtn>

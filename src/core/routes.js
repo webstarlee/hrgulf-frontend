@@ -118,10 +118,22 @@ export const routes = {
       myJobAlerts: "/work/find-jobs/my-job-alerts",
       advancedSearch: "/work/find-jobs/advanced-search",
       browseJobs: "/work/find-jobs/browse-jobs",
-      jobsByRole: "/work/find-jobs/jobs-by-role",
-      jobsByLocation: "/work/find-jobs/jobs-by-location",
-      jobsBySector: "/work/find-jobs/jobs-by-sector",
-      jobsByCompanies: "/work/find-jobs/jobs-by-companies",
+      jobsByRole: {
+        root: "/work/find-jobs/jobs-by-role",
+        main: "/work/find-jobs/jobs-by-role",
+      },
+      jobsByLocation: {
+        root: "/work/find-jobs/jobs-by-location",
+        main: "/work/find-jobs/jobs-by-location",
+      },
+      jobsBySector: {
+        root: "/work/find-jobs/jobs-by-sector",
+        main: "/work/find-jobs/jobs-by-sector",
+      },
+      jobsByCompanies: {
+        root: "/work/find-jobs/jobs-by-companies",
+        main: "/work/find-jobs/jobs-by-companies",
+      },
       executiveJobs: "/work/find-jobs/executive-jobs",
       salaries: "/work/find-jobs/salaries",
     },

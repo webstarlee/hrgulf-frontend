@@ -63,12 +63,12 @@ const WorkNavbar = (props) => {
                 <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.savedJobs)}>{t("NAVBAR.WORK.FIND_JOBS.SAVED_JOBS")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.myJobAlerts)}>{t("NAVBAR.WORK.FIND_JOBS.MY_JOB_ALERTS")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.advancedSearch)}>{t("NAVBAR.WORK.FIND_JOBS.ADVANCED_SEARCH")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.browseJobs)}>{t("NAVBAR.WORK.FIND_JOBS.BROWSE_JOBS")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.jobsByRole)}>{t("NAVBAR.WORK.FIND_JOBS.JOBS_BY_ROLE")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.jobsByLocation)}>{t("NAVBAR.WORK.FIND_JOBS.JOBS_BY_LOCATION")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.jobsBySector)}>{t("NAVBAR.WORK.FIND_JOBS.JOBS_BY_SECTOR")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.jobsByCompanies)}>{t("NAVBAR.WORK.FIND_JOBS.JOBS_BY_COMPANIES")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.executiveJobs)}>{t("NAVBAR.WORK.FIND_JOBS.EXECUTIVE_JOBS")}</MDBDropdownItem>
+                <MDBDropdownItem header className="px-2 font-weight-bold">{t("NAVBAR.WORK.FIND_JOBS.BROWSE_JOBS")}</MDBDropdownItem>
+                <MDBDropdownItem className="ml-3" onClick={() => onNavigate(routes.work.findJobs.jobsByRole.root)}>{t("NAVBAR.WORK.FIND_JOBS.JOBS_BY_ROLE")}</MDBDropdownItem>
+                <MDBDropdownItem className="ml-3" onClick={() => onNavigate(routes.work.findJobs.jobsByLocation.root)}>{t("NAVBAR.WORK.FIND_JOBS.JOBS_BY_LOCATION")}</MDBDropdownItem>
+                <MDBDropdownItem className="ml-3" onClick={() => onNavigate(routes.work.findJobs.jobsBySector.root)}>{t("NAVBAR.WORK.FIND_JOBS.JOBS_BY_SECTOR")}</MDBDropdownItem>
+                <MDBDropdownItem className="ml-3" onClick={() => onNavigate(routes.work.findJobs.jobsByCompanies.root)}>{t("NAVBAR.WORK.FIND_JOBS.JOBS_BY_COMPANIES")}</MDBDropdownItem>
+                <MDBDropdownItem className="ml-3" onClick={() => onNavigate(routes.work.findJobs.executiveJobs)}>{t("NAVBAR.WORK.FIND_JOBS.EXECUTIVE_JOBS")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => onNavigate(routes.work.findJobs.salaries)}>{t("NAVBAR.WORK.FIND_JOBS.SALARIES")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>

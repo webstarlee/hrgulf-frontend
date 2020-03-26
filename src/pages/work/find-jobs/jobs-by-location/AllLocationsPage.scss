@@ -1,0 +1,14 @@
+@import "../../../../assets/consts";
+
+$locationlist-item-height: 180px;
+
+.location-item-wrapper {
+  height: calc(#{$locationlist-item-height} * 0.8);
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .location-item-wrapper {
+    height: $locationlist-item-height;
+  }
+}
+

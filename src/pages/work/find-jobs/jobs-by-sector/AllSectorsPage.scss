@@ -1,0 +1,14 @@
+@import "../../../../assets/consts";
+
+$sectorlist-item-height: 180px;
+
+.sector-item-wrapper {
+  height: calc(#{$sectorlist-item-height} * 0.8);
+}
+
+@media (min-width: $screen-breakpoint-md) {
+  .sector-item-wrapper {
+    height: $sectorlist-item-height;
+  }
+}
+

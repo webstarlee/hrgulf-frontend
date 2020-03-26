@@ -93,6 +93,24 @@ export default {
       validateFacebookAccount: "work/auth/validate-facebook-account",
       signInWithFacebook: "work/auth/sign-in-with-facebook",
     },
+    findJobs: {
+      jobsByRole: {
+        listRoles: "work/find-jobs/jobs-by-role/list-roles",
+        list: "work/find-jobs/jobs-by-role/list",
+      },
+      jobsByLocation: {
+        listLocations: "work/find-jobs/jobs-by-location/list-locations",
+        list: "work/find-jobs/jobs-by-location/list",
+      },
+      jobsBySector: {
+        listSectors: "work/find-jobs/jobs-by-sector/list-sectors",
+        list: "work/find-jobs/jobs-by-sector/list",
+      },
+      jobsByCompanies: {
+        listCompanies: "work/find-jobs/jobs-by-companies/list-companies",
+        list: "work/find-jobs/jobs-by-companies/list",
+      },
+    },
     account: {
       save: "work/account/save",
       saveMinifiedProfile: "work/account/save-minified-profile",
